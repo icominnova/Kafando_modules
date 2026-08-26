@@ -15,7 +15,16 @@ class FuelStation(models.Model):
     phone = fields.Char(string='Phone')
     email = fields.Char(string='Email')
     manager_id = fields.Many2one('res.users', string='Station Manager', tracking=True)
-    company_id = fields.Many2one('res.company', string='Company', default=lambda self: self.env.company)
+
+    company_id = fields.Many2one(
+        'res.company',
+        string='Company',
+        required=True,
+        default=lambda self: self.env.company,
+        index=True,
+        tracking=True,
+    )
+
     active = fields.Boolean(default=True)
     state = fields.Selection([
         ('active', 'Active'),
@@ -33,7 +42,6 @@ class FuelStation(models.Model):
     license_count = fields.Integer(compute='_compute_counts', string='Licenses')
 
     open_shift_count = fields.Integer(compute='_compute_today_activity', string='Open Shifts')
-    pending_validation_count = fields.Integer(compute='_compute_today_activity', string='Pending Validation')
     today_sales_amount = fields.Float(compute='_compute_today_activity', string="Today's Sales")
     today_dispensed_qty = fields.Float(compute='_compute_today_activity', string="Today's Volume (L)")
     today_sale_count = fields.Integer(compute='_compute_today_activity', string="Today's Sale Count")
@@ -54,7 +62,6 @@ class FuelStation(models.Model):
                 ('date', '=', today),
             ])
             rec.open_shift_count = len(shifts_today.filtered(lambda s: s.state == 'open'))
-            rec.pending_validation_count = len(shifts_today.filtered(lambda s: s.state == 'closed'))
             rec.today_sales_amount = sum(shifts_today.mapped('total_sales_amount'))
             rec.today_dispensed_qty = sum(shifts_today.mapped('total_dispensed'))
             rec.today_sale_count = self.env['fuel.meter.reading'].search_count([

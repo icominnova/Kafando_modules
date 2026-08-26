@@ -32,6 +32,15 @@ class FuelLicense(models.Model):
     days_to_expiry = fields.Integer(string='Days to Expiry', compute='_compute_state', store=True)
     notes = fields.Text(string='Notes')
 
+    company_id = fields.Many2one(
+        'res.company',
+        related='station_id.company_id',
+        string='Company',
+        store=True,
+        index=True,
+        readonly=True,
+    )
+    
     @api.depends('expiry_date')
     def _compute_state(self):
         today = date.today()

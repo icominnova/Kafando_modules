@@ -24,6 +24,15 @@ class FuelTank(models.Model):
 
     stock_percent = fields.Float(string='Fill %', compute='_compute_stock_percent', store=True)
 
+    company_id = fields.Many2one(
+        'res.company',
+        related='station_id.company_id',
+        string='Company',
+        store=True,
+        index=True,
+        readonly=True,
+    )
+    
     @api.depends('current_stock', 'min_stock_alert', 'capacity')
     def _compute_state(self):
         for rec in self:
@@ -40,7 +49,7 @@ class FuelTank(models.Model):
     def _compute_stock_percent(self):
         for rec in self:
             rec.stock_percent = (rec.current_stock / rec.capacity * 100) if rec.capacity else 0.0
-        
+
     def action_stock_adjustment(self):
         return {
             'type': 'ir.actions.act_window',

@@ -1211,6 +1211,11 @@ msgid "Validate"
 msgstr "Valider"
 
 #. module: fuel_management
+#: model_terms:ir.ui.view,arch_db:fuel_management.view_fuel_shift_validation_wizard_form
+msgid "Please verify your closing indexes before validation."
+msgstr "Veuillez vérifier vos index de clôture avant la validation."
+
+#. module: fuel_management
 #: model:ir.model.fields.selection,name:fuel_management.selection__fuel_shift__state__validated
 #: model_terms:ir.ui.view,arch_db:fuel_management.view_fuel_shift_search
 msgid "Validated"

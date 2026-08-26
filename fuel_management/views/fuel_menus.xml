@@ -15,6 +15,20 @@
         action="action_fuel_dashboard"
         sequence="5"/>
 
+    <!-- Purchases -->
+    <menuitem
+        id="menu_fuel_purchases"
+        name="Purchases"
+        parent="menu_fuel_main"
+        sequence="10"/>
+
+    <menuitem
+        id="menu_fuel_purchase_orders"
+        name="Purchase Orders"
+        parent="menu_fuel_purchases"
+        action="action_fuel_purchase_order"
+        sequence="10"/>
+
     <!-- Stations &amp; Equipment -->
     <menuitem id="menu_fuel_stations"
         name="Stations &amp; Equipment"
@@ -70,11 +84,11 @@
         sequence="30"/>
 
     <menuitem id="menu_fuel_tank_replenishment"
-    name="Replenish Tank"
-    parent="menu_fuel_operations"
-    action="action_fuel_tank_replenishment"
-    sequence="40"/>
-
+        name="Replenish Tank"
+        parent="menu_fuel_operations"
+        action="action_fuel_tank_replenishment"
+        sequence="40"/>
+        
     <!-- Compliance -->
     <menuitem id="menu_fuel_compliance"
         name="Compliance"

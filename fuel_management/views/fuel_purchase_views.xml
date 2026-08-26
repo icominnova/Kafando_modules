@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="view_fuel_purchase_order_form" model="ir.ui.view">
+        <field name="name">fuel.purchase.order.form</field>
+        <field name="model">purchase.order</field>
+        <field name="inherit_id" ref="purchase.purchase_order_form"/>
+        <field name="arch" type="xml">
+
+            <xpath expr="//field[@name='partner_id']" position="after">
+                <field name="fuel_station_id"/>
+            </xpath>
+
+        </field>
+    </record>
+
+    <record id="action_fuel_purchase_order" model="ir.actions.act_window">
+        <field name="name">Fuel Purchase Orders</field>
+        <field name="res_model">purchase.order</field>
+        <field name="view_mode">list,form</field>
+        <field name="domain">[('fuel_station_id', '!=', False)]</field>
+    </record>
+</odoo>

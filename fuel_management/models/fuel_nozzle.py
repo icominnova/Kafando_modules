@@ -21,3 +21,12 @@ class FuelNozzle(models.Model):
     tank_id = fields.Many2one('fuel.tank', string='Source tank',
         domain="[('station_id', '=', station_id), ('product_id', '=', product_id)]",
         help='Tank this nozzle draws fuel from. Used to automatically decrease stock on dispensing.')
+
+    company_id = fields.Many2one(
+        'res.company',
+        related='station_id.company_id',
+        string='Company',
+        store=True,
+        index=True,
+        readonly=True,
+    )

@@ -19,6 +19,15 @@ class FuelPump(models.Model):
     nozzle_ids = fields.One2many('fuel.nozzle', 'pump_id', string='Nozzles')
     nozzle_count = fields.Integer(compute='_compute_nozzle_count', string='Nozzles')
 
+    company_id = fields.Many2one(
+        'res.company',
+        related='station_id.company_id',
+        string='Company',
+        store=True,
+        index=True,
+        readonly=True,
+    )
+
     @api.depends('nozzle_ids')
     def _compute_nozzle_count(self):
         for rec in self:

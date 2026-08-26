@@ -4,7 +4,7 @@
 
     <t t-name="fuel_management.StockPercentWidget">
         <div class="fuel-stock-percent">
-            
+
             <div class="fuel-stock-percent-bar">
                 <div
                     class="fuel-stock-percent-fill"

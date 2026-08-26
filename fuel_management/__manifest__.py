@@ -17,6 +17,7 @@
         'views/fuel_nozzle_views.xml',
         'wizard/fuel_tank_replenishment_views.xml',
         'views/fuel_tank_views.xml',
+        'views/fuel_purchase_views.xml',
         'views/fuel_shift_views.xml',
         'views/fuel_meter_reading_views.xml',
         'views/fuel_dip_reading_views.xml',
@@ -26,6 +27,7 @@
         'report/fuel_shift_report_template.xml',
         'views/fuel_dashboard_views.xml',
         'views/fuel_menus.xml',
+        'wizard/fuel_shift_validation_views.xml',
     ],
     'images': [
         'static/description/banner.png',

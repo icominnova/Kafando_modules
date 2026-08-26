@@ -18,6 +18,15 @@ class FuelDipReading(models.Model):
     variance = fields.Float(string='Variance (L)', compute='_compute_variance', store=True, digits=(16, 3))
     notes = fields.Text(string='Notes')
 
+    company_id = fields.Many2one(
+        'res.company',
+        related='station_id.company_id',
+        string='Company',
+        store=True,
+        index=True,
+        readonly=True,
+    )
+    
     @api.depends('opening_level', 'received_qty', 'shift_id', 'product_id')
     def _compute_expected(self):
         for rec in self:

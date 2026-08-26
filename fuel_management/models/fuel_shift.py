@@ -27,7 +27,6 @@ class FuelShift(models.Model):
     state = fields.Selection([
         ('draft', 'Draft'),
         ('open', 'In Progress'),
-        ('closed', 'Closed'),
         ('validated', 'Validated'),
     ], string='Status', default='draft', tracking=True)
     notes = fields.Text(string='Notes')
@@ -39,6 +38,23 @@ class FuelShift(models.Model):
     total_sales_amount = fields.Float(string='Total Sales', compute='_compute_totals', store=True, digits='Account')
     currency_id = fields.Many2one('res.currency', related='station_id.company_id.currency_id')
 
+    company_id = fields.Many2one(
+        'res.company',
+        related='station_id.company_id',
+        string='Company',
+        store=True,
+        index=True,
+        readonly=True,
+    )
+
+    stock_posted = fields.Boolean(
+        string='Stock Posted',
+        default=False,
+        copy=False,
+        readonly=True,
+        tracking=True,
+    )
+    
     @api.depends('meter_reading_ids.dispensed_qty', 'meter_reading_ids.total_amount')
     def _compute_totals(self):
         for rec in self:
@@ -58,22 +74,23 @@ class FuelShift(models.Model):
                 raise UserError(_('Only draft shifts can be opened.'))
             rec.state = 'open'
 
-    def action_close(self):
-        for rec in self:
-            if rec.state != 'open':
-                raise UserError(_('Only open shifts can be closed.'))
-            rec.state = 'closed'
 
     def action_validate(self):
-        for rec in self:
-            if rec.state != 'closed':
-                raise UserError(_('Only closed shifts can be validated.'))
-            rec.state = 'validated'
+        self.ensure_one()
 
-    def action_reset_draft(self):
-        for rec in self:
-            rec.state = 'draft'
-
+        if self.state != 'open':
+            raise UserError(_('Only open shifts can be validated.'))
+        return {
+            'type': 'ir.actions.act_window',
+            'name': _('Confirm Closing Indexes'),
+            'res_model': 'fuel.shift.validation.wizard',
+            'view_mode': 'form',
+            'target': 'new',
+            'context': {
+                'default_shift_id': self.id,
+            },
+        }
+    
     def action_print_report(self):
         for rec in self:
             if rec.state != 'validated':

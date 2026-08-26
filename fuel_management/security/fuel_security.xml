@@ -25,5 +25,55 @@
             <field name="sequence">20</field>
         </record>
 
+        <!-- MULTI-COMPANY RECORD RULES -->
+        
+        <record id="fuel_station_company_rule" model="ir.rule">
+            <field name="name">Fuel Station - Active Company</field>
+            <field name="model_id" ref="model_fuel_station"/>
+            <field name="domain_force">[('company_id', '=', company_id)]</field>
+        </record>
+
+        <record id="fuel_tank_company_rule" model="ir.rule">
+            <field name="name">Fuel Tank - Active Company</field>
+            <field name="model_id" ref="model_fuel_tank"/>
+            <field name="domain_force">[('station_id.company_id', '=', company_id)]</field>
+        </record>
+
+        <record id="fuel_pump_company_rule" model="ir.rule">
+            <field name="name">Fuel Pump - Active Company</field>
+            <field name="model_id" ref="model_fuel_pump"/>
+            <field name="domain_force">[('station_id.company_id', '=', company_id)]</field>
+        </record>
+
+        <record id="fuel_nozzle_company_rule" model="ir.rule">
+            <field name="name">Fuel Nozzle - Active Company</field>
+            <field name="model_id" ref="model_fuel_nozzle"/>
+            <field name="domain_force">[('station_id.company_id', '=', company_id)]</field>
+        </record>
+
+        <record id="fuel_shift_company_rule" model="ir.rule">
+            <field name="name">Fuel Shift - Active Company</field>
+            <field name="model_id" ref="model_fuel_shift"/>
+            <field name="domain_force">[('station_id.company_id', '=', company_id)]</field>
+        </record>
+
+        <record id="fuel_meter_reading_company_rule" model="ir.rule">
+            <field name="name">Fuel Meter Reading - Active Company</field>
+            <field name="model_id" ref="model_fuel_meter_reading"/>
+            <field name="domain_force">[('station_id.company_id', '=', company_id)]</field>
+        </record>
+
+        <record id="fuel_dip_reading_company_rule" model="ir.rule">
+            <field name="name">Fuel Dip Reading - Active Company</field>
+            <field name="model_id" ref="model_fuel_dip_reading"/>
+            <field name="domain_force">[('station_id.company_id', '=', company_id)]</field>
+        </record>
+
+        <record id="fuel_license_company_rule" model="ir.rule">
+            <field name="name">Fuel License - Active Company</field>
+            <field name="model_id" ref="model_fuel_license"/>
+            <field name="domain_force">[('station_id.company_id', '=', company_id)]</field>
+        </record>
+
     </data>
 </odoo>
