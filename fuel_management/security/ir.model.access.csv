@@ -1,0 +1,22 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_fuel_station_user,fuel.station user,model_fuel_station,fuel_management.group_fuel_user,1,1,1,0
+access_fuel_station_manager,fuel.station manager,model_fuel_station,fuel_management.group_fuel_manager,1,1,1,1
+access_fuel_pump_user,fuel.pump user,model_fuel_pump,fuel_management.group_fuel_user,1,1,1,0
+access_fuel_pump_manager,fuel.pump manager,model_fuel_pump,fuel_management.group_fuel_manager,1,1,1,1
+access_fuel_nozzle_user,fuel.nozzle user,model_fuel_nozzle,fuel_management.group_fuel_user,1,1,1,0
+access_fuel_nozzle_manager,fuel.nozzle manager,model_fuel_nozzle,fuel_management.group_fuel_manager,1,1,1,1
+access_fuel_tank_user,fuel.tank user,model_fuel_tank,fuel_management.group_fuel_user,1,1,1,0
+access_fuel_tank_manager,fuel.tank manager,model_fuel_tank,fuel_management.group_fuel_manager,1,1,1,1
+access_fuel_shift_definition_user,fuel.shift.definition user,model_fuel_shift_definition,fuel_management.group_fuel_user,1,0,0,0
+access_fuel_shift_definition_manager,fuel.shift.definition manager,model_fuel_shift_definition,fuel_management.group_fuel_manager,1,1,1,1
+access_fuel_shift_user,fuel.shift user,model_fuel_shift,fuel_management.group_fuel_user,1,1,1,0
+access_fuel_shift_manager,fuel.shift manager,model_fuel_shift,fuel_management.group_fuel_manager,1,1,1,1
+access_fuel_meter_reading_user,fuel.meter.reading user,model_fuel_meter_reading,fuel_management.group_fuel_user,1,1,1,0
+access_fuel_meter_reading_manager,fuel.meter.reading manager,model_fuel_meter_reading,fuel_management.group_fuel_manager,1,1,1,1
+access_fuel_dip_reading_user,fuel.dip.reading user,model_fuel_dip_reading,fuel_management.group_fuel_user,1,1,1,0
+access_fuel_dip_reading_manager,fuel.dip.reading manager,model_fuel_dip_reading,fuel_management.group_fuel_manager,1,1,1,1
+access_fuel_license_user,fuel.license user,model_fuel_license,fuel_management.group_fuel_user,1,1,1,0
+access_fuel_license_manager,fuel.license manager,model_fuel_license,fuel_management.group_fuel_manager,1,1,1,1
+access_fuel_price_wizard_user,fuel.price.wizard user,model_fuel_price_wizard,fuel_management.group_fuel_user,1,1,1,1
+access_fuel_tank_replenishment_user,fuel.tank.replenishment user,model_fuel_tank_replenishment,fuel_management.group_fuel_user,1,1,1,1
+access_fuel_dashboard_user,fuel.dashboard user,model_fuel_dashboard,fuel_management.group_fuel_user,1,1,1,0

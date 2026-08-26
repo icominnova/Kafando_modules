@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="view_fuel_nozzle_form" model="ir.ui.view">
+        <field name="name">fuel.nozzle.form</field>
+        <field name="model">fuel.nozzle</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <div class="oe_title">
+                        <h1><field name="name" placeholder="Nozzle Name"/></h1>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="pump_id"/>
+                            <field name="station_id" readonly="1"/>
+                            <field name="product_id"/>
+                            <field name="tank_id"/>
+                            <field name="current_price"/>
+                            <field name="state"/>
+                        </group>
+                    </group>
+                    <field name="notes" placeholder="Notes..."/>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_fuel_nozzle_list" model="ir.ui.view">
+        <field name="name">fuel.nozzle.list</field>
+        <field name="model">fuel.nozzle</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="name"/>
+                <field name="pump_id"/>
+                <field name="station_id"/>
+                <field name="product_id"/>
+                <field name="tank_id"/>
+                <field name="current_price"/>
+                <field name="state" widget="badge"
+                    decoration-success="state == 'active'"
+                    decoration-warning="state == 'maintenance'"
+                    decoration-muted="state == 'inactive'"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="action_fuel_nozzle" model="ir.actions.act_window">
+        <field name="name">Nozzles</field>
+        <field name="res_model">fuel.nozzle</field>
+        <field name="view_mode">list,form</field>
+    </record>
+
+</odoo>

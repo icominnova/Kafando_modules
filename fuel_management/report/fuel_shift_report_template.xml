@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <template id="report_fuel_shift_template">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="shift">
+                <t t-call="web.external_layout">
+                    <div class="page">
+                        <!-- Header -->
+                        <div class="row mb-4">
+                            <div class="col-6">
+                                <h2>Shift Report</h2>
+                                <p><strong>Ref:</strong> <t t-out="shift.name"/></p>
+                                <p><strong>Station:</strong> <t t-out="shift.station_id.name"/></p>
+                                <p><strong>Date:</strong> <t t-out="shift.date"/></p>
+                            </div>
+                            <div class="col-6 text-end">
+                                <p><strong>Shift Type:</strong> <t t-out="shift.shift_definition_id.name or '-'"/></p>
+                                <p><strong>Attendant:</strong> <t t-out="shift.attendant_id.name or '-'"/></p>
+                                <p><strong>Status:</strong> <t t-out="dict(shift.fields_get(['state'])['state']['selection'])[shift.state]"/></p>
+                            </div>
+                        </div>
+
+                        <!-- Meter Readings -->
+                        <h4>Meter Readings</h4>
+                        <table class="table table-sm table-bordered">
+                            <thead>
+                                <tr>
+                                    <th>Nozzle</th>
+                                    <th>Product</th>
+                                    <th>Opening (L)</th>
+                                    <th>Closing (L)</th>
+                                    <th>Dispensed (L)</th>
+                                    <th>Unit Price</th>
+                                    <th>Amount</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <t t-foreach="shift.meter_reading_ids" t-as="mr">
+                                    <tr>
+                                        <td><t t-out="mr.nozzle_id.name"/></td>
+                                        <td><t t-out="mr.product_id.name"/></td>
+                                        <td class="text-end"><t t-out="'%.3f' % mr.opening_reading"/></td>
+                                        <td class="text-end"><t t-out="'%.3f' % mr.closing_reading"/></td>
+                                        <td class="text-end"><t t-out="'%.3f' % mr.dispensed_qty"/></td>
+                                        <td class="text-end"><t t-out="'%.4f' % mr.unit_price"/></td>
+                                        <td class="text-end"><t t-out="'%.2f' % mr.total_amount"/></td>
+                                    </tr>
+                                </t>
+                            </tbody>
+                            <tfoot>
+                                <tr>
+                                    <td colspan="4"><strong>Total</strong></td>
+                                    <td class="text-end"><strong><t t-out="'%.3f' % shift.total_dispensed"/></strong></td>
+                                    <td></td>
+                                    <td class="text-end"><strong><t t-out="'%.2f' % shift.total_sales_amount"/></strong></td>
+                                </tr>
+                            </tfoot>
+                        </table>
+
+                        <!-- Dip Readings -->
+                        <t t-if="shift.dip_reading_ids">
+                            <h4 class="mt-4">Tank Dip Readings</h4>
+                            <table class="table table-sm table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th>Tank</th>
+                                        <th>Product</th>
+                                        <th>Opening (L)</th>
+                                        <th>Received (L)</th>
+                                        <th>Closing (L)</th>
+                                        <th>Expected (L)</th>
+                                        <th>Variance (L)</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <t t-foreach="shift.dip_reading_ids" t-as="dr">
+                                        <tr>
+                                            <td><t t-out="dr.tank_id.name"/></td>
+                                            <td><t t-out="dr.product_id.name"/></td>
+                                            <td class="text-end"><t t-out="'%.3f' % dr.opening_level"/></td>
+                                            <td class="text-end"><t t-out="'%.3f' % dr.received_qty"/></td>
+                                            <td class="text-end"><t t-out="'%.3f' % dr.closing_level"/></td>
+                                            <td class="text-end"><t t-out="'%.3f' % dr.expected_closing"/></td>
+                                            <td class="text-end" t-attf-class="#{dr.variance &lt; 0 and 'text-danger' or 'text-success'}">
+                                                <t t-out="'%.3f' % dr.variance"/>
+                                            </td>
+                                        </tr>
+                                    </t>
+                                </tbody>
+                            </table>
+                        </t>
+
+                        <!-- Notes -->
+                        <t t-if="shift.notes">
+                            <h4 class="mt-4">Notes</h4>
+                            <p><t t-out="shift.notes"/></p>
+                        </t>
+                    </div>
+                </t>
+            </t>
+        </t>
+    </template>
+
+</odoo>

@@ -1,0 +1,629 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <!-- ============================================================
+             FUEL PRODUCTS
+        ============================================================ -->
+        <record id="product_petrol_95" model="product.product">
+            <field name="name">Petrol 95</field>
+            <field name="type">consu</field>
+            <field name="categ_id" ref="product.product_category_goods"/>
+            <field name="list_price">2.85</field>
+            <field name="standard_price">1.90</field>
+        </record>
+        <record id="product_petrol_98" model="product.product">
+            <field name="name">Petrol 98 (Premium)</field>
+            <field name="type">consu</field>
+            <field name="categ_id" ref="product.product_category_goods"/>
+            <field name="list_price">3.10</field>
+            <field name="standard_price">2.10</field>
+        </record>
+        <record id="product_diesel" model="product.product">
+            <field name="name">Diesel</field>
+            <field name="type">consu</field>
+            <field name="categ_id" ref="product.product_category_goods"/>
+            <field name="list_price">2.50</field>
+            <field name="standard_price">1.65</field>
+        </record>
+
+        <!-- ============================================================
+             SHIFT DEFINITIONS
+        ============================================================ -->
+        <record id="shift_morning" model="fuel.shift.definition">
+            <field name="name">Morning (06:00–14:00)</field>
+            <field name="start_time">6.0</field>
+            <field name="end_time">14.0</field>
+        </record>
+        <record id="shift_afternoon" model="fuel.shift.definition">
+            <field name="name">Afternoon (14:00–22:00)</field>
+            <field name="start_time">14.0</field>
+            <field name="end_time">22.0</field>
+        </record>
+        <record id="shift_night" model="fuel.shift.definition">
+            <field name="name">Night (22:00–06:00)</field>
+            <field name="start_time">22.0</field>
+            <field name="end_time">6.0</field>
+        </record>
+
+        <!-- ============================================================
+             STATION 1 — MAIN ROAD STATION
+        ============================================================ -->
+        <record id="station_main" model="fuel.station">
+            <field name="name">Main Road Station</field>
+            <field name="code">STN-001</field>
+            <field name="street">Sheikh Zayed Road, Exit 22</field>
+            <field name="city">Dubai</field>
+            <field name="country_id" ref="base.ae"/>
+            <field name="phone">+971 4 123 4567</field>
+            <field name="email">mainroad@fuelco.ae</field>
+            <field name="manager_id" ref="base.user_admin"/>
+            <field name="state">active</field>
+        </record>
+
+        <!-- Pumps — STN-001 -->
+        <record id="pump_1_1" model="fuel.pump">
+            <field name="name">Pump 1</field>
+            <field name="code">P-001</field>
+            <field name="station_id" ref="station_main"/>
+            <field name="state">active</field>
+        </record>
+        <record id="pump_1_2" model="fuel.pump">
+            <field name="name">Pump 2</field>
+            <field name="code">P-002</field>
+            <field name="station_id" ref="station_main"/>
+            <field name="state">active</field>
+        </record>
+        <record id="pump_1_3" model="fuel.pump">
+            <field name="name">Pump 3</field>
+            <field name="code">P-003</field>
+            <field name="station_id" ref="station_main"/>
+            <field name="state">maintenance</field>
+        </record>
+
+        <!-- Tanks — STN-001 -->
+        <record id="tank_1_petrol_95" model="fuel.tank">
+            <field name="name">Tank A — Petrol 95</field>
+            <field name="station_id" ref="station_main"/>
+            <field name="product_id" ref="product_petrol_95"/>
+            <field name="capacity">50000</field>
+            <field name="current_stock">32400</field>
+            <field name="min_stock_alert">5000</field>
+        </record>
+        <record id="tank_1_petrol_98" model="fuel.tank">
+            <field name="name">Tank B — Petrol 98</field>
+            <field name="station_id" ref="station_main"/>
+            <field name="product_id" ref="product_petrol_98"/>
+            <field name="capacity">20000</field>
+            <field name="current_stock">11800</field>
+            <field name="min_stock_alert">3000</field>
+        </record>
+        <record id="tank_1_diesel" model="fuel.tank">
+            <field name="name">Tank C — Diesel</field>
+            <field name="station_id" ref="station_main"/>
+            <field name="product_id" ref="product_diesel"/>
+            <field name="capacity">30000</field>
+            <field name="current_stock">4200</field>
+            <field name="min_stock_alert">5000</field>
+        </record>
+
+        <!-- Nozzles — STN-001 -->
+        <record id="nozzle_1_1_a" model="fuel.nozzle">
+            <field name="name">P1-N1 (Petrol 95)</field>
+            <field name="pump_id" ref="pump_1_1"/>
+            <field name="product_id" ref="product_petrol_95"/>
+            <field name="current_price">2.85</field>
+            <field name="state">active</field>
+            <field name="tank_id" ref="tank_1_petrol_95"/>
+        </record>
+        <record id="nozzle_1_1_b" model="fuel.nozzle">
+            <field name="name">P1-N2 (Diesel)</field>
+            <field name="pump_id" ref="pump_1_1"/>
+            <field name="product_id" ref="product_diesel"/>
+            <field name="current_price">2.50</field>
+            <field name="state">active</field>
+            <field name="tank_id" ref="tank_1_diesel"/>
+        </record>
+        <record id="nozzle_1_2_a" model="fuel.nozzle">
+            <field name="name">P2-N1 (Petrol 95)</field>
+            <field name="pump_id" ref="pump_1_2"/>
+            <field name="product_id" ref="product_petrol_95"/>
+            <field name="current_price">2.85</field>
+            <field name="state">active</field>
+            <field name="tank_id" ref="tank_1_petrol_95"/>
+        </record>
+        <record id="nozzle_1_2_b" model="fuel.nozzle">
+            <field name="name">P2-N2 (Petrol 98)</field>
+            <field name="pump_id" ref="pump_1_2"/>
+            <field name="product_id" ref="product_petrol_98"/>
+            <field name="current_price">3.10</field>
+            <field name="state">active</field>
+            <field name="tank_id" ref="tank_1_petrol_98"/>
+        </record>
+
+        <!-- Licenses — STN-001 -->
+        <record id="lic_1_operating" model="fuel.license">
+            <field name="name">Operating License 2025–2026</field>
+            <field name="station_id" ref="station_main"/>
+            <field name="license_type">operating</field>
+            <field name="license_number">OL-2025-0042</field>
+            <field name="issuing_authority">Ministry of Energy &amp; Infrastructure</field>
+            <field name="issue_date">2025-01-01</field>
+            <field name="expiry_date">2026-12-31</field>
+        </record>
+        <record id="lic_1_fire" model="fuel.license">
+            <field name="name">Fire Safety Certificate</field>
+            <field name="station_id" ref="station_main"/>
+            <field name="license_type">fire_safety</field>
+            <field name="license_number">FS-2025-0189</field>
+            <field name="issuing_authority">Dubai Civil Defense</field>
+            <field name="issue_date">2025-06-01</field>
+            <field name="expiry_date">2026-07-10</field>
+        </record>
+        <record id="lic_1_env" model="fuel.license">
+            <field name="name">Environmental Clearance</field>
+            <field name="station_id" ref="station_main"/>
+            <field name="license_type">environmental</field>
+            <field name="license_number">ENV-2024-0071</field>
+            <field name="issuing_authority">Dubai Municipality</field>
+            <field name="issue_date">2024-03-01</field>
+            <field name="expiry_date">2026-06-25</field>
+        </record>
+        <record id="lic_1_weights" model="fuel.license">
+            <field name="name">Weights &amp; Measures Cert.</field>
+            <field name="station_id" ref="station_main"/>
+            <field name="license_type">weights</field>
+            <field name="license_number">WM-2024-0305</field>
+            <field name="issuing_authority">Emirates Metrology Authority</field>
+            <field name="issue_date">2024-01-15</field>
+            <field name="expiry_date">2025-12-31</field>
+        </record>
+
+        <!-- ============================================================
+             STATION 2 — HIGHWAY EXPRESS STATION
+        ============================================================ -->
+        <record id="station_highway" model="fuel.station">
+            <field name="name">Highway Express Station</field>
+            <field name="code">STN-002</field>
+            <field name="street">Emirates Road, Km 45</field>
+            <field name="city">Sharjah</field>
+            <field name="country_id" ref="base.ae"/>
+            <field name="phone">+971 6 234 5678</field>
+            <field name="email">highway@fuelco.ae</field>
+            <field name="state">active</field>
+        </record>
+
+        <!-- Pumps — STN-002 -->
+        <record id="pump_2_1" model="fuel.pump">
+            <field name="name">Pump 1</field>
+            <field name="code">P-001</field>
+            <field name="station_id" ref="station_highway"/>
+            <field name="state">active</field>
+        </record>
+        <record id="pump_2_2" model="fuel.pump">
+            <field name="name">Pump 2</field>
+            <field name="code">P-002</field>
+            <field name="station_id" ref="station_highway"/>
+            <field name="state">active</field>
+        </record>
+
+        <!-- Tanks — STN-002 -->
+        <record id="tank_2_petrol_95" model="fuel.tank">
+            <field name="name">Tank A — Petrol 95</field>
+            <field name="station_id" ref="station_highway"/>
+            <field name="product_id" ref="product_petrol_95"/>
+            <field name="capacity">40000</field>
+            <field name="current_stock">21500</field>
+            <field name="min_stock_alert">4000</field>
+        </record>
+        <record id="tank_2_diesel" model="fuel.tank">
+            <field name="name">Tank B — Diesel</field>
+            <field name="station_id" ref="station_highway"/>
+            <field name="product_id" ref="product_diesel"/>
+            <field name="capacity">25000</field>
+            <field name="current_stock">18300</field>
+            <field name="min_stock_alert">3000</field>
+        </record>
+
+        <!-- Nozzles — STN-002 -->
+        <record id="nozzle_2_1_a" model="fuel.nozzle">
+            <field name="name">P1-N1 (Petrol 95)</field>
+            <field name="pump_id" ref="pump_2_1"/>
+            <field name="product_id" ref="product_petrol_95"/>
+            <field name="current_price">2.85</field>
+            <field name="state">active</field>
+            <field name="tank_id" ref="tank_2_petrol_95"/>
+        </record>
+        <record id="nozzle_2_1_b" model="fuel.nozzle">
+            <field name="name">P1-N2 (Diesel)</field>
+            <field name="pump_id" ref="pump_2_1"/>
+            <field name="product_id" ref="product_diesel"/>
+            <field name="current_price">2.50</field>
+            <field name="state">active</field>
+            <field name="tank_id" ref="tank_2_diesel"/>
+        </record>
+        <record id="nozzle_2_2_a" model="fuel.nozzle">
+            <field name="name">P2-N1 (Petrol 95)</field>
+            <field name="pump_id" ref="pump_2_2"/>
+            <field name="product_id" ref="product_petrol_95"/>
+            <field name="current_price">2.85</field>
+            <field name="state">active</field>
+            <field name="tank_id" ref="tank_2_petrol_95"/>
+        </record>
+
+        <!-- Licenses — STN-002 -->
+        <record id="lic_2_operating" model="fuel.license">
+            <field name="name">Operating License 2025–2026</field>
+            <field name="station_id" ref="station_highway"/>
+            <field name="license_type">operating</field>
+            <field name="license_number">OL-2025-0078</field>
+            <field name="issuing_authority">Ministry of Energy &amp; Infrastructure</field>
+            <field name="issue_date">2025-01-01</field>
+            <field name="expiry_date">2026-12-31</field>
+        </record>
+        <record id="lic_2_fire" model="fuel.license">
+            <field name="name">Fire Safety Certificate</field>
+            <field name="station_id" ref="station_highway"/>
+            <field name="license_type">fire_safety</field>
+            <field name="license_number">FS-2026-0042</field>
+            <field name="issuing_authority">Sharjah Civil Defense</field>
+            <field name="issue_date">2026-01-01</field>
+            <field name="expiry_date">2027-01-01</field>
+        </record>
+
+        <!-- ============================================================
+             STATION 3 — AIRPORT ROAD STATION
+        ============================================================ -->
+        <record id="station_airport" model="fuel.station">
+            <field name="name">Airport Road Station</field>
+            <field name="code">STN-003</field>
+            <field name="street">Airport Road, Near Terminal 2</field>
+            <field name="city">Abu Dhabi</field>
+            <field name="country_id" ref="base.ae"/>
+            <field name="phone">+971 2 345 6789</field>
+            <field name="email">airport@fuelco.ae</field>
+            <field name="state">active</field>
+        </record>
+
+        <!-- Pumps — STN-003 -->
+        <record id="pump_3_1" model="fuel.pump">
+            <field name="name">Pump 1</field>
+            <field name="code">P-001</field>
+            <field name="station_id" ref="station_airport"/>
+            <field name="state">active</field>
+        </record>
+        <record id="pump_3_2" model="fuel.pump">
+            <field name="name">Pump 2</field>
+            <field name="code">P-002</field>
+            <field name="station_id" ref="station_airport"/>
+            <field name="state">active</field>
+        </record>
+
+        <!-- Tanks — STN-003 -->
+        <record id="tank_3_petrol_95" model="fuel.tank">
+            <field name="name">Tank A — Petrol 95</field>
+            <field name="station_id" ref="station_airport"/>
+            <field name="product_id" ref="product_petrol_95"/>
+            <field name="capacity">35000</field>
+            <field name="current_stock">28700</field>
+            <field name="min_stock_alert">4000</field>
+        </record>
+        <record id="tank_3_petrol_98" model="fuel.tank">
+            <field name="name">Tank B — Petrol 98</field>
+            <field name="station_id" ref="station_airport"/>
+            <field name="product_id" ref="product_petrol_98"/>
+            <field name="capacity">15000</field>
+            <field name="current_stock">9600</field>
+            <field name="min_stock_alert">2000</field>
+        </record>
+        <record id="tank_3_diesel" model="fuel.tank">
+            <field name="name">Tank C — Diesel</field>
+            <field name="station_id" ref="station_airport"/>
+            <field name="product_id" ref="product_diesel"/>
+            <field name="capacity">20000</field>
+            <field name="current_stock">3800</field>
+            <field name="min_stock_alert">4000</field>
+        </record>
+
+        <!-- Nozzles — STN-003 -->
+        <record id="nozzle_3_1_a" model="fuel.nozzle">
+            <field name="name">P1-N1 (Petrol 95)</field>
+            <field name="pump_id" ref="pump_3_1"/>
+            <field name="product_id" ref="product_petrol_95"/>
+            <field name="current_price">2.85</field>
+            <field name="state">active</field>
+            <field name="tank_id" ref="tank_3_petrol_95"/>
+        </record>
+        <record id="nozzle_3_1_b" model="fuel.nozzle">
+            <field name="name">P1-N2 (Petrol 98)</field>
+            <field name="pump_id" ref="pump_3_1"/>
+            <field name="product_id" ref="product_petrol_98"/>
+            <field name="current_price">3.10</field>
+            <field name="state">active</field>
+            <field name="tank_id" ref="tank_3_petrol_98"/>
+        </record>
+        <record id="nozzle_3_2_a" model="fuel.nozzle">
+            <field name="name">P2-N1 (Diesel)</field>
+            <field name="pump_id" ref="pump_3_2"/>
+            <field name="product_id" ref="product_diesel"/>
+            <field name="current_price">2.50</field>
+            <field name="state">active</field>
+            <field name="tank_id" ref="tank_3_diesel"/>
+        </record>
+
+        <!-- Licenses — STN-003 -->
+        <record id="lic_3_operating" model="fuel.license">
+            <field name="name">Operating License</field>
+            <field name="station_id" ref="station_airport"/>
+            <field name="license_type">operating</field>
+            <field name="license_number">OL-2026-0011</field>
+            <field name="issuing_authority">Ministry of Energy &amp; Infrastructure</field>
+            <field name="issue_date">2026-01-01</field>
+            <field name="expiry_date">2027-12-31</field>
+        </record>
+        <record id="lic_3_trade" model="fuel.license">
+            <field name="name">Trade License</field>
+            <field name="station_id" ref="station_airport"/>
+            <field name="license_type">trade</field>
+            <field name="license_number">TL-2026-0993</field>
+            <field name="issuing_authority">Abu Dhabi DED</field>
+            <field name="issue_date">2026-03-01</field>
+            <field name="expiry_date">2026-06-28</field>
+        </record>
+
+        <!-- ============================================================
+             SHIFTS — STATION 1 (Main Road)
+             Shift 1: Morning Jun 16 — VALIDATED
+        ============================================================ -->
+        <record id="shift_1_1" model="fuel.shift">
+            <field name="name">SHF/2026/00001</field>
+            <field name="station_id" ref="station_main"/>
+            <field name="shift_definition_id" ref="shift_morning"/>
+            <field name="date">2026-06-16</field>
+            <field name="attendant_id" ref="hr.employee_qdp"/>
+            <field name="state">validated</field>
+        </record>
+        <record id="mr_1_1_a" model="fuel.meter.reading">
+            <field name="shift_id" ref="shift_1_1"/>
+            <field name="nozzle_id" ref="nozzle_1_1_a"/>
+            <field name="opening_reading">48250.000</field>
+            <field name="closing_reading">48692.500</field>
+            <field name="unit_price">2.85</field>
+        </record>
+        <record id="mr_1_1_b" model="fuel.meter.reading">
+            <field name="shift_id" ref="shift_1_1"/>
+            <field name="nozzle_id" ref="nozzle_1_1_b"/>
+            <field name="opening_reading">22100.000</field>
+            <field name="closing_reading">22348.200</field>
+            <field name="unit_price">2.50</field>
+        </record>
+        <record id="mr_1_1_c" model="fuel.meter.reading">
+            <field name="shift_id" ref="shift_1_1"/>
+            <field name="nozzle_id" ref="nozzle_1_2_a"/>
+            <field name="opening_reading">31500.000</field>
+            <field name="closing_reading">31984.750</field>
+            <field name="unit_price">2.85</field>
+        </record>
+        <record id="mr_1_1_d" model="fuel.meter.reading">
+            <field name="shift_id" ref="shift_1_1"/>
+            <field name="nozzle_id" ref="nozzle_1_2_b"/>
+            <field name="opening_reading">15200.000</field>
+            <field name="closing_reading">15412.300</field>
+            <field name="unit_price">3.10</field>
+        </record>
+        <record id="dr_1_1_a" model="fuel.dip.reading">
+            <field name="shift_id" ref="shift_1_1"/>
+            <field name="tank_id" ref="tank_1_petrol_95"/>
+            <field name="opening_level">33350.000</field>
+            <field name="received_qty">0</field>
+            <field name="closing_level">32422.750</field>
+        </record>
+        <record id="dr_1_1_b" model="fuel.dip.reading">
+            <field name="shift_id" ref="shift_1_1"/>
+            <field name="tank_id" ref="tank_1_diesel"/>
+            <field name="opening_level">4448.200</field>
+            <field name="received_qty">0</field>
+            <field name="closing_level">4200.000</field>
+        </record>
+
+        <!-- Shift 2: Afternoon Jun 16 — VALIDATED -->
+        <record id="shift_1_2" model="fuel.shift">
+            <field name="name">SHF/2026/00002</field>
+            <field name="station_id" ref="station_main"/>
+            <field name="shift_definition_id" ref="shift_afternoon"/>
+            <field name="date">2026-06-16</field>
+            <field name="attendant_id" ref="hr.employee_qdp"/>
+            <field name="state">validated</field>
+        </record>
+        <record id="mr_1_2_a" model="fuel.meter.reading">
+            <field name="shift_id" ref="shift_1_2"/>
+            <field name="nozzle_id" ref="nozzle_1_1_a"/>
+            <field name="opening_reading">48692.500</field>
+            <field name="closing_reading">49201.000</field>
+            <field name="unit_price">2.85</field>
+        </record>
+        <record id="mr_1_2_b" model="fuel.meter.reading">
+            <field name="shift_id" ref="shift_1_2"/>
+            <field name="nozzle_id" ref="nozzle_1_1_b"/>
+            <field name="opening_reading">22348.200</field>
+            <field name="closing_reading">22580.600</field>
+            <field name="unit_price">2.50</field>
+        </record>
+        <record id="mr_1_2_c" model="fuel.meter.reading">
+            <field name="shift_id" ref="shift_1_2"/>
+            <field name="nozzle_id" ref="nozzle_1_2_a"/>
+            <field name="opening_reading">31984.750</field>
+            <field name="closing_reading">32521.000</field>
+            <field name="unit_price">2.85</field>
+        </record>
+        <record id="dr_1_2_a" model="fuel.dip.reading">
+            <field name="shift_id" ref="shift_1_2"/>
+            <field name="tank_id" ref="tank_1_petrol_95"/>
+            <field name="opening_level">32422.750</field>
+            <field name="received_qty">10000</field>
+            <field name="closing_level">41377.750</field>
+        </record>
+        <record id="dr_1_2_b" model="fuel.dip.reading">
+            <field name="shift_id" ref="shift_1_2"/>
+            <field name="tank_id" ref="tank_1_diesel"/>
+            <field name="opening_level">4200.000</field>
+            <field name="received_qty">0</field>
+            <field name="closing_level">3967.400</field>
+        </record>
+
+        <!-- Shift 3: Morning Jun 17 — CLOSED -->
+        <record id="shift_1_3" model="fuel.shift">
+            <field name="name">SHF/2026/00003</field>
+            <field name="station_id" ref="station_main"/>
+            <field name="shift_definition_id" ref="shift_morning"/>
+            <field name="date">2026-06-17</field>
+            <field name="attendant_id" ref="hr.employee_qdp"/>
+            <field name="state">closed</field>
+        </record>
+        <record id="mr_1_3_a" model="fuel.meter.reading">
+            <field name="shift_id" ref="shift_1_3"/>
+            <field name="nozzle_id" ref="nozzle_1_1_a"/>
+            <field name="opening_reading">49201.000</field>
+            <field name="closing_reading">49756.500</field>
+            <field name="unit_price">2.85</field>
+        </record>
+        <record id="mr_1_3_b" model="fuel.meter.reading">
+            <field name="shift_id" ref="shift_1_3"/>
+            <field name="nozzle_id" ref="nozzle_1_2_a"/>
+            <field name="opening_reading">32521.000</field>
+            <field name="closing_reading">33088.250</field>
+            <field name="unit_price">2.85</field>
+        </record>
+        <record id="mr_1_3_c" model="fuel.meter.reading">
+            <field name="shift_id" ref="shift_1_3"/>
+            <field name="nozzle_id" ref="nozzle_1_1_b"/>
+            <field name="opening_reading">22580.600</field>
+            <field name="closing_reading">22762.800</field>
+            <field name="unit_price">2.50</field>
+        </record>
+        <record id="dr_1_3_a" model="fuel.dip.reading">
+            <field name="shift_id" ref="shift_1_3"/>
+            <field name="tank_id" ref="tank_1_petrol_95"/>
+            <field name="opening_level">41377.750</field>
+            <field name="received_qty">0</field>
+            <field name="closing_level">40254.000</field>
+        </record>
+
+        <!-- Shift 4: Morning Jun 18 — OPEN (today) -->
+        <record id="shift_1_4" model="fuel.shift">
+            <field name="name">SHF/2026/00004</field>
+            <field name="station_id" ref="station_main"/>
+            <field name="shift_definition_id" ref="shift_morning"/>
+            <field name="date">2026-06-18</field>
+            <field name="attendant_id" ref="hr.employee_qdp"/>
+            <field name="state">open</field>
+        </record>
+        <record id="mr_1_4_a" model="fuel.meter.reading">
+            <field name="shift_id" ref="shift_1_4"/>
+            <field name="nozzle_id" ref="nozzle_1_1_a"/>
+            <field name="opening_reading">49756.500</field>
+            <field name="closing_reading">49756.500</field>
+            <field name="unit_price">2.85</field>
+        </record>
+        <record id="mr_1_4_b" model="fuel.meter.reading">
+            <field name="shift_id" ref="shift_1_4"/>
+            <field name="nozzle_id" ref="nozzle_1_2_a"/>
+            <field name="opening_reading">33088.250</field>
+            <field name="closing_reading">33088.250</field>
+            <field name="unit_price">2.85</field>
+        </record>
+
+        <!-- ============================================================
+             SHIFTS — STATION 2 (Highway)
+        ============================================================ -->
+        <record id="shift_2_1" model="fuel.shift">
+            <field name="name">SHF/2026/00005</field>
+            <field name="station_id" ref="station_highway"/>
+            <field name="shift_definition_id" ref="shift_morning"/>
+            <field name="date">2026-06-17</field>
+            <field name="state">validated</field>
+        </record>
+        <record id="mr_2_1_a" model="fuel.meter.reading">
+            <field name="shift_id" ref="shift_2_1"/>
+            <field name="nozzle_id" ref="nozzle_2_1_a"/>
+            <field name="opening_reading">12000.000</field>
+            <field name="closing_reading">12630.500</field>
+            <field name="unit_price">2.85</field>
+        </record>
+        <record id="mr_2_1_b" model="fuel.meter.reading">
+            <field name="shift_id" ref="shift_2_1"/>
+            <field name="nozzle_id" ref="nozzle_2_1_b"/>
+            <field name="opening_reading">8400.000</field>
+            <field name="closing_reading">8782.400</field>
+            <field name="unit_price">2.50</field>
+        </record>
+        <record id="mr_2_1_c" model="fuel.meter.reading">
+            <field name="shift_id" ref="shift_2_1"/>
+            <field name="nozzle_id" ref="nozzle_2_2_a"/>
+            <field name="opening_reading">5100.000</field>
+            <field name="closing_reading">5718.300</field>
+            <field name="unit_price">2.85</field>
+        </record>
+        <record id="dr_2_1_a" model="fuel.dip.reading">
+            <field name="shift_id" ref="shift_2_1"/>
+            <field name="tank_id" ref="tank_2_petrol_95"/>
+            <field name="opening_level">22750.800</field>
+            <field name="received_qty">0</field>
+            <field name="closing_level">21501.000</field>
+        </record>
+        <record id="dr_2_1_b" model="fuel.dip.reading">
+            <field name="shift_id" ref="shift_2_1"/>
+            <field name="tank_id" ref="tank_2_diesel"/>
+            <field name="opening_level">18682.400</field>
+            <field name="received_qty">0</field>
+            <field name="closing_level">18300.000</field>
+        </record>
+
+        <!-- ============================================================
+             SHIFTS — STATION 3 (Airport)
+        ============================================================ -->
+        <record id="shift_3_1" model="fuel.shift">
+            <field name="name">SHF/2026/00006</field>
+            <field name="station_id" ref="station_airport"/>
+            <field name="shift_definition_id" ref="shift_morning"/>
+            <field name="date">2026-06-16</field>
+            <field name="state">validated</field>
+        </record>
+        <record id="mr_3_1_a" model="fuel.meter.reading">
+            <field name="shift_id" ref="shift_3_1"/>
+            <field name="nozzle_id" ref="nozzle_3_1_a"/>
+            <field name="opening_reading">9100.000</field>
+            <field name="closing_reading">9738.000</field>
+            <field name="unit_price">2.85</field>
+        </record>
+        <record id="mr_3_1_b" model="fuel.meter.reading">
+            <field name="shift_id" ref="shift_3_1"/>
+            <field name="nozzle_id" ref="nozzle_3_1_b"/>
+            <field name="opening_reading">4200.000</field>
+            <field name="closing_reading">4512.600</field>
+            <field name="unit_price">3.10</field>
+        </record>
+        <record id="mr_3_1_c" model="fuel.meter.reading">
+            <field name="shift_id" ref="shift_3_1"/>
+            <field name="nozzle_id" ref="nozzle_3_2_a"/>
+            <field name="opening_reading">6300.000</field>
+            <field name="closing_reading">6598.200</field>
+            <field name="unit_price">2.50</field>
+        </record>
+        <record id="dr_3_1_a" model="fuel.dip.reading">
+            <field name="shift_id" ref="shift_3_1"/>
+            <field name="tank_id" ref="tank_3_petrol_95"/>
+            <field name="opening_level">29338.000</field>
+            <field name="received_qty">0</field>
+            <field name="closing_level">28700.000</field>
+        </record>
+        <record id="dr_3_1_b" model="fuel.dip.reading">
+            <field name="shift_id" ref="shift_3_1"/>
+            <field name="tank_id" ref="tank_3_diesel"/>
+            <field name="opening_level">4098.200</field>
+            <field name="received_qty">0</field>
+            <field name="closing_level">3800.000</field>
+        </record>
+
+    </data>
+</odoo>

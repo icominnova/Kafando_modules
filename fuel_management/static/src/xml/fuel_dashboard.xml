@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+    <templates xml:space="preserve">
+        <t t-name="fuel_management.FuelDashboard">
+            <div class="o_fuel_dashboard">
+
+                <!-- HEADER -->
+                <div class="fuel-dashboard-header">
+                    <div class="fuel-dashboard-title">
+                        <i class="fa fa-tachometer"/>
+                        <span>Fuel Station Dashboard</span>
+                    </div>
+
+                    <div class="fuel-station-selector">
+                        <label for="fuel_station_select">
+                            Station
+                        </label>
+                        <select
+                            id="fuel_station_select"
+                            class="form-select"
+                            t-on-change="onStationChange">
+
+                            <option value="">
+                                All Stations
+                            </option>
+
+                            <t t-foreach="state.stations"
+                            t-as="station"
+                            t-key="station.id">
+
+                                <option
+                                    t-att-value="station.id"
+                                    t-att-selected="state.stationId === station.id">
+
+                                    <t t-esc="station.name"/>
+
+                                </option>
+                            </t>
+                        </select>
+                    </div>
+                </div>                      
+                  
+                <div class="fuel-dashboard">
+                    <!-- KPI -->
+                    <div class="fuel-section-header fuel-daily-summary-header">
+                        <div>
+                            <i class="fa fa-bar-chart"/>
+                            <span>Daily Summary</span>
+                        </div>
+                    </div>
+
+                    <div class="fuel-kpi-grid">
+                        <!-- SALES -->
+                        <div class="fuel-kpi-card">
+                            <div class="fuel-kpi-icon text-success">
+                                <i class="fa fa-money"/>
+                            </div>
+
+                            <div class="fuel-kpi-value text-success">
+                                <t t-esc="formatNumber(state.data.today_sales_amount)"/>
+                            </div>
+
+                            <div class="fuel-kpi-label">
+                                Today's Sales
+                            </div>
+                        </div>
+
+                        <!-- FUEL SOLD -->
+                        <div class="fuel-kpi-card">
+                            <div class="fuel-kpi-icon text-primary">
+                                <i class="fa fa-tint"/>
+                            </div>
+
+                            <div class="fuel-kpi-value text-primary">
+                                <t t-esc="formatNumber(state.data.today_dispensed_qty)"/>
+                                L
+                            </div>
+
+                            <div class="fuel-kpi-label">
+                                Fuel Sold
+                            </div>
+                        </div>
+
+                        <!-- ACTIVE SHIFTS -->
+                        <div class="fuel-kpi-card">
+                            <div class="fuel-kpi-icon text-info">
+                                <i class="fa fa-clock-o"/>
+                            </div>
+
+                            <div class="fuel-kpi-value text-info">
+                                <t t-esc="state.data.open_shift_count"/>
+                            </div>
+
+                            <div class="fuel-kpi-label">
+                                Active Shifts
+                            </div>
+                        </div>
+
+                        <!-- SALE COUNT -->
+                        <div class="fuel-kpi-card">
+                            <div class="fuel-kpi-icon text-warning">
+                                <i class="fa fa-shopping-cart"/>
+                            </div>
+
+                            <div class="fuel-kpi-value text-warning">
+                                <t t-esc="state.data.today_sale_count"/>
+                            </div>
+
+                            <div class="fuel-kpi-label">
+                                Sale Count
+                            </div>
+                        </div>
+                    </div>
+                
+
+                    <!-- TANKS -->
+                    <div class="fuel-section-header">
+                        <div>
+                            <i class="fa fa-database"/>
+                            <span>Tank Stock Levels</span>
+                        </div>
+
+                        <span class="fuel-tank-count">
+                            <t t-esc="state.data.tanks.length"/> Tanks
+                        </span>
+                    </div>
+
+                    <div class="fuel-tanks-grid">
+                        <t t-if="state.data.tanks.length">
+                            <t t-foreach="state.data.tanks" t-as="tank" t-key="tank.id">
+                                <div class="fuel-tank-card">
+                                    <div class="fuel-tank-header">
+                                        <div>
+                                            <strong>
+                                                <t t-esc="tank.name"/>
+                                            </strong>
+
+                                            <div class="fuel-tank-product">
+                                                <t t-esc="tank.product"/>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- GAUGE -->
+                                    <div class="fuel-gauge">
+                                        <div class="fuel-gauge-track">
+                                            <div
+                                                class="fuel-gauge-fill"
+                                                t-att-class="getStockClass(tank.stock_percent)"
+                                                t-att-style="'width: ' + tank.stock_percent + '%;'">
+                                            </div>
+
+                                            <div class="fuel-gauge-label">
+                                                <t t-esc="Math.round(tank.stock_percent)"/>
+                                                %
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- STOCK -->
+                                    <div class="fuel-tank-stock">
+                                        <span>
+                                            <t t-esc="formatNumber(tank.current_stock)"/>
+                                            L
+                                        </span>
+
+                                        <span>
+                                            /
+                                            <t t-esc="formatNumber(tank.capacity)"/>
+                                            L
+                                        </span>
+                                    </div>
+                                </div>
+                            </t>
+                        </t>
+
+                        <!-- NO TANK -->
+                        <t t-else="">
+                            <div class="fuel-empty-state">
+                                <i class="fa fa-database"/>
+                                <h3>No tanks found</h3>
+                                <p>
+                                    No fuel tanks are available for this station.
+                                </p>
+                            </div>
+                        </t>
+                    </div>
+                </div>
+            </div>
+        </t>
+    </templates>

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="action_fuel_dashboard" model="ir.actions.client">
+        <field name="name">Fuel Station Dashboard</field>
+        <field name="tag">fuel_management.fuel_dashboard</field>
+    </record>
+
+</odoo>

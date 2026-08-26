@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="view_fuel_shift_definition_form" model="ir.ui.view">
+        <field name="name">fuel.shift.definition.form</field>
+        <field name="model">fuel.shift.definition</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <field name="name"/>
+                        <field name="start_time" widget="float_time"/>
+                        <field name="end_time" widget="float_time"/>
+                        <field name="active"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_fuel_shift_definition_list" model="ir.ui.view">
+        <field name="name">fuel.shift.definition.list</field>
+        <field name="model">fuel.shift.definition</field>
+        <field name="arch" type="xml">
+            <list editable="bottom">
+                <field name="name"/>
+                <field name="start_time" widget="float_time"/>
+                <field name="end_time" widget="float_time"/>
+                <field name="active"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="action_fuel_shift_definition" model="ir.actions.act_window">
+        <field name="name">Shift Definitions</field>
+        <field name="res_model">fuel.shift.definition</field>
+        <field name="view_mode">list,form</field>
+    </record>
+
+    <!-- Shift Form -->
+    <record id="view_fuel_shift_form" model="ir.ui.view">
+        <field name="name">fuel.shift.form</field>
+        <field name="model">fuel.shift</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <button name="action_open" string="Start Shift" type="object"
+                        class="btn-primary" invisible="state != 'draft'"/>
+                    <button name="action_close" string="Close Shift" type="object"
+                        class="btn-primary" invisible="state != 'open'"/>
+                    <button name="action_validate" string="Validate" type="object"
+                        class="btn-primary" invisible="state != 'closed'"/>
+                    <button name="action_reset_draft" string="Reset to Draft" type="object"
+                        invisible="state not in ('closed',)"/>
+                    <button name="action_print_report" string="Print Report" type="object"
+                        icon="fa-print"/>
+                    <field name="state" widget="statusbar" statusbar_visible="draft,open,closed,validated"/>
+                </header>
+                <sheet>
+                    <div class="oe_title">
+                        <h1><field name="name" readonly="1"/></h1>
+                    </div>
+                    <group>
+                        <group string="Shift Details">
+                            <field name="station_id" readonly="state != 'draft'"/>
+                            <field name="shift_definition_id"/>
+                            <field name="date" readonly="state != 'draft'"/>
+                            <field name="attendant_id"/>
+                            <field name="supervisor_id"/>
+                        </group>
+                        <group string="Totals">
+                            <field name="total_dispensed"/>
+                            <field name="total_sales_amount" widget="monetary"/>
+                            <field name="currency_id" invisible="1"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Meter Readings" name="meter_readings">
+                            <field name="meter_reading_ids" readonly="state == 'validated'">
+                                <list editable="bottom">
+                                    <field name="nozzle_id"/>
+                                    <field name="pump_id" optional="show"/>
+                                    <field name="product_id"/>
+                                    <field name="opening_reading"/>
+                                    <field name="closing_reading"/>
+                                    <field name="dispensed_qty" readonly="1"/>
+                                    <field name="unit_price"/>
+                                    <field name="total_amount" readonly="1"/>
+                                    <field name="notes" optional="hide"/>
+                                </list>
+                            </field>
+                        </page>
+                        <page string="Dip Readings (Tanks)" name="dip_readings">
+                            <field name="dip_reading_ids" readonly="state == 'validated'">
+                                <list editable="bottom">
+                                    <field name="tank_id"/>
+                                    <field name="product_id"/>
+                                    <field name="opening_level"/>
+                                    <field name="received_qty"/>
+                                    <field name="closing_level"/>
+                                    <field name="expected_closing" readonly="1"/>
+                                    <field name="variance" readonly="1"
+                                        decoration-danger="variance &lt; -10"
+                                        decoration-warning="variance &lt; 0"
+                                        decoration-success="variance &gt;= 0"/>
+                                    <field name="notes" optional="hide"/>
+                                </list>
+                            </field>
+                        </page>
+                        <page string="Notes">
+                            <field name="notes" placeholder="Shift notes..."/>
+                        </page>
+                    </notebook>
+                </sheet>
+                <chatter/>
+            </form>
+        </field>
+    </record>
+
+    <!-- Shift List -->
+    <record id="view_fuel_shift_list" model="ir.ui.view">
+        <field name="name">fuel.shift.list</field>
+        <field name="model">fuel.shift</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="name"/>
+                <field name="station_id"/>
+                <field name="shift_definition_id"/>
+                <field name="date"/>
+                <field name="attendant_id"/>
+                <field name="total_dispensed"/>
+                <field name="total_sales_amount" widget="monetary"/>
+                <field name="currency_id" column_invisible="1"/>
+                <field name="state" widget="badge"
+                    decoration-info="state == 'draft'"
+                    decoration-primary="state == 'open'"
+                    decoration-warning="state == 'closed'"
+                    decoration-success="state == 'validated'"/>
+            </list>
+        </field>
+    </record>
+
+    <!-- Shift Search -->
+    <record id="view_fuel_shift_search" model="ir.ui.view">
+        <field name="name">fuel.shift.search</field>
+        <field name="model">fuel.shift</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="name"/>
+                <field name="station_id"/>
+                <field name="attendant_id"/>
+                <filter string="Draft" name="draft" domain="[('state','=','draft')]"/>
+                <filter string="In Progress" name="open" domain="[('state','=','open')]"/>
+                <filter string="Closed" name="closed" domain="[('state','=','closed')]"/>
+                <filter string="Validated" name="validated" domain="[('state','=','validated')]"/>
+                <separator/>
+                <filter string="Today" name="today" domain="[('date','=', context_today().strftime('%Y-%m-%d'))]"/>
+                <group>
+                    <filter string="Station" name="group_station" context="{'group_by': 'station_id'}"/>
+                    <filter string="Date" name="group_date" context="{'group_by': 'date'}"/>
+                    <filter string="Status" name="group_state" context="{'group_by': 'state'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <record id="action_fuel_shift" model="ir.actions.act_window">
+        <field name="name">Shifts</field>
+        <field name="res_model">fuel.shift</field>
+        <field name="view_mode">list,form</field>
+        <field name="search_view_id" ref="view_fuel_shift_search"/>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">Record your first shift</p>
+        </field>
+    </record>
+
+</odoo>

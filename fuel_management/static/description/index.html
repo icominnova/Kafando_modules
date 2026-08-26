@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <title>Fuel Management System | Petrol Pump &amp; Gas Station ERP</title>
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: 'Segoe UI', Arial, sans-serif; color: #333; background: #fff; }
+
+        /* ── Hero ───────────────────────────── */
+        .hero {
+            background: linear-gradient(135deg, #714B67 0%, #4A2F47 100%);
+            color: white;
+            padding: 48px 40px;
+            display: flex;
+            align-items: center;
+            gap: 32px;
+        }
+        .hero img.icon { width: 80px; height: 80px; border-radius: 16px; background: rgba(255,255,255,0.15); padding: 8px; }
+        .hero h1 { font-size: 32px; font-weight: 800; margin-bottom: 8px; }
+        .hero p  { font-size: 15px; opacity: 0.9; max-width: 600px; line-height: 1.6; }
+        .hero .badges { display: flex; gap: 10px; margin-top: 16px; flex-wrap: wrap; }
+        .badge-pill {
+            background: rgba(255,255,255,0.18);
+            border: 1px solid rgba(255,255,255,0.35);
+            color: white;
+            padding: 4px 14px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        /* ── Content wrapper ────────────────── */
+        .content { max-width: 960px; margin: 0 auto; padding: 40px 30px; }
+
+        /* ── Section headings ───────────────── */
+        h2 {
+            font-size: 20px;
+            font-weight: 700;
+            color: #714B67;
+            margin-bottom: 20px;
+            padding-bottom: 8px;
+            border-bottom: 2px solid #f0e8ef;
+        }
+
+        /* ── Screenshot ─────────────────────── */
+        .screenshot-section { margin-bottom: 48px; }
+        .screenshot-section img {
+            width: 100%;
+            border-radius: 10px;
+            box-shadow: 0 4px 24px rgba(0,0,0,0.15);
+            border: 1px solid #e0d8e0;
+            display: block;
+        }
+        .screenshot-caption {
+            text-align: center;
+            font-size: 13px;
+            color: #888;
+            margin-top: 10px;
+            font-style: italic;
+        }
+
+        /* ── Feature grid ───────────────────── */
+        .feature-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+            margin-bottom: 48px;
+        }
+        .feature-card {
+            background: #fdf8fc;
+            border: 1px solid #eedde8;
+            border-left: 4px solid #714B67;
+            border-radius: 8px;
+            padding: 18px 20px;
+        }
+        .feature-card h3 {
+            font-size: 14px;
+            font-weight: 700;
+            color: #714B67;
+            margin-bottom: 6px;
+        }
+        .feature-card p {
+            font-size: 13px;
+            color: #555;
+            line-height: 1.6;
+        }
+        .feature-card .icon { font-size: 20px; margin-bottom: 8px; }
+
+        /* ── Steps ──────────────────────────── */
+        .steps { margin-bottom: 48px; }
+        .step {
+            display: flex;
+            gap: 20px;
+            margin-bottom: 20px;
+            align-items: flex-start;
+        }
+        .step-num {
+            background: #714B67;
+            color: white;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 14px;
+            flex-shrink: 0;
+        }
+        .step-content h4 { font-size: 14px; font-weight: 700; color: #333; margin-bottom: 4px; }
+        .step-content p  { font-size: 13px; color: #666; line-height: 1.5; }
+
+        /* ── Modules table ──────────────────── */
+        table.models {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 13px;
+            margin-bottom: 48px;
+        }
+        table.models thead tr { background: #714B67; color: white; }
+        table.models th { padding: 10px 14px; text-align: left; font-weight: 600; }
+        table.models td { padding: 9px 14px; border-bottom: 1px solid #f0e8ef; color: #444; }
+        table.models tr:nth-child(even) td { background: #fdf8fc; }
+
+        /* ── Tip box ────────────────────────── */
+        .tip {
+            background: #fff8e1;
+            border-left: 4px solid #f9a825;
+            border-radius: 6px;
+            padding: 14px 18px;
+            font-size: 13px;
+            color: #555;
+            margin-bottom: 40px;
+        }
+        .tip strong { color: #e65100; }
+
+        /* ── Footer ─────────────────────────── */
+        .footer {
+            background: #4A2F47;
+            color: rgba(255,255,255,0.8);
+            text-align: center;
+            padding: 24px;
+            font-size: 12px;
+        }
+        .footer a { color: #d4a8cc; text-decoration: none; }
+    </style>
+</head>
+<body>
+
+<!-- ═══════════════════════════════════════════════════════
+     HERO BANNER
+═══════════════════════════════════════════════════════ -->
+<div class="hero">
+    <img class="icon" src="icon.png" alt="Fuel Management"/>
+    <div>
+        <h1>⛽ Fuel Management System</h1>
+        <p>Complete Petrol Pump &amp; Gas Station ERP for Odoo 19. Manage stations, pumps, tanks, shifts,
+           meter readings, dip readings, and license compliance — all in one place.</p>
+        <div class="badges">
+            <span class="badge-pill">Odoo 19.0</span>
+            <span class="badge-pill">Arabic &amp; English</span>
+            <span class="badge-pill">Multi-Station</span>
+            <span class="badge-pill">PDF Reports</span>
+            <span class="badge-pill">Demo Data Included</span>
+        </div>
+    </div>
+</div>
+
+<div class="content">
+
+    <!-- ═══════════════════════════════════════
+         SCREENSHOT
+    ═══════════════════════════════════════ -->
+    <div class="screenshot-section" style="margin-top:40px">
+        <h2>📸 Module Preview</h2>
+        <img src="screenshot.jpg" alt="Fuel Management System – Shifts, Meter Readings, Tanks &amp; Licenses"/>
+        <p class="screenshot-caption">
+            Shift list with status badges · Shift detail with meter readings · Tank stock monitoring · License compliance tracker
+        </p>
+    </div>
+
+    <!-- ═══════════════════════════════════════
+         KEY FEATURES
+    ═══════════════════════════════════════ -->
+    <h2>🚀 Key Features</h2>
+    <div class="feature-grid">
+        <div class="feature-card">
+            <div class="icon">🏭</div>
+            <h3>Multi-Station Management</h3>
+            <p>Configure unlimited stations with location, manager, phone, and email. Smart buttons show pump, tank, and license counts at a glance.</p>
+        </div>
+        <div class="feature-card">
+            <div class="icon">⚙️</div>
+            <h3>Pump · Nozzle · Tank Hierarchy</h3>
+            <p>Full hierarchy: Station → Pump → Nozzle, each with product assignment and individual pricing. Tank capacity and real-time stock with low/critical/empty alerts.</p>
+        </div>
+        <div class="feature-card">
+            <div class="icon">⏱</div>
+            <h3>Shift Operations &amp; Workflow</h3>
+            <p>Define Morning, Afternoon, and Night shifts. Full state workflow: Draft → In Progress → Closed → Validated with attendant and supervisor tracking.</p>
+        </div>
+        <div class="feature-card">
+            <div class="icon">📊</div>
+            <h3>Meter &amp; Dip Readings</h3>
+            <p>Opening/closing meter readings auto-calculate dispensed quantity and sales amount. Tank dip readings compute expected-vs-actual variance to detect leakage or losses.</p>
+        </div>
+        <div class="feature-card">
+            <div class="icon">📄</div>
+            <h3>Printable Shift Report (PDF)</h3>
+            <p>Generate a detailed audit-ready PDF report per shift including all meter readings, dip readings, tank variances, and financial totals.</p>
+        </div>
+        <div class="feature-card">
+            <div class="icon">💰</div>
+            <h3>Fuel Price Update Wizard</h3>
+            <p>Bulk-update nozzle prices across multiple stations for a given product in one click. Shows how many nozzles will be affected before applying.</p>
+        </div>
+        <div class="feature-card">
+            <div class="icon">📋</div>
+            <h3>License &amp; Compliance Tracking</h3>
+            <p>Centrally manage operating licenses, fire safety certificates, environmental clearances, and trade licenses with automatic expiry status (Valid / Expiring Soon / Expired).</p>
+        </div>
+        <div class="feature-card">
+            <div class="icon">🌍</div>
+            <h3>Arabic &amp; English Bilingual</h3>
+            <p>Fully translated into Arabic with RTL support. Switch languages per user from Odoo settings. All field labels, menus, buttons, and reports are translated.</p>
+        </div>
+    </div>
+
+    <!-- ═══════════════════════════════════════
+         HOW IT WORKS
+    ═══════════════════════════════════════ -->
+    <h2>📖 How It Works</h2>
+    <div class="steps">
+        <div class="step">
+            <div class="step-num">1</div>
+            <div class="step-content">
+                <h4>Configure Stations &amp; Equipment</h4>
+                <p>Create your fuel stations, then add pumps under each station and nozzles under each pump. Assign the fuel product (Petrol 95, Diesel, etc.) and current price to each nozzle. Register tanks with their capacity and minimum stock alert levels.</p>
+            </div>
+        </div>
+        <div class="step">
+            <div class="step-num">2</div>
+            <div class="step-content">
+                <h4>Run Daily Shift Operations</h4>
+                <p>Create a shift record, assign attendant and shift type, then click <strong>Start Shift</strong>. Enter opening meter readings for each nozzle and opening dip levels for each tank. At shift end, enter closing readings — dispensed quantities and sales totals are calculated automatically.</p>
+            </div>
+        </div>
+        <div class="step">
+            <div class="step-num">3</div>
+            <div class="step-content">
+                <h4>Close, Validate &amp; Report</h4>
+                <p>Close the shift, review dip reading variances to spot any losses, then validate and print the PDF shift report. Track license expiry dates and get visual warnings when documents are expiring or expired.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- ═══════════════════════════════════════
+         MODELS
+    ═══════════════════════════════════════ -->
+    <h2>🗂 Data Models</h2>
+    <table class="models">
+        <thead>
+            <tr>
+                <th>Model</th>
+                <th>Description</th>
+                <th>Key Fields</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><strong>fuel.station</strong></td>
+                <td>Fuel Station (main entity)</td>
+                <td>Name, Code, City, Manager, Pumps, Tanks, Licenses</td>
+            </tr>
+            <tr>
+                <td><strong>fuel.pump</strong></td>
+                <td>Dispensing Pump</td>
+                <td>Name, Code, Station, Nozzles, Status</td>
+            </tr>
+            <tr>
+                <td><strong>fuel.nozzle</strong></td>
+                <td>Individual Nozzle / Dispenser</td>
+                <td>Name, Pump, Product, Current Price, Status</td>
+            </tr>
+            <tr>
+                <td><strong>fuel.tank</strong></td>
+                <td>Storage Tank</td>
+                <td>Name, Station, Product, Capacity, Stock, Alert Level</td>
+            </tr>
+            <tr>
+                <td><strong>fuel.shift</strong></td>
+                <td>Shift Record (workflow)</td>
+                <td>Reference, Station, Date, Attendant, State, Totals</td>
+            </tr>
+            <tr>
+                <td><strong>fuel.meter.reading</strong></td>
+                <td>Pump Meter Reading per Shift</td>
+                <td>Nozzle, Opening/Closing, Dispensed Qty, Amount</td>
+            </tr>
+            <tr>
+                <td><strong>fuel.dip.reading</strong></td>
+                <td>Tank Dip Level per Shift</td>
+                <td>Tank, Opening/Closing Level, Received, Variance</td>
+            </tr>
+            <tr>
+                <td><strong>fuel.license</strong></td>
+                <td>License &amp; Compliance Document</td>
+                <td>Type, Number, Authority, Issue/Expiry Date, Status</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <!-- ═══════════════════════════════════════
+         TIP
+    ═══════════════════════════════════════ -->
+    <div class="tip">
+        💡 <strong>Demo data included!</strong> Install the module with demo data to instantly see
+        3 stations (Dubai · Sharjah · Abu Dhabi), 10 nozzles, 8 tanks, 6 shifts with full meter and
+        dip readings, and 10 licenses — ready to explore without any manual setup.
+    </div>
+
+    <!-- ═══════════════════════════════════════
+         ACCESS RIGHTS
+    ═══════════════════════════════════════ -->
+    <h2>🔐 Access Rights</h2>
+    <table class="models">
+        <thead>
+            <tr><th>Group</th><th>Permissions</th></tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><strong>Fuel Management / User</strong></td>
+                <td>Read, create, and edit stations, pumps, nozzles, tanks, shifts, and readings.</td>
+            </tr>
+            <tr>
+                <td><strong>Fuel Management / Manager</strong></td>
+                <td>Full access including delete and access to Configuration menu (shift definitions, price wizard).</td>
+            </tr>
+        </tbody>
+    </table>
+
+</div>
+
+<!-- ═══════════════════════════════════════════════════════
+     FOOTER
+═══════════════════════════════════════════════════════ -->
+<div class="footer">
+    Developed by <strong style="color:white">LeapAI</strong> ·
+    <a href="https://www.leapai.ai">www.leapai.ai</a> ·
+    Odoo 19.0 · Version 19.0.1.0.0 · License LGPL-3
+</div>
+
+</body>
+</html>

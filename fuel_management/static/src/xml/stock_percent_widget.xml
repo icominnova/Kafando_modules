@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<templates xml:space="preserve">
+
+    <t t-name="fuel_management.StockPercentWidget">
+        <div class="fuel-stock-percent">
+            
+            <div class="fuel-stock-percent-bar">
+                <div
+                    class="fuel-stock-percent-fill"
+                    t-att-style="'width: ' + percentage + '%;'">
+                </div>
+            </div>
+
+            <span class="fuel-stock-percent-value">
+                <t t-esc="percentage"/>%
+            </span>
+
+        </div>
+    </t>
+
+</templates>

@@ -1,0 +1,27 @@
+.fuel-stock-percent {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    min-width: 50px;
+}
+
+.fuel-stock-percent-bar {
+    flex: 1;
+    height: 10px;
+    overflow: hidden;
+    background: #e9ecef;
+}
+
+.fuel-stock-percent-fill {
+    height: 100%;
+    background: #5c393e;
+    transition: width 0.3s ease;
+}
+
+.fuel-stock-percent-value {
+    min-width: 38px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    text-align: right;
+    color: #212529;
+}

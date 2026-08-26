@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="view_fuel_tank_form" model="ir.ui.view">
+        <field name="name">fuel.tank.form</field>
+        <field name="model">fuel.tank</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <div class="oe_title">
+                        <h1><field name="name" placeholder="Tank Name"/></h1>
+                    </div>
+
+                    <group>
+                        <group>
+                            <field name="station_id"/>
+                            <field name="product_id"/>
+                            <field name="capacity"/>
+                            <field name="min_stock_alert"/>
+                        </group>
+                        <group>
+                            <field name="current_stock" readonly="id != False"/>
+                            <field name="state" widget="badge"
+                                decoration-success="state == 'normal'"
+                                decoration-warning="state == 'low'"
+                                decoration-danger="state in ('critical','empty')"/>
+                        </group>
+                    </group>
+                    <field name="notes" placeholder="Notes..."/>
+                </sheet>
+                <chatter/>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_fuel_tank_list" model="ir.ui.view">
+        <field name="name">fuel.tank.list</field>
+        <field name="model">fuel.tank</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="name"/>
+                <field name="station_id"/>
+                <field name="product_id"/>
+                <field name="capacity"/>
+                <field name="current_stock" readonly="id != False"/>
+                <field name="stock_percent" widget="stock_percent_bar"/>
+                <field name="min_stock_alert"/>
+                <field name="state" widget="badge"
+                    decoration-success="state == 'normal'"
+                    decoration-warning="state == 'low'"
+                    decoration-danger="state in ('critical','empty')"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="action_fuel_tank" model="ir.actions.act_window">
+        <field name="name">Tanks</field>
+        <field name="res_model">fuel.tank</field>
+        <field name="view_mode">list,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">Register your first fuel tank</p>
+        </field>
+    </record>
+
+    <record id="view_fuel_tank_kanban" model="ir.ui.view">
+        <field name="name">fuel.tank.kanban</field>
+        <field name="model">fuel.tank</field>
+        <field name="arch" type="xml">
+            <kanban default_group_by="station_id" class="o_kanban_dashboard">
+                <field name="name"/>
+                <field name="product_id"/>
+                <field name="current_stock"/>
+                <field name="capacity"/>
+                <field name="stock_percent"/>
+                <field name="state"/>
+
+                <templates>
+
+                    <t t-name="card">
+                        <div class="oe_kanban_card oe_kanban_global_click p-3"> 
+                            <strong><t t-out="record.name.value"/></strong>
+                            <div class="text-muted"><t t-out="record.product_id.value"/></div>
+                            <div class="progress mt-2" style="height: 18px;">
+                                <div class="progress-bar"
+                                    t-attf-class="#{record.state.raw_value == 'normal' and 'bg-success' or record.state.raw_value == 'low' and 'bg-warning' or 'bg-danger'}"
+                                    t-attf-style="width: #{record.stock_percent.value}%;">
+                                </div>
+                            </div>
+
+                            <div class="d-flex justify-content-between mt-1">
+                                <small><t t-out="record.current_stock.value"/> / <t t-out="record.capacity.value"/> L</small>
+                                <span class="badge"
+                                    t-attf-class="#{record.state.raw_value == 'normal' and 'text-bg-success' or record.state.raw_value == 'low' and 'text-bg-warning' or 'text-bg-danger'}">
+                                    <t t-out="record.state.value"/>
+                                </span>
+                            </div>
+                        </div>
+                    </t>
+                </templates>
+            </kanban>
+        </field>
+    </record>
+
+</odoo>

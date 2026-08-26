@@ -1,0 +1,773 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# * fuel_management
+#
+# Translators:
+# LeapAI <info@leapai.ai>, 2025
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 19.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-01-01 00:00+0000\n"
+"PO-Revision-Date: 2025-01-01 00:00+0000\n"
+"Last-Translator: LeapAI <info@leapai.ai>\n"
+"Language-Team: Arabic\n"
+"Language: ar\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 && n%100<=10 ? 3 : n%100>=11 ? 4 : 5;\n"
+
+# ── fuel.station fields ───────────────────────────────────────────────────────
+
+#. module: fuel_management
+#: model:ir.model,model_description:fuel_management.model_fuel_station
+msgid "Fuel Station"
+msgstr "محطة الوقود"
+
+#. module: fuel_management
+#: model:ir.model.fields,field_description:fuel_management.field_fuel_station__name
+msgid "Station Name"
+msgstr "اسم المحطة"
+
+#. module: fuel_management
+#: model:ir.model.fields,field_description:fuel_management.field_fuel_station__code
+msgid "Station Code"
+msgstr "رمز المحطة"
+
+#. module: fuel_management
+#: model:ir.model.fields,field_description:fuel_management.field_fuel_station__manager_id
+msgid "Station Manager"
+msgstr "مدير المحطة"
+
+#. module: fuel_management
+#: model:ir.model.fields,field_description:fuel_management.field_fuel_station__street
+msgid "Street"
+msgstr "الشارع"
+
+#. module: fuel_management
+#: model:ir.model.fields,field_description:fuel_management.field_fuel_station__city
+msgid "City"
+msgstr "المدينة"
+
+#. module: fuel_management
+#: model:ir.model.fields,field_description:fuel_management.field_fuel_station__state_id
+msgid "State"
+msgstr "الولاية / المنطقة"
+
+#. module: fuel_management
+#: model:ir.model.fields,field_description:fuel_management.field_fuel_station__country_id
+msgid "Country"
+msgstr "الدولة"
+
+#. module: fuel_management
+#: model:ir.model.fields,field_description:fuel_management.field_fuel_station__phone
+msgid "Phone"
+msgstr "الهاتف"
+
+#. module: fuel_management
+#: model:ir.model.fields,field_description:fuel_management.field_fuel_station__email
+msgid "Email"
+msgstr "البريد الإلكتروني"
+
+#. module: fuel_management
+#: model:ir.model.fields,field_description:fuel_management.field_fuel_station__company_id
+msgid "Company"
+msgstr "الشركة"
+
+#. module: fuel_management
+#: model:ir.model.fields,field_description:fuel_management.field_fuel_station__active
+msgid "Active"
+msgstr "نشط"
+
+#. module: fuel_management
+#: model:ir.model.fields,field_description:fuel_management.field_fuel_station__state
+msgid "Status"
+msgstr "الحالة"
+
+#. module: fuel_management
+#: model:ir.model.fields,field_description:fuel_management.field_fuel_station__notes
+msgid "Notes"
+msgstr "ملاحظات"
+
+#. module: fuel_management
+#: model:ir.model.fields,field_description:fuel_management.field_fuel_station__pump_ids
+#: model:ir.model.fields,field_description:fuel_management.field_fuel_station__pump_count
+msgid "Pumps"
+msgstr "المضخات"
+
+#. module: fuel_management
+#: model:ir.model.fields,field_description:fuel_management.field_fuel_station__tank_ids
+#: model:ir.model.fields,field_description:fuel_management.field_fuel_station__tank_count
+msgid "Tanks"
+msgstr "الخزانات"
+
+#. module: fuel_management
+#: model:ir.model.fields,field_description:fuel_management.field_fuel_station__license_ids
+#: model:ir.model.fields,field_description:fuel_management.field_fuel_station__license_count
+msgid "Licenses"
+msgstr "التراخيص"
+
+# ── fuel.station selection values ─────────────────────────────────────────────
+
+#. module: fuel_management
+#: model:ir.model.fields.selection,name:fuel_management.selection__fuel_station__state__active
+msgid "Active"
+msgstr "نشط"
+
+#. module: fuel_management
+#: model:ir.model.fields.selection,name:fuel_management.selection__fuel_station__state__maintenance
+msgid "Under Maintenance"
+msgstr "تحت الصيانة"
+
+#. module: fuel_management
+#: model:ir.model.fields.selection,name:fuel_management.selection__fuel_station__state__inactive
+msgid "Inactive"
+msgstr "غير نشط"
+
+# ── fuel.pump fields ──────────────────────────────────────────────────────────
+
+#. module: fuel_management
+#: model:ir.model,model_description:fuel_management.model_fuel_pump
+msgid "Fuel Pump"
+msgstr "مضخة الوقود"
+
+#. module: fuel_management
+#: model:ir.model.fields,field_description:fuel_management.field_fuel_pump__name
+msgid "Pump Name"
+msgstr "اسم المضخة"
+
+#. module: fuel_management
+#: model:ir.model.fields,field_description:fuel_management.field_fuel_pump__code
+msgid "Pump Code"
+msgstr "رمز المضخة"
+
+#. module: fuel_management
+#: model:ir.model.fields,field_description:fuel_management.field_fuel_pump__station_id
+msgid "Station"
+msgstr "المحطة"
+
+#. module: fuel_management
+#: model:ir.model.fields,field_description:fuel_management.field_fuel_pump__state
+msgid "Status"
+msgstr "الحالة"
+
+#. module: fuel_management
+#: model:ir.model.fields,field_description:fuel_management.field_fuel_pump__notes
+msgid "Notes"
+msgstr "ملاحظات"
+
+#. module: fuel_management
+#: model:ir.model.fields,field_description:fuel_management.field_fuel_pump__nozzle_ids
+#: model:ir.model.fields,field_description:fuel_management.field_fuel_pump__nozzle_count
+msgid "Nozzles"
+msgstr "الفوهات"
+
+# ── fuel.nozzle fields ────────────────────────────────────────────────────────
+
+#. module: fuel_management
+#: model:ir.model,model_description:fuel_management.model_fuel_nozzle
+msgid "Fuel Nozzle"
+msgstr "فوهة الوقود"
+
+#. module: fuel_management
+#: model:ir.model.fields,field_description:fuel_management.field_fuel_nozzle__name
+msgid "Nozzle Name"
+msgstr "اسم الفوهة"
+
+#. module: fuel_management
+#: model:ir.model.fields,field_description:fuel_management.field_fuel_nozzle__pump_id
+msgid "Pump"
+msgstr "المضخة"
+
+#. module: fuel_management
+#: model:ir.model.fields,field_description:fuel_management.field_fuel_nozzle__station_id
+msgid "Station"
+msgstr "المحطة"
+
+#. module: fuel_management
+#: model:ir.model.fields,field_description:fuel_management.field_fuel_nozzle__product_id
+#: model:ir.model.fields,field_description:fuel_management.field_fuel_price_wizard__product_id
+#: model:ir.model.fields,field_description:fuel_management.field_fuel_tank__product_id
+msgid "Fuel Product"
+msgstr "منتج الوقود"
+
+#. module: fuel_management
+#: model:ir.model.fields,field_description:fuel_management.field_fuel_nozzle__current_price
+msgid "Current Price"
+msgstr "السعر الحالي"
+
+#. module: fuel_management
+#: model:ir.model.fields,field_description:fuel_management.field_fuel_nozzle__state
+msgid "Status"
+msgstr "الحالة"
+
+#. module: fuel_management
+#: model:ir.model.fields,field_description:fuel_management.field_fuel_nozzle__notes
+msgid "Notes"
+msgstr "ملاحظات"
+
+# ── fuel.tank fields ──────────────────────────────────────────────────────────
+
+#. module: fuel_management
+#: model:ir.model,model_description:fuel_management.model_fuel_tank
+msgid "Fuel Tank"
+msgstr "خزان الوقود"
+
+#. module: fuel_management
+#: model:ir.model.fields,field_description:fuel_management.field_fuel_tank__name
+msgid "Tank Name"
+msgstr "اسم الخزان"
+
+#. module: fuel_management
+#: model:ir.model.fields,field_description:fuel_management.field_fuel_tank__station_id
+msgid "Station"
+msgstr "المحطة"
+
+#. module: fuel_management
+#: model:ir.model.fields,field_description:fuel_management.field_fuel_tank__capacity
+msgid "Tank Capacity (L)"
+msgstr "سعة الخزان (لتر)"
+
+#. module: fuel_management
+#: model:ir.model.fields,field_description:fuel_management.field_fuel_tank__current_stock
+msgid "Current Stock (L)"
+msgstr "المخزون الحالي (لتر)"
+
+#. module: fuel_management
+#: model:ir.model.fields,field_description:fuel_management.field_fuel_tank__min_stock_alert
+msgid "Min. Stock Alert (L)"
+msgstr "تنبيه الحد الأدنى للمخزون (لتر)"
+
+#. module: fuel_management
+#: model:ir.model.fields,field_description:fuel_management.field_fuel_tank__state
+msgid "Stock Status"
+msgstr "حالة المخزون"
+
+#. module: fuel_management
+#: model:ir.model.fields,field_description:fuel_management.field_fuel_tank__notes
+msgid "Notes"
+msgstr "ملاحظات"
+
+# ── fuel.tank selection values ────────────────────────────────────────────────
+
+#. module: fuel_management
+#: model:ir.model.fields.selection,name:fuel_management.selection__fuel_tank__state__normal
+msgid "Normal"
+msgstr "طبيعي"
+
+#. module: fuel_management
+#: model:ir.model.fields.selection,name:fuel_management.selection__fuel_tank__state__low
+msgid "Low Stock"
+msgstr "مخزون منخفض"
+
+#. module: fuel_management
+#: model:ir.model.fields.selection,name:fuel_management.selection__fuel_tank__state__critical
+msgid "Critical"
+msgstr "حرج"
+
+#. module: fuel_management
+#: model:ir.model.fields.selection,name:fuel_management.selection__fuel_tank__state__empty
+msgid "Empty"
+msgstr "فارغ"
+
+# ── fuel.shift.definition fields ──────────────────────────────────────────────
+
+#. module: fuel_management
+#: model:ir.model,model_description:fuel_management.model_fuel_shift_definition
+msgid "Shift Definition"
+msgstr "تعريف الوردية"
+
+#. module: fuel_management
+#: model:ir.model.fields,field_description:fuel_management.field_fuel_shift_definition__name
+msgid "Shift Name"
+msgstr "اسم الوردية"
+
+#. module: fuel_management
+#: model:ir.model.fields,field_description:fuel_management.field_fuel_shift_definition__start_time
+msgid "Start Time"
+msgstr "وقت البداية"
+
+#. module: fuel_management
+#: model:ir.model.fields,field_description:fuel_management.field_fuel_shift_definition__end_time
+msgid "End Time"
+msgstr "وقت الانتهاء"
+
+#. module: fuel_management
+#: model:ir.model.fields,field_description:fuel_management.field_fuel_shift_definition__active
+msgid "Active"
+msgstr "نشط"
+
+# ── fuel.shift fields ─────────────────────────────────────────────────────────
+
+#. module: fuel_management
+#: model:ir.model,model_description:fuel_management.model_fuel_shift
+msgid "Fuel Shift"
+msgstr "وردية الوقود"
+
+#. module: fuel_management
+#: model:ir.model.fields,field_description:fuel_management.field_fuel_shift__name
+msgid "Shift Reference"
+msgstr "مرجع الوردية"
+
+#. module: fuel_management
+#: model:ir.model.fields,field_description:fuel_management.field_fuel_shift__station_id
+msgid "Station"
+msgstr "المحطة"
+
+#. module: fuel_management
+#: model:ir.model.fields,field_description:fuel_management.field_fuel_shift__shift_definition_id
+msgid "Shift Type"
+msgstr "نوع الوردية"
+
+#. module: fuel_management
+#: model:ir.model.fields,field_description:fuel_management.field_fuel_shift__date
+msgid "Date"
+msgstr "التاريخ"
+
+#. module: fuel_management
+#: model:ir.model.fields,field_description:fuel_management.field_fuel_shift__attendant_id
+msgid "Attendant"
+msgstr "الموظف المناوب"
+
+#. module: fuel_management
+#: model:ir.model.fields,field_description:fuel_management.field_fuel_shift__supervisor_id
+msgid "Supervisor"
+msgstr "المشرف"
+
+#. module: fuel_management
+#: model:ir.model.fields,field_description:fuel_management.field_fuel_shift__state
+msgid "Status"
+msgstr "الحالة"
+
+#. module: fuel_management
+#: model:ir.model.fields,field_description:fuel_management.field_fuel_shift__notes
+msgid "Notes"
+msgstr "ملاحظات"
+
+#. module: fuel_management
+#: model:ir.model.fields,field_description:fuel_management.field_fuel_shift__meter_reading_ids
+msgid "Meter Readings"
+msgstr "قراءات العداد"
+
+#. module: fuel_management
+#: model:ir.model.fields,field_description:fuel_management.field_fuel_shift__dip_reading_ids
+msgid "Dip Readings"
+msgstr "قراءات المسبار"
+
+#. module: fuel_management
+#: model:ir.model.fields,field_description:fuel_management.field_fuel_shift__total_dispensed
+msgid "Total Dispensed (L)"
+msgstr "إجمالي المصروف (لتر)"
+
+#. module: fuel_management
+#: model:ir.model.fields,field_description:fuel_management.field_fuel_shift__total_sales_amount
+msgid "Total Sales"
+msgstr "إجمالي المبيعات"
+
+#. module: fuel_management
+#: model:ir.model.fields,field_description:fuel_management.field_fuel_shift__currency_id
+msgid "Currency"
+msgstr "العملة"
+
+# ── fuel.shift selection values ───────────────────────────────────────────────
+
+#. module: fuel_management
+#: model:ir.model.fields.selection,name:fuel_management.selection__fuel_shift__state__draft
+msgid "Draft"
+msgstr "مسودة"
+
+#. module: fuel_management
+#: model:ir.model.fields.selection,name:fuel_management.selection__fuel_shift__state__open
+msgid "In Progress"
+msgstr "جارٍ التنفيذ"
+
+#. module: fuel_management
+#: model:ir.model.fields.selection,name:fuel_management.selection__fuel_shift__state__closed
+msgid "Closed"
+msgstr "مغلق"
+
+#. module: fuel_management
+#: model:ir.model.fields.selection,name:fuel_management.selection__fuel_shift__state__validated
+msgid "Validated"
+msgstr "مُعتمد"
+
+# ── fuel.meter.reading fields ─────────────────────────────────────────────────
+
+#. module: fuel_management
+#: model:ir.model,model_description:fuel_management.model_fuel_meter_reading
+msgid "Fuel Meter Reading"
+msgstr "قراءة عداد الوقود"
+
+#. module: fuel_management
+#: model:ir.model.fields,field_description:fuel_management.field_fuel_meter_reading__shift_id
+msgid "Shift"
+msgstr "الوردية"
+
+#. module: fuel_management
+#: model:ir.model.fields,field_description:fuel_management.field_fuel_meter_reading__nozzle_id
+msgid "Nozzle"
+msgstr "الفوهة"
+
+#. module: fuel_management
+#: model:ir.model.fields,field_description:fuel_management.field_fuel_meter_reading__pump_id
+msgid "Pump"
+msgstr "المضخة"
+
+#. module: fuel_management
+#: model:ir.model.fields,field_description:fuel_management.field_fuel_meter_reading__product_id
+#: model:ir.model.fields,field_description:fuel_management.field_fuel_dip_reading__product_id
+msgid "Product"
+msgstr "المنتج"
+
+#. module: fuel_management
+#: model:ir.model.fields,field_description:fuel_management.field_fuel_meter_reading__station_id
+#: model:ir.model.fields,field_description:fuel_management.field_fuel_dip_reading__station_id
+msgid "Station"
+msgstr "المحطة"
+
+#. module: fuel_management
+#: model:ir.model.fields,field_description:fuel_management.field_fuel_meter_reading__opening_reading
+msgid "Opening Reading (L)"
+msgstr "قراءة الفتح (لتر)"
+
+#. module: fuel_management
+#: model:ir.model.fields,field_description:fuel_management.field_fuel_meter_reading__closing_reading
+msgid "Closing Reading (L)"
+msgstr "قراءة الإغلاق (لتر)"
+
+#. module: fuel_management
+#: model:ir.model.fields,field_description:fuel_management.field_fuel_meter_reading__dispensed_qty
+msgid "Dispensed (L)"
+msgstr "المصروف (لتر)"
+
+#. module: fuel_management
+#: model:ir.model.fields,field_description:fuel_management.field_fuel_meter_reading__unit_price
+msgid "Unit Price"
+msgstr "سعر الوحدة"
+
+#. module: fuel_management
+#: model:ir.model.fields,field_description:fuel_management.field_fuel_meter_reading__total_amount
+msgid "Total Amount"
+msgstr "المبلغ الإجمالي"
+
+#. module: fuel_management
+#: model:ir.model.fields,field_description:fuel_management.field_fuel_meter_reading__notes
+msgid "Notes"
+msgstr "ملاحظات"
+
+# ── fuel.dip.reading fields ───────────────────────────────────────────────────
+
+#. module: fuel_management
+#: model:ir.model,model_description:fuel_management.model_fuel_dip_reading
+msgid "Tank Dip Reading"
+msgstr "قراءة مسبار الخزان"
+
+#. module: fuel_management
+#: model:ir.model.fields,field_description:fuel_management.field_fuel_dip_reading__shift_id
+msgid "Shift"
+msgstr "الوردية"
+
+#. module: fuel_management
+#: model:ir.model.fields,field_description:fuel_management.field_fuel_dip_reading__tank_id
+msgid "Tank"
+msgstr "الخزان"
+
+#. module: fuel_management
+#: model:ir.model.fields,field_description:fuel_management.field_fuel_dip_reading__opening_level
+msgid "Opening Level (L)"
+msgstr "مستوى الفتح (لتر)"
+
+#. module: fuel_management
+#: model:ir.model.fields,field_description:fuel_management.field_fuel_dip_reading__received_qty
+msgid "Received During Shift (L)"
+msgstr "المستلم خلال الوردية (لتر)"
+
+#. module: fuel_management
+#: model:ir.model.fields,field_description:fuel_management.field_fuel_dip_reading__closing_level
+msgid "Closing Level (L)"
+msgstr "مستوى الإغلاق (لتر)"
+
+#. module: fuel_management
+#: model:ir.model.fields,field_description:fuel_management.field_fuel_dip_reading__expected_closing
+msgid "Expected Closing (L)"
+msgstr "المستوى المتوقع عند الإغلاق (لتر)"
+
+#. module: fuel_management
+#: model:ir.model.fields,field_description:fuel_management.field_fuel_dip_reading__variance
+msgid "Variance (L)"
+msgstr "الفارق (لتر)"
+
+#. module: fuel_management
+#: model:ir.model.fields,field_description:fuel_management.field_fuel_dip_reading__notes
+msgid "Notes"
+msgstr "ملاحظات"
+
+# ── fuel.license fields ───────────────────────────────────────────────────────
+
+#. module: fuel_management
+#: model:ir.model,model_description:fuel_management.model_fuel_license
+msgid "Fuel Station License & Compliance"
+msgstr "ترخيص محطة الوقود والامتثال"
+
+#. module: fuel_management
+#: model:ir.model.fields,field_description:fuel_management.field_fuel_license__name
+msgid "License Name"
+msgstr "اسم الترخيص"
+
+#. module: fuel_management
+#: model:ir.model.fields,field_description:fuel_management.field_fuel_license__station_id
+msgid "Station"
+msgstr "المحطة"
+
+#. module: fuel_management
+#: model:ir.model.fields,field_description:fuel_management.field_fuel_license__license_type
+msgid "License Type"
+msgstr "نوع الترخيص"
+
+#. module: fuel_management
+#: model:ir.model.fields,field_description:fuel_management.field_fuel_license__license_number
+msgid "License Number"
+msgstr "رقم الترخيص"
+
+#. module: fuel_management
+#: model:ir.model.fields,field_description:fuel_management.field_fuel_license__issuing_authority
+msgid "Issuing Authority"
+msgstr "جهة الإصدار"
+
+#. module: fuel_management
+#: model:ir.model.fields,field_description:fuel_management.field_fuel_license__issue_date
+msgid "Issue Date"
+msgstr "تاريخ الإصدار"
+
+#. module: fuel_management
+#: model:ir.model.fields,field_description:fuel_management.field_fuel_license__expiry_date
+msgid "Expiry Date"
+msgstr "تاريخ الانتهاء"
+
+#. module: fuel_management
+#: model:ir.model.fields,field_description:fuel_management.field_fuel_license__days_to_expiry
+msgid "Days to Expiry"
+msgstr "الأيام المتبقية حتى الانتهاء"
+
+#. module: fuel_management
+#: model:ir.model.fields,field_description:fuel_management.field_fuel_license__document
+msgid "Document"
+msgstr "الوثيقة"
+
+#. module: fuel_management
+#: model:ir.model.fields,field_description:fuel_management.field_fuel_license__document_name
+msgid "Document Name"
+msgstr "اسم الوثيقة"
+
+#. module: fuel_management
+#: model:ir.model.fields,field_description:fuel_management.field_fuel_license__state
+msgid "Status"
+msgstr "الحالة"
+
+#. module: fuel_management
+#: model:ir.model.fields,field_description:fuel_management.field_fuel_license__notes
+msgid "Notes"
+msgstr "ملاحظات"
+
+# ── fuel.license selection values ─────────────────────────────────────────────
+
+#. module: fuel_management
+#: model:ir.model.fields.selection,name:fuel_management.selection__fuel_license__license_type__operating
+msgid "Operating License"
+msgstr "رخصة التشغيل"
+
+#. module: fuel_management
+#: model:ir.model.fields.selection,name:fuel_management.selection__fuel_license__license_type__fire_safety
+msgid "Fire Safety Certificate"
+msgstr "شهادة السلامة من الحريق"
+
+#. module: fuel_management
+#: model:ir.model.fields.selection,name:fuel_management.selection__fuel_license__license_type__environmental
+msgid "Environmental Clearance"
+msgstr "التصريح البيئي"
+
+#. module: fuel_management
+#: model:ir.model.fields.selection,name:fuel_management.selection__fuel_license__license_type__weights
+msgid "Weights & Measures"
+msgstr "الأوزان والمقاييس"
+
+#. module: fuel_management
+#: model:ir.model.fields.selection,name:fuel_management.selection__fuel_license__license_type__trade
+msgid "Trade License"
+msgstr "الرخصة التجارية"
+
+#. module: fuel_management
+#: model:ir.model.fields.selection,name:fuel_management.selection__fuel_license__license_type__other
+msgid "Other"
+msgstr "أخرى"
+
+#. module: fuel_management
+#: model:ir.model.fields.selection,name:fuel_management.selection__fuel_license__state__valid
+msgid "Valid"
+msgstr "ساري"
+
+#. module: fuel_management
+#: model:ir.model.fields.selection,name:fuel_management.selection__fuel_license__state__expiring
+msgid "Expiring Soon"
+msgstr "ينتهي قريباً"
+
+#. module: fuel_management
+#: model:ir.model.fields.selection,name:fuel_management.selection__fuel_license__state__expired
+msgid "Expired"
+msgstr "منتهي الصلاحية"
+
+# ── fuel.price.wizard fields ──────────────────────────────────────────────────
+
+#. module: fuel_management
+#: model:ir.model,model_description:fuel_management.model_fuel_price_wizard
+msgid "Fuel Price Update Wizard"
+msgstr "معالج تحديث سعر الوقود"
+
+#. module: fuel_management
+#: model:ir.model.fields,field_description:fuel_management.field_fuel_price_wizard__new_price
+msgid "New Price"
+msgstr "السعر الجديد"
+
+#. module: fuel_management
+#: model:ir.model.fields,field_description:fuel_management.field_fuel_price_wizard__station_ids
+msgid "Stations"
+msgstr "المحطات"
+
+#. module: fuel_management
+#: model:ir.model.fields,field_description:fuel_management.field_fuel_price_wizard__nozzle_count
+msgid "Nozzles to Update"
+msgstr "الفوهات المراد تحديثها"
+
+# ── Python code strings ───────────────────────────────────────────────────────
+
+#. module: fuel_management
+#. odoo-python
+#: code:addons/fuel_management/models/fuel_shift.py:0
+msgid "Only draft shifts can be opened."
+msgstr "يمكن فتح الورديات المسودة فقط."
+
+#. module: fuel_management
+#. odoo-python
+#: code:addons/fuel_management/models/fuel_shift.py:0
+msgid "Only open shifts can be closed."
+msgstr "يمكن إغلاق الورديات المفتوحة فقط."
+
+#. module: fuel_management
+#. odoo-python
+#: code:addons/fuel_management/models/fuel_shift.py:0
+msgid "Only closed shifts can be validated."
+msgstr "يمكن اعتماد الورديات المغلقة فقط."
+
+#. module: fuel_management
+#. odoo-python
+#: code:addons/fuel_management/wizard/fuel_price_wizard.py:0
+msgid "Please enter a valid price greater than zero."
+msgstr "الرجاء إدخال سعر صحيح أكبر من الصفر."
+
+#. module: fuel_management
+#. odoo-python
+#: code:addons/fuel_management/wizard/fuel_price_wizard.py:0
+msgid "Price Updated"
+msgstr "تم تحديث السعر"
+
+#. module: fuel_management
+#. odoo-python
+#: code:addons/fuel_management/wizard/fuel_price_wizard.py:0
+msgid "Price updated for %d nozzle(s) to %s."
+msgstr "تم تحديث السعر لـ %d فوهة إلى %s."
+
+# ── Menu items ────────────────────────────────────────────────────────────────
+
+#. module: fuel_management
+#: model:ir.ui.menu,name:fuel_management.menu_fuel_main
+msgid "Fuel Management"
+msgstr "إدارة الوقود"
+
+#. module: fuel_management
+#: model:ir.ui.menu,name:fuel_management.menu_fuel_stations
+msgid "Stations & Equipment"
+msgstr "المحطات والمعدات"
+
+#. module: fuel_management
+#: model:ir.ui.menu,name:fuel_management.menu_fuel_station
+#: model:ir.actions.act_window,name:fuel_management.action_fuel_station
+msgid "Stations"
+msgstr "المحطات"
+
+#. module: fuel_management
+#: model:ir.ui.menu,name:fuel_management.menu_fuel_pump
+#: model:ir.actions.act_window,name:fuel_management.action_fuel_pump
+msgid "Pumps"
+msgstr "المضخات"
+
+#. module: fuel_management
+#: model:ir.ui.menu,name:fuel_management.menu_fuel_nozzle
+#: model:ir.actions.act_window,name:fuel_management.action_fuel_nozzle
+msgid "Nozzles"
+msgstr "الفوهات"
+
+#. module: fuel_management
+#: model:ir.ui.menu,name:fuel_management.menu_fuel_tank
+#: model:ir.actions.act_window,name:fuel_management.action_fuel_tank
+msgid "Tanks"
+msgstr "الخزانات"
+
+#. module: fuel_management
+#: model:ir.ui.menu,name:fuel_management.menu_fuel_operations
+msgid "Operations"
+msgstr "العمليات"
+
+#. module: fuel_management
+#: model:ir.ui.menu,name:fuel_management.menu_fuel_shift
+#: model:ir.actions.act_window,name:fuel_management.action_fuel_shift
+msgid "Shifts"
+msgstr "الورديات"
+
+#. module: fuel_management
+#: model:ir.ui.menu,name:fuel_management.menu_fuel_meter_reading
+#: model:ir.actions.act_window,name:fuel_management.action_fuel_meter_reading
+msgid "Meter Readings"
+msgstr "قراءات العداد"
+
+#. module: fuel_management
+#: model:ir.ui.menu,name:fuel_management.menu_fuel_dip_reading
+#: model:ir.actions.act_window,name:fuel_management.action_fuel_dip_reading
+msgid "Dip Readings"
+msgstr "قراءات المسبار"
+
+#. module: fuel_management
+#: model:ir.ui.menu,name:fuel_management.menu_fuel_compliance
+msgid "Compliance"
+msgstr "الامتثال"
+
+#. module: fuel_management
+#: model:ir.ui.menu,name:fuel_management.menu_fuel_license
+#: model:ir.actions.act_window,name:fuel_management.action_fuel_license
+msgid "Licenses & Compliance"
+msgstr "التراخيص والامتثال"
+
+#. module: fuel_management
+#: model:ir.ui.menu,name:fuel_management.menu_fuel_config
+msgid "Configuration"
+msgstr "الإعدادات"
+
+#. module: fuel_management
+#: model:ir.ui.menu,name:fuel_management.menu_fuel_shift_definition
+#: model:ir.actions.act_window,name:fuel_management.action_fuel_shift_definition
+msgid "Shift Definitions"
+msgstr "تعريفات الورديات"
+
+#. module: fuel_management
+#: model:ir.ui.menu,name:fuel_management.menu_fuel_price_wizard
+#: model:ir.actions.act_window,name:fuel_management.action_fuel_price_wizard
+msgid "Update Fuel Prices"
+msgstr "تحديث أسعار الوقود"
+
+# ── Report ────────────────────────────────────────────────────────────────────
+
+#. module: fuel_management
+#: model:ir.actions.report,name:fuel_management.action_report_fuel_shift
+msgid "Shift Report"
+msgstr "تقرير الوردية"

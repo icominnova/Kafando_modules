@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="action_report_fuel_shift" model="ir.actions.report">
+        <field name="name">Shift Report</field>
+        <field name="model">fuel.shift</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">fuel_management.report_fuel_shift_template</field>
+        <field name="report_file">fuel_management.report_fuel_shift_template</field>
+        <field name="binding_model_id" ref="model_fuel_shift"/>
+        <field name="binding_type">report</field>
+    </record>
+
+</odoo>
