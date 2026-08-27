@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- COLLECTION LIST -->
+    <record id="view_fuel_collection_list" model="ir.ui.view">
+        <field name="name">fuel.collection.list</field>
+        <field name="model">fuel.collection</field>
+        <field name="arch" type="xml">
+
+            <list>
+                <field name="shift_id"/>
+                <field name="station_id"/>
+                <field name="expected_amount"
+                       widget="monetary"/>
+                <field name="cash_amount"
+                       widget="monetary"/>
+                <field name="mobile_money_amount"
+                       widget="monetary"/>
+                <field name="collected_amount"
+                       widget="monetary"/>
+                <field name="difference"
+                       widget="monetary"
+                       decoration-danger="difference &lt; 0"
+                       decoration-success="difference == 0"
+                       decoration-warning="difference &gt; 0"/>
+
+                <field name="currency_id"
+                       column_invisible="1"/>
+            </list>
+        </field>
+    </record>
+
+    <!-- COLLECTION FORM -->
+    <record id="view_fuel_collection_form" model="ir.ui.view">
+        <field name="name">fuel.collection.form</field>
+        <field name="model">fuel.collection</field>
+        <field name="arch" type="xml">
+
+            <form string="Collection">
+                <sheet>
+                    <div class="oe_title">
+                        <label for="shift_id" string="Shift to Collect"/>
+                        <h1>
+                            <field name="shift_id"
+                                placeholder="Select a shift..."
+                                options="{'no_create': True}"/>
+                        </h1>
+                    </div>
+
+                    <field name="currency_id" invisible="1"/>
+                    <field name="company_id" invisible="1"/>
+
+                    <group>
+                        <group string="Shift">
+                            <field name="station_id"
+                                   readonly="1"/>
+                            <field name="expected_amount"
+                                   widget="monetary"
+                                   readonly="1"/>
+                        </group>
+
+                        <group string="Collection">
+                            <field name="cash_amount"
+                                   widget="monetary"/>
+                            <field name="mobile_money_amount"
+                                   widget="monetary"/>
+                        </group>
+                    </group>
+
+                    <group string="Summary">
+                        <field name="collected_amount"
+                               widget="monetary"
+                               readonly="1"/>
+                        <field name="difference"
+                               widget="monetary"
+                               readonly="1"/>
+                    </group>
+
+                    <group string="Notes">
+                        <field name="notes"
+                               placeholder="Collection notes..."/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- SEARCH -->
+    <record id="view_fuel_collection_search" model="ir.ui.view">
+        <field name="name">fuel.collection.search</field>
+        <field name="model">fuel.collection</field>
+        <field name="arch" type="xml">
+
+            <search>
+                <field name="shift_id"/>
+                <field name="station_id"/>
+                <filter string="Shortage"
+                        name="collection_shortage"
+                        domain="[('difference', '&lt;', 0)]"/>
+                <filter string="Balanced"
+                        name="collection_balanced"
+                        domain="[('difference', '=', 0)]"/>
+                <filter string="Surplus"
+                        name="collection_surplus"
+                        domain="[('difference', '&gt;', 0)]"/>
+                <group>
+                    <filter string="Station"
+                            name="group_station"
+                            context="{'group_by': 'station_id'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <!-- ACTION -->
+    <record id="action_fuel_collection" model="ir.actions.act_window">
+        <field name="name">Collections</field>
+        <field name="res_model">fuel.collection</field>
+        <field name="view_mode">list,form</field>
+        <field name="search_view_id"
+               ref="view_fuel_collection_search"/>
+
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Record your first shift collection
+            </p>
+        </field>
+    </record>
+
+</odoo>

@@ -75,5 +75,13 @@
             <field name="domain_force">[('station_id.company_id', '=', company_id)]</field>
         </record>
 
+        <record id="fuel_collection_company_rule" model="ir.rule">
+            <field name="name">Fuel Collection - Active Company</field>
+            <field name="model_id" ref="model_fuel_collection"/>
+            <field name="domain_force">
+                [('company_id', '=', company_id)]
+            </field>
+        </record>
+
     </data>
 </odoo>

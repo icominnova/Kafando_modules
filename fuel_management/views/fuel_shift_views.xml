@@ -54,12 +54,13 @@
                         string="Validate"
                         type="object"
                         class="btn-primary"
-                        invisible="state == 'validated'"/>
+                        invisible="state != 'open'"/>
 
                     <button name="action_print_report"
                         string="Print Report"
                         type="object"
-                        icon="fa-print"/>
+                        icon="fa-print"
+                        invisible="state != 'validated'"/>
 
                     <field name="state"
                         widget="statusbar"
@@ -71,9 +72,18 @@
                     </div>
                     <group>
                         <group string="Shift Details">
-                            <field name="station_id" readonly="state != 'draft'"/>
+                            <field name="station_id"
+                                readonly="state != 'draft'"/>
+
+                            <field name="nozzle_ids"
+                                widget="many2many_tags"
+                                domain="[('station_id', '=', station_id)]"
+                                readonly="state != 'draft'"/>
+
                             <field name="shift_definition_id"/>
-                            <field name="date" readonly="state != 'draft'"/>
+                            <field name="date"
+                                readonly="state != 'draft'"/>
+
                             <field name="attendant_id"/>
                             <field name="supervisor_id"/>
                         </group>
@@ -87,6 +97,7 @@
                         <page string="Meter Readings" name="meter_readings">
                             <field name="meter_reading_ids" readonly="state == 'validated'">
                                 <list editable="bottom">
+                                    <field name="allowed_nozzle_ids" invisible="1"/>
                                     <field name="nozzle_id"/>
                                     <field name="pump_id" optional="show"/>
                                     <field name="product_id"/>
@@ -134,6 +145,11 @@
             <list>
                 <field name="name"/>
                 <field name="station_id"/>
+
+                <field name="nozzle_ids"
+                    widget="many2many_tags"
+                    domain="[('station_id', '=', station_id)]"/>
+
                 <field name="shift_definition_id"/>
                 <field name="date"/>
                 <field name="attendant_id"/>

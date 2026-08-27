@@ -71,6 +71,12 @@
         action="action_fuel_shift"
         sequence="10"/>
 
+    <menuitem id="menu_fuel_collection"
+        name="Collections"
+        parent="menu_fuel_operations"
+        action="action_fuel_collection"
+        sequence="20"/>
+
     <menuitem id="menu_fuel_meter_reading"
         name="Meter Readings"
         parent="menu_fuel_operations"

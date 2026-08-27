@@ -9,8 +9,14 @@ class FuelMeterReading(models.Model):
     shift_id = fields.Many2one('fuel.shift', string='Shift', required=True, ondelete='cascade')
     shift_date = fields.Date(related='shift_id.date', store=True, index=True)
     station_id = fields.Many2one('fuel.station', related='shift_id.station_id', store=True)
-    nozzle_id = fields.Many2one('fuel.nozzle', string='Nozzle', required=True,
-        domain="[('station_id', '=', station_id)]")
+
+    nozzle_id = fields.Many2one(
+        'fuel.nozzle',
+        string='Nozzle',
+        required=True,
+        domain="[('id', 'in', allowed_nozzle_ids)]"
+    )
+    
     pump_id = fields.Many2one('fuel.pump', related='nozzle_id.pump_id', store=True, string='Pump')
     tank_id = fields.Many2one('fuel.tank', related='nozzle_id.tank_id', store=True, index=True, string='Tank')
     product_id = fields.Many2one('product.product', related='nozzle_id.product_id', store=True, string='Product')
@@ -35,6 +41,13 @@ class FuelMeterReading(models.Model):
         string='Closing Index Recorded',
         default=False,
         copy=False,
+        readonly=True,
+    )
+
+    allowed_nozzle_ids = fields.Many2many(
+        'fuel.nozzle',
+        related='shift_id.nozzle_ids',
+        string='Allowed Nozzles',
         readonly=True,
     )
     
@@ -86,13 +99,20 @@ class FuelMeterReading(models.Model):
                 nozzle = self.env['fuel.nozzle'].browse(nozzle_id)
                 shift = self.env['fuel.shift'].browse(shift_id)
 
+                if nozzle not in shift.nozzle_ids:
+                    raise UserError(_(
+                        "Nozzle '%(nozzle)s' is not assigned to shift '%(shift)s'.",
+                        nozzle=nozzle.display_name,
+                        shift=shift.display_name,
+                 ))
+                
                 previous_reading = self.search([
                     ('nozzle_id', '=', nozzle.id),
                     ('shift_id.station_id', '=', shift.station_id.id),
                     ('shift_id.date', '<=', shift.date),
                     ('shift_id', '!=', shift.id),
                     ('shift_id.state', '=', 'validated'),
-                ], order='id desc', limit=1)
+                ], order='shift_date desc, id desc', limit=1)
                 
                 vals['opening_reading'] = (
                     previous_reading.closing_reading
@@ -104,11 +124,13 @@ class FuelMeterReading(models.Model):
 
     def write(self, vals):
         for rec in self:
-            # Interdire toute modification après validation du shift
+
+            # Interdire toute modification après validation
             if rec.shift_id.state == 'validated':
                 raise UserError(_(
                     'You cannot modify a meter reading from a validated shift.'
                 ))
+
             # Interdire la modification manuelle de l'index d'ouverture
             if (
                 'opening_reading' in vals
@@ -118,8 +140,29 @@ class FuelMeterReading(models.Model):
                     'The opening reading cannot be modified. '
                     'It is automatically determined from the previous validated shift.'
                 ))
+
+            # Déterminer le shift qui sera utilisé après modification
+            new_shift = self.env['fuel.shift'].browse(
+                vals.get('shift_id', rec.shift_id.id)
+            )
+
+            # Déterminer le pistolet qui sera utilisé après modification
+            new_nozzle = self.env['fuel.nozzle'].browse(
+                vals.get('nozzle_id', rec.nozzle_id.id)
+            )
+
+            # Le pistolet doit appartenir aux pistolets déclarés du shift
+            if new_nozzle not in new_shift.nozzle_ids:
+                raise UserError(_(
+                    "Nozzle '%(nozzle)s' is not assigned "
+                    "to shift '%(shift)s'.",
+                    nozzle=new_nozzle.display_name,
+                    shift=new_shift.display_name,
+                ))
+
         if 'closing_reading' in vals:
             vals['closing_recorded'] = True
+
         return super().write(vals)
 
     def unlink(self):

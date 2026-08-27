@@ -20,4 +20,5 @@ access_fuel_license_manager,fuel.license manager,model_fuel_license,fuel_managem
 access_fuel_price_wizard_user,fuel.price.wizard user,model_fuel_price_wizard,fuel_management.group_fuel_user,1,1,1,1
 access_fuel_tank_replenishment_user,fuel.tank.replenishment user,model_fuel_tank_replenishment,fuel_management.group_fuel_user,1,1,1,1
 access_fuel_dashboard_user,fuel.dashboard user,model_fuel_dashboard,fuel_management.group_fuel_user,1,1,1,0
-access_fuel_shift_validation_wizard_user,fuel.shift.validation.wizard.user,model_fuel_shift_validation_wizard,base.group_user,1,1,1,1
+access_fuel_shift_validation_wizard_user,fuel.shift.validation.wizard user,model_fuel_shift_validation_wizard,base.group_user,1,1,1,1
+access_fuel_collection_user,Fuel.collection User,model_fuel_collection,group_fuel_user,1,1,1,1

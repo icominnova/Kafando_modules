@@ -26,6 +26,7 @@
         'report/fuel_shift_report.xml',
         'report/fuel_shift_report_template.xml',
         'views/fuel_dashboard_views.xml',
+        'views/fuel_collection_views.xml',
         'views/fuel_menus.xml',
         'wizard/fuel_shift_validation_views.xml',
     ],

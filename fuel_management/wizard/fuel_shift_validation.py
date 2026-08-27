@@ -30,16 +30,6 @@ class FuelShiftValidationWizard(models.TransientModel):
                 "have already been posted."
             ))
 
-        #Vérifier qu'il existe des pistolets
-        nozzles = self.env['fuel.nozzle'].search([
-            ('station_id', '=', shift.station_id.id),
-        ])
-
-        if not nozzles:
-            raise UserError(_(
-                "No nozzle is configured for station '%s'."
-            ) % shift.station_id.display_name)
-
         # 3. Vérifier les relevés compteurs
         readings = shift.meter_reading_ids
         if not readings:
@@ -57,25 +47,6 @@ class FuelShiftValidationWizard(models.TransientModel):
                     "reading for this shift."
                 ) % reading.nozzle_id.display_name)
             seen_nozzles.add(reading.nozzle_id.id)
-
-        # 5. Vérifier que chaque pistolet a son relevé
-        reading_nozzle_ids = set(
-            readings.mapped('nozzle_id').ids
-        )
-
-        missing_nozzles = nozzles.filtered(
-            lambda nozzle:
-                nozzle.id not in reading_nozzle_ids
-        )
-
-        if missing_nozzles:
-            names = ', '.join(
-                missing_nozzles.mapped('display_name')
-            )
-            raise UserError(_(
-                "The shift cannot be closed because "
-                "the following nozzles have no meter reading:\n\n%s"
-            ) % names)
 
         #Vérifier chaque index de clôture
         for reading in readings:

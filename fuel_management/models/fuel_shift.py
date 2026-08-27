@@ -18,12 +18,54 @@ class FuelShift(models.Model):
     _rec_name = 'name'
     _order = 'date desc, id desc'
 
-    name = fields.Char(string='Shift Reference', required=True, copy=False, default='New')
-    station_id = fields.Many2one('fuel.station', string='Station', required=True, tracking=True)
-    shift_definition_id = fields.Many2one('fuel.shift.definition', string='Shift Type', tracking=True)
-    date = fields.Date(string='Date', required=True, default=fields.Date.today, tracking=True)
-    attendant_id = fields.Many2one('hr.employee', string='Attendant', tracking=True)
-    supervisor_id = fields.Many2one('res.users', string='Supervisor')
+    name = fields.Char(
+        string='Shift Reference', 
+        required=True, 
+        copy=False, 
+        default='New',
+    )
+
+    station_id = fields.Many2one(
+        'fuel.station', 
+        string='Station', 
+        required=True, 
+        tracking=True,
+    )
+
+    nozzle_ids = fields.Many2many(
+        'fuel.nozzle',
+        'fuel_shift_nozzle_rel',
+        'shift_id',
+        'nozzle_id',
+        string='Nozzles Used',
+        domain="[('station_id', '=', station_id)]",
+        help='Nozzles that will be used during this shift.',
+    )
+    
+    shift_definition_id = fields.Many2one(
+        'fuel.shift.definition', 
+        string='Shift Type', 
+        tracking=True,
+    )
+
+    date = fields.Date(
+        string='Date', 
+        required=True, 
+        default=fields.Date.today, 
+        tracking=True,
+    )
+
+    attendant_id = fields.Many2one(
+        'hr.employee', 
+        string='Attendant', 
+        tracking=True,
+    )
+
+    supervisor_id = fields.Many2one(
+        'res.users', 
+        string='Supervisor',
+    )
+
     state = fields.Selection([
         ('draft', 'Draft'),
         ('open', 'In Progress'),
@@ -31,12 +73,37 @@ class FuelShift(models.Model):
     ], string='Status', default='draft', tracking=True)
     notes = fields.Text(string='Notes')
 
-    meter_reading_ids = fields.One2many('fuel.meter.reading', 'shift_id', string='Meter Readings')
-    dip_reading_ids = fields.One2many('fuel.dip.reading', 'shift_id', string='Dip Readings')
+    meter_reading_ids = fields.One2many(
+        'fuel.meter.reading', 
+        'shift_id', 
+        string='Meter Readings'
+    )
 
-    total_dispensed = fields.Float(string='Total Dispensed (L)', compute='_compute_totals', store=True)
-    total_sales_amount = fields.Float(string='Total Sales', compute='_compute_totals', store=True, digits='Account')
-    currency_id = fields.Many2one('res.currency', related='station_id.company_id.currency_id')
+    dip_reading_ids = fields.One2many(
+        'fuel.dip.reading', 
+        'shift_id', 
+        string='Dip Readings',
+    )
+
+    total_dispensed = fields.Float(
+        string='Total Dispensed (L)', 
+        compute='_compute_totals', 
+        store=True,
+    )
+
+    total_sales_amount = fields.Monetary(
+        string='Total Sales',
+        compute='_compute_totals',
+        store=True,
+        currency_field='currency_id',
+    )
+
+    currency_id = fields.Many2one(
+        'res.currency', 
+        related='station_id.company_id.currency_id',
+        store=True,
+        readonly=True,
+    )
 
     company_id = fields.Many2one(
         'res.company',

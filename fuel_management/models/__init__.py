@@ -8,3 +8,4 @@ from . import fuel_dip_reading
 from . import fuel_license
 from . import fuel_dashboard
 from . import fuel_purchase
+from . import fuel_collection
