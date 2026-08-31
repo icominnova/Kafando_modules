@@ -431,6 +431,7 @@ msgstr "Poste de carburant"
 
 #. module: fuel_management
 #: model:ir.model,name:fuel_management.model_fuel_station
+#: model:ir.model.fields,field_description:fuel_management.field_purchase_order__fuel_station_id
 msgid "Fuel Station"
 msgstr "Station-service"
 
@@ -945,6 +946,9 @@ msgstr ""
 #. module: fuel_management
 #: model:ir.model.fields,field_description:fuel_management.field_fuel_dip_reading__shift_id
 #: model:ir.model.fields,field_description:fuel_management.field_fuel_meter_reading__shift_id
+#: model:ir.actions.act_window,name:fuel_management.action_fuel_shift
+#: model:ir.ui.menu,name:fuel_management.menu_fuel_shift
+#: model:ir.model.fields,field_description:fuel_management.field_fuel_collection__shift_id
 msgid "Shift"
 msgstr "Poste"
 
@@ -989,12 +993,6 @@ msgstr "Type de poste"
 #: model_terms:ir.ui.view,arch_db:fuel_management.view_fuel_shift_form
 msgid "Shift notes..."
 msgstr "Notes du poste..."
-
-#. module: fuel_management
-#: model:ir.actions.act_window,name:fuel_management.action_fuel_shift
-#: model:ir.ui.menu,name:fuel_management.menu_fuel_shift
-msgid "Shifts"
-msgstr "Postes"
 
 #. module: fuel_management
 #: model_terms:ir.ui.view,arch_db:fuel_management.view_fuel_shift_form
@@ -1093,6 +1091,7 @@ msgstr "Superviseur"
 #. module: fuel_management
 #: model:ir.model.fields,field_description:fuel_management.field_fuel_dip_reading__tank_id
 #: model_terms:ir.ui.view,arch_db:fuel_management.report_fuel_shift_template
+#: model:ir.model.fields,field_description:fuel_management.field_fuel_meter_reading__tank_id
 msgid "Tank"
 msgstr "Cuve"
 
@@ -1254,3 +1253,136 @@ msgstr ""
 #: model:ir.model.fields.selection,name:fuel_management.selection__fuel_license__license_type__weights
 msgid "Weights & Measures"
 msgstr "Poids et mesures"
+
+#. module: fuel_management
+#: model:ir.model,name:fuel_management.model_fuel_collection
+msgid "Fuel Cash Collection"
+msgstr "Collecte des fonds"
+
+#. module: fuel_management
+#: model:ir.model.fields,field_description:fuel_management.field_fuel_collection__station_id
+msgid "Station"
+msgstr "Station"
+
+#. module: fuel_management
+#: model:ir.model.fields,field_description:fuel_management.field_fuel_collection__expected_amount
+msgid "Expected Sales"
+msgstr "Ventes attendues"
+
+#. module: fuel_management
+#: model:ir.model.fields,field_description:fuel_management.field_fuel_collection__cash_amount
+msgid "Cash"
+msgstr "Espèces"
+
+#. module: fuel_management
+#: model:ir.model.fields,field_description:fuel_management.field_fuel_collection__mobile_money_amount
+msgid "Mobile Money"
+msgstr "Mobile Money"
+
+#. module: fuel_management
+#: model:ir.model.fields,field_description:fuel_management.field_fuel_collection__collected_amount
+msgid "Total Collected"
+msgstr "Total collecté"
+
+#. module: fuel_management
+#: model:ir.model.fields,field_description:fuel_management.field_fuel_collection__difference
+msgid "Difference"
+msgstr "Écart"
+
+#. module: fuel_management
+#: model:ir.model.fields,field_description:fuel_management.field_fuel_collection__notes
+msgid "Notes"
+msgstr "Notes"
+
+#. module: fuel_management
+#: model:ir.model.fields,field_description:fuel_management.field_fuel_collection__company_id
+#: model:ir.model.fields,field_description:fuel_management.field_fuel_meter_reading__company_id
+msgid "Company"
+msgstr "Société"
+
+#. module: fuel_management
+#: model:ir.model.fields,field_description:fuel_management.field_fuel_collection__currency_id
+msgid "Currency"
+msgstr "Devise"
+
+#. module: fuel_management
+#: model:ir.actions.act_window,name:fuel_management.action_fuel_collection
+#: model:ir.ui.menu,name:fuel_management.menu_fuel_collection
+msgid "Collections"
+msgstr "Collectes"
+
+#. module: fuel_management
+#: model_terms:ir.ui.view,arch_db:fuel_management.view_fuel_collection_form
+msgid "Collection"
+msgstr "Collecte"
+
+#. module: fuel_management
+#: model_terms:ir.ui.view,arch_db:fuel_management.view_fuel_collection_form
+msgid "Shift to Collect"
+msgstr "Poste à collecter"
+
+#. module: fuel_management
+#: model_terms:ir.ui.view,arch_db:fuel_management.view_fuel_collection_form
+msgid "Select a shift..."
+msgstr "Sélectionner un poste..."
+
+#. module: fuel_management
+#: model_terms:ir.ui.view,arch_db:fuel_management.view_fuel_collection_form
+msgid "Collection"
+msgstr "Collecte"
+
+#. module: fuel_management
+#: model_terms:ir.ui.view,arch_db:fuel_management.view_fuel_collection_form
+msgid "Summary"
+msgstr "Résumé"
+
+#. module: fuel_management
+#: model_terms:ir.ui.view,arch_db:fuel_management.view_fuel_collection_search
+msgid "Shortage"
+msgstr "Manquant"
+
+#. module: fuel_management
+#: model_terms:ir.ui.view,arch_db:fuel_management.view_fuel_collection_search
+msgid "Balanced"
+msgstr "Équilibré"
+
+#. module: fuel_management
+#: model_terms:ir.ui.view,arch_db:fuel_management.view_fuel_collection_search
+msgid "Surplus"
+msgstr "Excédent"
+
+#. module: fuel_management
+#: model_terms:ir.ui.view,arch_db:fuel_management.view_fuel_collection_search
+msgid "Station"
+msgstr "Station"
+
+#. module: fuel_management
+#: model_terms:ir.actions.act_window,help:fuel_management.action_fuel_collection
+msgid "Record your first shift collection"
+msgstr "Enregistrez votre première collecte de poste"
+
+#. module: fuel_management
+#: model:ir.model.fields,field_description:fuel_management.field_fuel_shift__nozzle_ids
+msgid "Nozzles Used"
+msgstr "Pistolets utilisés"
+
+#. module: fuel_management
+#: model_terms:ir.ui.view,arch_db:fuel_management.view_fuel_tank_replenishment_form
+msgid "Validated Receipt"
+msgstr "Réception validée"
+
+#. module: fuel_management
+#. odoo-python
+#: code:addons/fuel_management/models/fuel_meter_reading.py:0
+msgid "You cannot modify a meter reading from a validated shift."
+msgstr "Vous ne pouvez pas modifier un relevé compteur appartenant à un poste validé."
+
+#. module: fuel_management
+#: model:ir.model.fields,field_description:fuel_management.field_fuel_meter_reading__closing_recorded
+msgid "Closing Index Recorded"
+msgstr "Index de clôture enregistré"
+
+#. module: fuel_management
+#: model:ir.model.fields,field_description:fuel_management.field_fuel_meter_reading__allowed_nozzle_ids
+msgid "Allowed Nozzles"
+msgstr "Pistolets autorisés"

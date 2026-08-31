@@ -13,6 +13,7 @@ class FuelTankReplenishment(models.TransientModel):
         domain=[
             ('state', '=', 'done'),
             ('picking_type_code', '=', 'incoming'),
+            ('fuel_replenished', '=', False),
         ],
     )
 
@@ -94,17 +95,13 @@ class FuelTankReplenishment(models.TransientModel):
             # Pour l'instant : une réception Fuel = un produit carburant
             if len(products) == 1:
                 product = products
-
                 rec.product_id = product.id
-
                 qty = 0.0
-
                 for move in moves:
                     qty += move.product_uom._compute_quantity(
                         move.quantity,
                         product.uom_id,
                     )
-
                 rec.received_qty = qty
 
     @api.onchange('receipt_id')
@@ -119,6 +116,12 @@ class FuelTankReplenishment(models.TransientModel):
         if not self.receipt_id:
             raise UserError(_(
                 'Please select a validated receipt.'
+            ))
+
+        if self.receipt_id.fuel_replenished:
+            raise UserError(_(
+                "This receipt has already been used for a tank replenishment "
+                "and cannot be used again."
             ))
 
         if self.receipt_id.state != 'done':
@@ -170,9 +173,9 @@ class FuelTankReplenishment(models.TransientModel):
             ))
 
         self.tank_id._adjust_stock(self.quantity)
-
         dip_reading.received_qty += self.quantity
 
+        self.receipt_id.write({'fuel_replenished': True})
         return {
             'type': 'ir.actions.act_window_close'
         }

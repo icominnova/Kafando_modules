@@ -7,13 +7,37 @@ class FuelTank(models.Model):
     _inherit = ['mail.thread']
     _rec_name = 'name'
 
-    name = fields.Char(string='Tank Name', required=True)
-    station_id = fields.Many2one('fuel.station', string='Station', required=True, ondelete='cascade')
-    product_id = fields.Many2one('product.product', string='Fuel Product', required=True,
-        domain=[('type', '=', 'consu')])
-    capacity = fields.Float(string='Tank Capacity (L)', required=True)
-    current_stock = fields.Float(string='Current Stock (L)', tracking=True)
+    name = fields.Char(
+        string='Tank Name', 
+        required=True,
+    )
+
+    station_id = fields.Many2one(
+        'fuel.station', 
+        string='Station', 
+        required=True, 
+        ondelete='cascade',
+    )
+
+    product_id = fields.Many2one(
+        'product.product', 
+        string='Fuel Product', 
+        required=True,
+        domain=[('type', '=', 'consu')],
+    )
+
+    capacity = fields.Float(
+        string='Tank Capacity (L)', 
+        required=True,
+    )
+
+    current_stock = fields.Float(
+        string='Current Stock (L)', 
+        tracking=True,
+    )
+
     min_stock_alert = fields.Float(string='Min. Stock Alert (L)')
+
     state = fields.Selection([
         ('normal', 'Normal'),
         ('low', 'Low Stock'),
@@ -22,7 +46,11 @@ class FuelTank(models.Model):
     ], string='Stock Status', compute='_compute_state', store=True)
     notes = fields.Text(string='Notes')
 
-    stock_percent = fields.Float(string='Fill %', compute='_compute_stock_percent', store=True)
+    stock_percent = fields.Float(
+        string='Fill %', 
+        compute='_compute_stock_percent', 
+        store=True,
+    )
 
     company_id = fields.Many2one(
         'res.company',
