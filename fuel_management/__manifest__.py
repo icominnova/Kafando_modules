@@ -1,6 +1,6 @@
 {
     'name': 'Fuel Management System',
-    'version': '19.0.1.0.0',
+    'version': '19.0.1.0.1',
     'summary': 'Petrol Pump & Gas Station ERP – Stations, Pumps, Tanks, Shifts, Readings',
     'description': 'Complete fuel station management: multi-station setup, pump/nozzle/tank tracking, shift operations, meter & dip readings, license compliance, and reporting.',
     'category': 'Industries',
