@@ -134,6 +134,7 @@ msgstr "Pompiste"
 
 #. module: fuel_management
 #: model_terms:ir.ui.view,arch_db:fuel_management.view_fuel_price_wizard_form
+#: model_terms:ir.ui.view,arch_db:fuel_management.view_fuel_tank_replenishment_form
 msgid "Cancel"
 msgstr "Annuler"
 
@@ -250,6 +251,7 @@ msgstr "Stock actuel (L)"
 #. module: fuel_management
 #: model:ir.model.fields,field_description:fuel_management.field_fuel_shift__date
 #: model_terms:ir.ui.view,arch_db:fuel_management.view_fuel_shift_search
+#: model_terms:ir.ui.view,arch_db:fuel_management.view_fuel_tank_replenishment_list
 msgid "Date"
 msgstr "Date"
 
@@ -416,6 +418,7 @@ msgstr "Assistant de mise à jour du prix du carburant"
 #: model:ir.model.fields,field_description:fuel_management.field_fuel_nozzle__product_id
 #: model:ir.model.fields,field_description:fuel_management.field_fuel_price_wizard__product_id
 #: model:ir.model.fields,field_description:fuel_management.field_fuel_tank__product_id
+#: model:ir.model.fields,field_description:fuel_management.field_fuel_tank_replenishment__product_id
 msgid "Fuel Product"
 msgstr "Produit carburant"
 
@@ -872,6 +875,7 @@ msgstr "Imprimer le rapport"
 #: model:ir.model.fields,field_description:fuel_management.field_fuel_dip_reading__product_id
 #: model:ir.model.fields,field_description:fuel_management.field_fuel_meter_reading__product_id
 #: model_terms:ir.ui.view,arch_db:fuel_management.report_fuel_shift_template
+#: model_terms:ir.ui.view,arch_db:fuel_management.view_fuel_tank_replenishment_list
 msgid "Product"
 msgstr "Produit"
 
@@ -949,6 +953,8 @@ msgstr ""
 #: model:ir.actions.act_window,name:fuel_management.action_fuel_shift
 #: model:ir.ui.menu,name:fuel_management.menu_fuel_shift
 #: model:ir.model.fields,field_description:fuel_management.field_fuel_collection__shift_id
+#: model:ir.model.fields,field_description:fuel_management.field_fuel_tank_replenishment__shift_id
+
 msgid "Shift"
 msgstr "Poste"
 
@@ -1019,6 +1025,8 @@ msgstr "État/Région"
 #: model:ir.model.fields,field_description:fuel_management.field_fuel_tank__station_id
 #: model_terms:ir.ui.view,arch_db:fuel_management.view_fuel_license_search
 #: model_terms:ir.ui.view,arch_db:fuel_management.view_fuel_shift_search
+#: model:ir.model.fields,field_description:fuel_management.field_fuel_tank_replenishment__station_id
+#: model_terms:ir.ui.view,arch_db:fuel_management.view_fuel_tank_replenishment_list
 msgid "Station"
 msgstr "Station"
 
@@ -1059,6 +1067,7 @@ msgstr "Stations et équipements"
 #: model_terms:ir.ui.view,arch_db:fuel_management.view_fuel_license_search
 #: model_terms:ir.ui.view,arch_db:fuel_management.view_fuel_shift_search
 #: model_terms:ir.ui.view,arch_db:fuel_management.view_fuel_station_search
+#: model_terms:ir.ui.view,arch_db:fuel_management.view_fuel_tank_replenishment_list
 msgid "Status"
 msgstr "Statut"
 
@@ -1092,6 +1101,7 @@ msgstr "Superviseur"
 #: model:ir.model.fields,field_description:fuel_management.field_fuel_dip_reading__tank_id
 #: model_terms:ir.ui.view,arch_db:fuel_management.report_fuel_shift_template
 #: model:ir.model.fields,field_description:fuel_management.field_fuel_meter_reading__tank_id
+#: model_terms:ir.ui.view,arch_db:fuel_management.view_fuel_tank_replenishment_list
 msgid "Tank"
 msgstr "Cuve"
 
@@ -1368,6 +1378,7 @@ msgstr "Pistolets utilisés"
 
 #. module: fuel_management
 #: model_terms:ir.ui.view,arch_db:fuel_management.view_fuel_tank_replenishment_form
+#: model:ir.model.fields,field_description:fuel_management.field_fuel_tank_replenishment__receipt_id
 msgid "Validated Receipt"
 msgstr "Réception validée"
 
@@ -1386,3 +1397,186 @@ msgstr "Index de clôture enregistré"
 #: model:ir.model.fields,field_description:fuel_management.field_fuel_meter_reading__allowed_nozzle_ids
 msgid "Allowed Nozzles"
 msgstr "Pistolets autorisés"
+
+#. module: fuel_management
+#. odoo-javascript
+#: code:addons/fuel_management/static/src/xml/fuel_dashboard.xml:0
+msgid "All Stations"
+msgstr "Toutes les stations"
+
+#. module: fuel_management
+#. odoo-javascript
+#: code:addons/fuel_management/static/src/xml/fuel_dashboard.xml:0
+msgid "Daily Summary"
+msgstr "Résumé journalier"
+
+#. module: fuel_management
+#. odoo-javascript
+#: code:addons/fuel_management/static/src/xml/fuel_dashboard.xml:0
+msgid "Today's Sales"
+msgstr "Ventes du jour"
+
+#. module: fuel_management
+#. odoo-javascript
+#: code:addons/fuel_management/static/src/xml/fuel_dashboard.xml:0
+msgid "Fuel Sold"
+msgstr "Carburant vendu"
+
+#. module: fuel_management
+#. odoo-javascript
+#: code:addons/fuel_management/static/src/xml/fuel_dashboard.xml:0
+msgid "Active Shifts"
+msgstr "Postes en cours"
+
+#. module: fuel_management
+#. odoo-javascript
+#: code:addons/fuel_management/static/src/xml/fuel_dashboard.xml:0
+msgid "Sale Count"
+msgstr "Nombre de ventes"
+
+#. module: fuel_management
+#. odoo-javascript
+#: code:addons/fuel_management/static/src/xml/fuel_dashboard.xml:0
+msgid "Tank Stock Levels"
+msgstr "Niveaux de stock des cuves"
+
+#. module: fuel_management
+#. odoo-javascript
+#: code:addons/fuel_management/static/src/xml/fuel_dashboard.xml:0
+msgid "Tanks"
+msgstr "Cuves"
+
+#. module: fuel_management
+#. odoo-javascript
+#: code:addons/fuel_management/static/src/xml/fuel_dashboard.xml:0
+msgid "No tanks found"
+msgstr "Aucune cuve trouvée"
+
+#. module: fuel_management
+#. odoo-javascript
+#: code:addons/fuel_management/static/src/xml/fuel_dashboard.xml:0
+msgid "No fuel tanks are available for this station."
+msgstr "Aucune cuve de carburant n'est disponible pour cette station."
+
+#. module: fuel_management
+#. odoo-python
+#: code:addons/fuel_management/models/fuel_collection.py:0
+msgid "Only today's shifts can be collected."
+msgstr "Seuls les postes du jour peuvent être collectés."
+
+#. module: fuel_management
+#. odoo-python
+#: code:addons/fuel_management/models/fuel_collection.py:0
+msgid "Only validated shifts can be collected."
+msgstr "Seuls les postes validés peuvent être collectés."
+
+#. module: fuel_management
+#. odoo-python
+#: code:addons/fuel_management/models/fuel_collection.py:0
+msgid "This shift has already been collected."
+msgstr "Ce poste a déjà fait l'objet d'une collecte."
+
+#. module: fuel_management
+#: model:ir.model.fields,field_description:fuel_management.field_stock_picking__fuel_replenished
+msgid "Fully Replenished"
+msgstr "Entièrement réapprovisionnée"
+
+#. module: fuel_management
+#: model:ir.model.fields,field_description:fuel_management.field_stock_picking__fuel_received_qty
+msgid "Received Fuel Quantity"
+msgstr "Quantité de carburant réceptionnée"
+
+#. module: fuel_management
+#: model:ir.model.fields,field_description:fuel_management.field_stock_picking__fuel_replenished_qty
+msgid "Replenished Quantity"
+msgstr "Quantité déjà réapprovisionnée"
+
+#. module: fuel_management
+#: model:ir.model.fields,field_description:fuel_management.field_stock_picking__fuel_remaining_qty
+#: model:ir.model.fields,field_description:fuel_management.field_fuel_tank_replenishment__remaining_qty
+msgid "Remaining Quantity"
+msgstr "Quantité restante"
+
+#. module: fuel_management
+#: model:ir.model.fields,field_description:fuel_management.field_fuel_tank_replenishment__already_replenished_qty
+msgid "Already Replenished"
+msgstr "Déjà réapprovisionné"
+
+#. module: fuel_management
+#: model:ir.model.fields,field_description:fuel_management.field_fuel_tank_replenishment__quantity
+msgid "Quantity to Replenish (L)"
+msgstr "Quantité à réapprovisionner (L)"
+
+#. module: fuel_management
+#. odoo-python
+#: code:addons/fuel_management/models/fuel_tank_replenishment.py:0
+msgid "This receipt has been fully replenished and cannot be used again."
+msgstr "Cette réception a été entièrement répartie dans les cuves et ne peut plus être utilisée."
+
+#. module: fuel_management
+#. odoo-python
+#: code:addons/fuel_management/models/fuel_tank_replenishment.py:0
+msgid "There is no remaining quantity available on this receipt."
+msgstr "Il ne reste aucune quantité disponible sur cette réception."
+
+#. module: fuel_management
+#: model_terms:ir.ui.view,arch_db:fuel_management.view_fuel_tank_replenishment_form
+msgid "Confirm"
+msgstr "Confirmer"
+
+#. module: fuel_management
+#: model:ir.ui.menu,name:fuel_management.menu_fuel_purchases
+msgid "Purchases"
+msgstr "Achats"
+
+#. module: fuel_management
+#: model:ir.model.fields,field_description:fuel_management.field_fuel_tank_replenishment__purchase_order_id
+#: model:ir.ui.menu,name:fuel_management.menu_fuel_purchase_orders
+msgid "Purchase Order"
+msgstr "Bon de commande"
+
+#. module: fuel_management
+#: model:ir.model.fields,field_description:fuel_management.field_fuel_tank_replenishment__received_qty
+msgid "Received Quantity (L)"
+msgstr "Quantité réceptionnée (L)
+
+#. module: fuel_management
+#: model:ir.model.fields,field_description:fuel_management.field_fuel_tank_replenishment__tank_id
+msgid "Tank"
+msgstr "Cuve"
+
+#. module: fuel_management
+#: model_terms:ir.ui.view,arch_db:fuel_management.view_fuel_tank_replenishment_form
+msgid "Tracking"
+msgstr "Suivi"
+
+#. module: fuel_management
+#: model:ir.model.fields,field_description:fuel_management.field_fuel_tank_replenishment__user_id
+msgid "Recorded By"
+msgstr "Enregistré par"
+
+#. module: fuel_management
+#: model:ir.model.fields,field_description:fuel_management.field_fuel_tank_replenishment__remaining_after_qty
+msgid "Remaining After Replenishment (L)"
+msgstr "Quantité restante après réapprovisionnement (L)"
+
+#. module: fuel_management
+#: model_terms:ir.ui.view,arch_db:fuel_management.view_fuel_tank_replenishment_list
+msgid "Receipt"
+msgstr "Réception"
+
+#. module: fuel_management
+#: model_terms:ir.ui.view,arch_db:fuel_management.view_fuel_tank_replenishment_list
+msgid "Quantity (L)"
+msgstr "Quantité (L)"
+
+#. module: fuel_management
+#: model_terms:ir.ui.view,arch_db:fuel_management.view_fuel_tank_replenishment_list
+msgid "Remaining (L)"
+msgstr "Reste (L)"
+
+#. module: fuel_management
+#: model:ir.actions.act_window,name:fuel_management.action_fuel_tank_replenishment
+#: model:ir.ui.menu,name:fuel_management.menu_fuel_tank_replenishment
+msgid "Replenishments"
+msgstr "Réapprovisionnements"

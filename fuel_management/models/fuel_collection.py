@@ -1,5 +1,5 @@
-from odoo import models, fields, api
-
+from odoo import models, fields, api, _
+from odoo.exceptions import ValidationError
 
 class FuelCollection(models.Model):
     _name = 'fuel.collection'
@@ -12,6 +12,7 @@ class FuelCollection(models.Model):
         string='Shift',
         required=True,
         ondelete='cascade',
+        domain=lambda self: self._get_available_shift_domain(),
     )
 
     station_id = fields.Many2one(
@@ -77,11 +78,21 @@ class FuelCollection(models.Model):
         string='Notes',
     )
 
-    @api.depends(
-        'cash_amount',
-        'mobile_money_amount',
-        'expected_amount',
-    )
+    @api.model
+    def _get_available_shift_domain(self):
+        today = fields.Date.context_today(self)
+
+        collected_shift_ids = self.search([
+            ('shift_id', '!=', False),
+        ]).mapped('shift_id').ids
+
+        return [
+            ('date', '=', today),
+            ('state', '=', 'validated'),
+            ('id', 'not in', collected_shift_ids),
+        ]
+
+    @api.depends('cash_amount', 'mobile_money_amount', 'expected_amount')
     def _compute_collection(self):
         for rec in self:
             rec.collected_amount = (
@@ -93,3 +104,34 @@ class FuelCollection(models.Model):
                 rec.collected_amount
                 - rec.expected_amount
             )
+
+    @api.constrains('shift_id')
+    def _check_shift_collection(self):
+        today = fields.Date.context_today(self)
+
+        for rec in self:
+            if not rec.shift_id:
+                continue
+
+            # Le shift doit être celui du jour
+            if rec.shift_id.date != today:
+                raise ValidationError(
+                    _("Only today's shifts can be collected.")
+                )
+
+            # Le shift doit être validé
+            if rec.shift_id.state != 'validated':
+                raise ValidationError(
+                    _("Only validated shifts can be collected.")
+                )
+
+            # Un shift ne peut être collecté qu'une seule fois
+            duplicate = self.search_count([
+                ('shift_id', '=', rec.shift_id.id),
+                ('id', '!=', rec.id),
+            ])
+
+            if duplicate:
+                raise ValidationError(
+                    _("This shift has already been collected.")
+                )

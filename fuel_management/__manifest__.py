@@ -15,7 +15,7 @@
         'views/fuel_station_views.xml',
         'views/fuel_pump_views.xml',
         'views/fuel_nozzle_views.xml',
-        'wizard/fuel_tank_replenishment_views.xml',
+        'views/fuel_tank_replenishment_views.xml',
         'views/fuel_tank_views.xml',
         'views/fuel_purchase_views.xml',
         'views/fuel_shift_views.xml',
