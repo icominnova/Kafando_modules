@@ -28,7 +28,6 @@
         'views/fuel_dashboard_views.xml',
         'views/fuel_collection_views.xml',
         'views/fuel_menus.xml',
-        'views/res_users_views.xml',
         'wizard/fuel_shift_validation_views.xml',
         'wizard/fuel_meter_correction_wizard_views.xml',
     ],

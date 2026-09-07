@@ -12,4 +12,3 @@ from . import fuel_collection
 from . import fuel_receipt
 from . import fuel_tank_replenishment
 from . import fuel_meter_correction
-from . import res_users
