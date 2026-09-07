@@ -17,7 +17,8 @@ class FuelTankReplenishment(models.Model):
     state = fields.Selection(
         [
             ('draft', 'Draft'),
-            ('done', 'Done'),
+            ('done', 'Confirmed'),
+            ('cancelled', 'Cancelled'),
         ],
         string='Status',
         default='draft',
@@ -127,6 +128,37 @@ class FuelTankReplenishment(models.Model):
         readonly=True,
     )
 
+    confirmed_by = fields.Many2one(
+        'res.users',
+        string='Confirmed By',
+        readonly=True,
+        copy=False,
+    )
+
+    confirmed_date = fields.Datetime(
+        string='Confirmed On',
+        readonly=True,
+        copy=False,
+    )
+
+    cancelled_by = fields.Many2one(
+        'res.users',
+        string='Cancelled By',
+        readonly=True,
+        copy=False,
+    )
+
+    cancelled_date = fields.Datetime(
+        string='Cancelled On',
+        readonly=True,
+        copy=False,
+    )
+
+    cancel_reason = fields.Text(
+        string='Cancellation Reason',
+        copy=False,
+    )
+
     notes = fields.Text(
         string='Notes',
     )
@@ -172,6 +204,10 @@ class FuelTankReplenishment(models.Model):
 
     def action_confirm(self):
         self.ensure_one()
+        if self.shift_id.state != 'open':
+            raise UserError(_(
+                "A replenishment can only be confirmed on an open shift."
+            ))
 
         # Empêcher une deuxième confirmation
         if self.state == 'done':
@@ -245,25 +281,8 @@ class FuelTankReplenishment(models.Model):
                 entered=self.quantity,
             ))
 
-        # Vérifier qu'un jaugeage existe pour cette cuve et ce shift
-        dip_reading = self.env['fuel.dip.reading'].search([
-            ('tank_id', '=', self.tank_id.id),
-            ('shift_id', '=', self.shift_id.id),
-        ], limit=1)
-
-        if not dip_reading:
-            raise UserError(_(
-                "Cannot replenish: no dip reading found for tank "
-                "'%(tank)s' on shift '%(shift)s'.",
-                tank=self.tank_id.display_name,
-                shift=self.shift_id.display_name,
-            ))
-
         # Ajouter le carburant dans la cuve
         self.tank_id._adjust_stock(self.quantity)
-
-        # Ajouter la quantité réceptionnée dans le jaugeage
-        dip_reading.received_qty += self.quantity
 
         # Quantité totale déjà répartie depuis cette réception
         new_replenished_qty = (
@@ -294,3 +313,69 @@ class FuelTankReplenishment(models.Model):
             'type': 'ir.actions.client',
             'tag': 'reload',
         }
+
+    def action_cancel(self):
+        self.ensure_one()
+        if self.shift_id.state == 'validated' or self.shift_id.stock_posted:
+            raise UserError(_(
+                "A replenishment linked to a validated shift cannot be cancelled."
+            ))
+
+        if self.state != 'done':
+            raise UserError(_(
+                'Only a confirmed replenishment can be cancelled.'
+            ))
+
+        if not self.cancel_reason:
+            raise UserError(_(
+                'Please enter a cancellation reason.'
+            ))
+
+        # Vérifier qu'on peut retirer la quantité de la cuve
+        if self.tank_id.current_stock < self.quantity:
+            raise UserError(_(
+                "This replenishment cannot be cancelled because the tank "
+                "no longer contains enough stock.\n\n"
+                "Tank stock: %(stock).3f L\n"
+                "Quantity to reverse: %(quantity).3f L",
+                stock=self.tank_id.current_stock,
+                quantity=self.quantity,
+            ))
+
+        # 1. Annuler l'effet sur la cuve
+        self.tank_id._adjust_stock(-self.quantity)
+
+        # 2. Annuler l'effet sur la réception fournisseur
+        new_replenished_qty = max(
+            self.receipt_id.fuel_replenished_qty - self.quantity,
+            0.0,
+        )
+
+        new_remaining_qty = max(
+            self.receipt_id.fuel_received_qty - new_replenished_qty,
+            0.0,
+        )
+
+        self.receipt_id.write({
+            'fuel_replenished_qty': new_replenished_qty,
+            'fuel_replenished': new_remaining_qty <= 0.000001,
+        })
+
+        # 3. Conserver la trace de l'annulation
+        self.write({
+            'state': 'cancelled',
+            'cancelled_by': self.env.user.id,
+            'cancelled_date': fields.Datetime.now(),
+        })
+
+        return True
+
+    def unlink(self):
+        for rec in self:
+            if rec.state != 'draft':
+                raise UserError(_(
+                    'Only draft replenishments can be deleted. '
+                    'A confirmed replenishment must be cancelled instead.'
+                ))
+
+        return super().unlink()

@@ -62,6 +62,13 @@
                         icon="fa-print"
                         invisible="state != 'validated'"/>
 
+                    <button
+                        name="action_correct_meter_reading"
+                        string="Correct Meter Index"
+                        type="object"
+                        class="btn-secondary"
+                        invisible="state != 'validated'"/>
+
                     <field name="state"
                         widget="statusbar"
                         statusbar_visible="open,validated"/>

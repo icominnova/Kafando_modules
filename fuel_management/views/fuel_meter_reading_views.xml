@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
 
+    <!-- LISTE -->
     <record id="view_fuel_meter_reading_list" model="ir.ui.view">
         <field name="name">fuel.meter.reading.list</field>
         <field name="model">fuel.meter.reading</field>
@@ -20,10 +21,45 @@
         </field>
     </record>
 
+    <!-- FORMULAIRE -->
+    <record id="view_fuel_meter_reading_form" model="ir.ui.view">
+        <field name="name">fuel.meter.reading.form</field>
+        <field name="model">fuel.meter.reading</field>
+
+        <field name="arch" type="xml">
+            <form string="Meter Reading">
+
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="shift_id"/>
+                            <field name="station_id" readonly="1"/>
+                            <field name="pump_id" readonly="1"/>
+                            <field name="nozzle_id"/>
+                            <field name="tank_id" readonly="1"/>
+                            <field name="product_id" readonly="1"/>
+                        </group>
+                        <group>
+                            <field name="opening_reading" readonly="1"/>
+                            <field name="closing_reading"/>
+                            <field name="dispensed_qty" readonly="1"/>
+                            <field name="unit_price"/>
+                            <field name="total_amount" readonly="1"/>
+                        </group>
+                    </group>
+                    <group>
+                        <field name="notes"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- ACTION -->
     <record id="action_fuel_meter_reading" model="ir.actions.act_window">
         <field name="name">Meter Readings</field>
         <field name="res_model">fuel.meter.reading</field>
-        <field name="view_mode">list</field>
+        <field name="view_mode">list,form</field>
     </record>
 
 </odoo>

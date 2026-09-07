@@ -85,6 +85,12 @@ class FuelShift(models.Model):
         string='Dip Readings',
     )
 
+    replenishment_ids = fields.One2many(
+        'fuel.tank.replenishment',
+        'shift_id',
+        string='Replenishments',
+    )
+
     total_dispensed = fields.Float(
         string='Total Dispensed (L)', 
         compute='_compute_totals', 
@@ -157,7 +163,26 @@ class FuelShift(models.Model):
                 'default_shift_id': self.id,
             },
         }
-    
+
+    def action_correct_meter_reading(self):
+        self.ensure_one()
+
+        if self.state != 'validated' or not self.stock_posted:
+            raise UserError(_(
+                "Only a validated shift can have its meter indexes corrected."
+            ))
+
+        return {
+            'type': 'ir.actions.act_window',
+            'name': _('Correct Meter Index'),
+            'res_model': 'fuel.meter.correction.wizard',
+            'view_mode': 'form',
+            'target': 'new',
+            'context': {
+                'default_shift_id': self.id,
+            },
+        }
+
     def action_print_report(self):
         for rec in self:
             if rec.state != 'validated':
@@ -168,3 +193,19 @@ class FuelShift(models.Model):
                     status=dict(rec._fields['state'].selection).get(rec.state),
                 ))
         return self.env.ref('fuel_management.action_report_fuel_shift').report_action(self)
+
+    def unlink(self):
+        for rec in self:
+            if rec.state != 'draft':
+                raise UserError(_(
+                    "Only draft shifts can be deleted. "
+                    "An opened or validated shift must be kept for history."
+                ))
+
+            if rec.stock_posted:
+                raise UserError(_(
+                    "This shift cannot be deleted because its stock "
+                    "movement has already been posted."
+                ))
+
+        return super().unlink()

@@ -22,3 +22,5 @@ access_fuel_tank_replenishment_user,fuel.tank.replenishment user,model_fuel_tank
 access_fuel_dashboard_user,fuel.dashboard user,model_fuel_dashboard,fuel_management.group_fuel_user,1,1,1,0
 access_fuel_shift_validation_wizard_user,fuel.shift.validation.wizard user,model_fuel_shift_validation_wizard,base.group_user,1,1,1,1
 access_fuel_collection_user,Fuel.collection User,model_fuel_collection,group_fuel_user,1,1,1,1
+access_fuel_meter_correction_wizard_manager,fuel.meter.correction.wizard.manager,model_fuel_meter_correction_wizard,fuel_management.group_fuel_manager,1,1,1,1
+access_fuel_meter_correction_manager,fuel.meter.correction.manager,model_fuel_meter_correction,fuel_management.group_fuel_manager,1,0,1,0

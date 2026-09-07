@@ -37,6 +37,14 @@ class FuelShiftValidationWizard(models.TransientModel):
                 "No meter readings have been recorded "
                 "for this shift."
             ))
+        reading_nozzles = readings.mapped('nozzle_id')
+        missing_nozzles = shift.nozzle_ids - reading_nozzles
+        if missing_nozzles:
+            raise UserError(_(
+                "The shift cannot be validated because the following nozzles "
+                "have no meter reading: %(nozzles)s",
+                nozzles=', '.join(missing_nozzles.mapped('display_name')),
+            ))
         
         # 4. Empêcher deux relevés du même pistolet
         seen_nozzles = set()
@@ -50,6 +58,11 @@ class FuelShiftValidationWizard(models.TransientModel):
 
         #Vérifier chaque index de clôture
         for reading in readings:
+            if not reading.closing_recorded:
+                raise UserError(_(
+                    "The closing index has not been recorded for nozzle '%(nozzle)s'.",
+                    nozzle=reading.nozzle_id.display_name,
+                ))
             if reading.closing_reading < reading.opening_reading:
                 raise UserError(_(
                     "Invalid closing index for nozzle '%(nozzle)s'.\n\n"

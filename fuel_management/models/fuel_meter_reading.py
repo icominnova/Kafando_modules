@@ -6,9 +6,22 @@ class FuelMeterReading(models.Model):
     _description = 'Fuel Meter Reading'
     _rec_name = 'nozzle_id'
 
-    shift_id = fields.Many2one('fuel.shift', string='Shift', required=True, ondelete='cascade')
-    shift_date = fields.Date(related='shift_id.date', store=True, index=True)
-    station_id = fields.Many2one('fuel.station', related='shift_id.station_id', store=True)
+    shift_id = fields.Many2one(
+        'fuel.shift', 
+        string='Shift', 
+        required=True, 
+        ondelete='cascade',
+    )
+    shift_date = fields.Date(
+        related='shift_id.date', 
+        store=True, 
+        index=True,
+    )
+    station_id = fields.Many2one(
+        'fuel.station', 
+        related='shift_id.station_id', 
+        store=True,
+    )
 
     nozzle_id = fields.Many2one(
         'fuel.nozzle',
@@ -17,16 +30,57 @@ class FuelMeterReading(models.Model):
         domain="[('id', 'in', allowed_nozzle_ids)]"
     )
     
-    pump_id = fields.Many2one('fuel.pump', related='nozzle_id.pump_id', store=True, string='Pump')
-    tank_id = fields.Many2one('fuel.tank', related='nozzle_id.tank_id', store=True, index=True, string='Tank')
-    product_id = fields.Many2one('product.product', related='nozzle_id.product_id', store=True, string='Product')
-
-    opening_reading = fields.Float(string='Opening Reading (L)', digits=(16, 3), readonly=True)
-    closing_reading = fields.Float(string='Closing Reading (L)', digits=(16, 3))
-    dispensed_qty = fields.Float(string='Dispensed (L)', compute='_compute_dispensed', store=True, digits=(16, 3))
-    unit_price = fields.Float(string='Unit Price', digits='Product Price')
-    total_amount = fields.Float(string='Total Amount', compute='_compute_total', store=True, digits='Account')
+    pump_id = fields.Many2one(
+        'fuel.pump', 
+        related='nozzle_id.pump_id', 
+        store=True, 
+        string='Pump',
+    )
+    tank_id = fields.Many2one(
+        'fuel.tank', 
+        related='nozzle_id.tank_id', 
+        store=True, 
+        index=True, 
+        string='Tank',
+    )
+    product_id = fields.Many2one(
+        'product.product', 
+        related='nozzle_id.product_id', 
+        store=True, 
+        string='Product',
+    )
+    opening_reading = fields.Float(
+        string='Opening Reading (L)', 
+        digits=(16, 3), 
+        readonly=True,
+    )
+    closing_reading = fields.Float(
+        string='Closing Reading (L)', 
+        digits=(16, 3),
+    )
+    dispensed_qty = fields.Float(
+        string='Dispensed (L)', 
+        compute='_compute_dispensed', 
+        store=True, 
+        digits=(16, 3),
+    )
+    unit_price = fields.Float(
+        string='Unit Price', 
+        digits='Product Price',
+    )
+    total_amount = fields.Float(
+        string='Total Amount', 
+        compute='_compute_total', 
+        store=True, 
+        digits='Account',
+    )
     notes = fields.Text(string='Notes')
+    correction_ids = fields.One2many(
+        'fuel.meter.correction',
+        'reading_id',
+        string='Corrections',
+        readonly=True,
+    )
 
     company_id = fields.Many2one(
         'res.company',
@@ -92,12 +146,19 @@ class FuelMeterReading(models.Model):
     @api.model_create_multi
     def create(self, vals_list):
         for vals in vals_list:
+            if 'closing_reading' in vals:
+                vals['closing_recorded'] = True
             nozzle_id = vals.get('nozzle_id')
             shift_id = vals.get('shift_id')
 
             if nozzle_id and shift_id:
                 nozzle = self.env['fuel.nozzle'].browse(nozzle_id)
                 shift = self.env['fuel.shift'].browse(shift_id)
+
+                if shift.state == 'validated' or shift.stock_posted:
+                    raise UserError(_(
+                        "You cannot add a meter reading to a validated shift."
+                    ))
 
                 if nozzle not in shift.nozzle_ids:
                     raise UserError(_(
@@ -126,7 +187,7 @@ class FuelMeterReading(models.Model):
         for rec in self:
 
             # Interdire toute modification après validation
-            if rec.shift_id.state == 'validated':
+            if rec.shift_id.state == 'validated' or rec.shift_id.stock_posted:
                 raise UserError(_(
                     'You cannot modify a meter reading from a validated shift.'
                 ))
@@ -165,7 +226,26 @@ class FuelMeterReading(models.Model):
 
         return super().write(vals)
 
+    def _apply_validated_closing_correction(self, new_closing):
+        self.ensure_one()
+
+        return super(FuelMeterReading, self).write({
+            'closing_reading': new_closing,
+            'closing_recorded': True,
+        })
+
+
+    def _sync_opening_after_correction(self, new_opening):
+        self.ensure_one()
+        return super(FuelMeterReading, self).write({
+            'opening_reading': new_opening,
+        })
+    
     def unlink(self):
+        for rec in self:
+            if rec.shift_id.state == 'validated' or rec.shift_id.stock_posted:
+                raise UserError(_(
+                    "You cannot delete a meter reading from a validated shift."
+                ))
+
         return super().unlink()
-    
-    

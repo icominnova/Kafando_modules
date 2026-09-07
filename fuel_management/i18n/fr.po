@@ -135,6 +135,7 @@ msgstr "Pompiste"
 #. module: fuel_management
 #: model_terms:ir.ui.view,arch_db:fuel_management.view_fuel_price_wizard_form
 #: model_terms:ir.ui.view,arch_db:fuel_management.view_fuel_tank_replenishment_form
+#: model_terms:ir.ui.view,arch_db:fuel_management.view_fuel_meter_correction_wizard_form
 msgid "Cancel"
 msgstr "Annuler"
 
@@ -313,6 +314,7 @@ msgstr "Nom du document"
 #. module: fuel_management
 #: model:ir.model.fields.selection,name:fuel_management.selection__fuel_shift__state__draft
 #: model_terms:ir.ui.view,arch_db:fuel_management.view_fuel_shift_search
+#: model:ir.model.fields.selection,name:fuel_management.selection__fuel_tank_replenishment__state__draft
 msgid "Draft"
 msgstr "Brouillon"
 
@@ -625,7 +627,7 @@ msgstr "Licences et conformité"
 #. module: fuel_management
 #: model:ir.ui.menu,name:fuel_management.menu_fuel_license
 msgid "Licenses & Permits"
-msgstr ""
+msgstr "Licences et autorisations"
 
 #. module: fuel_management
 #: model:ir.model.fields.selection,name:fuel_management.selection__fuel_tank__state__low
@@ -1580,3 +1582,304 @@ msgstr "Reste (L)"
 #: model:ir.ui.menu,name:fuel_management.menu_fuel_tank_replenishment
 msgid "Replenishments"
 msgstr "Réapprovisionnements"
+
+#. module: fuel_management
+#: model:ir.model.fields.selection,name:fuel_management.selection__fuel_tank_replenishment__state__cancelled
+msgid "Cancelled"
+msgstr "Annulé"
+
+#. module: fuel_management
+#: model:ir.model.fields,field_description:fuel_management.field_fuel_tank_replenishment__confirmed_by
+msgid "Confirmed By"
+msgstr "Confirmé par"
+
+#. module: fuel_management
+#: model:ir.model.fields,field_description:fuel_management.field_fuel_tank_replenishment__confirmed_date
+msgid "Confirmed On"
+msgstr "Confirmé le"
+
+#. module: fuel_management
+#: model:ir.model.fields,field_description:fuel_management.field_fuel_tank_replenishment__cancelled_by
+msgid "Cancelled By"
+msgstr "Annulé par"
+
+#. module: fuel_management
+#: model:ir.model.fields,field_description:fuel_management.field_fuel_tank_replenishment__cancelled_date
+msgid "Cancelled On"
+msgstr "Annulé le"
+
+#. module: fuel_management
+#: model:ir.model.fields,field_description:fuel_management.field_fuel_tank_replenishment__cancel_reason
+msgid "Cancellation Reason"
+msgstr "Motif d'annulation"
+
+#. module: fuel_management
+#: model_terms:ir.ui.view,arch_db:fuel_management.view_fuel_tank_replenishment_form
+msgid "Cancellation"
+msgstr "Annulation"
+
+#. module: fuel_management
+#: model_terms:ir.ui.view,arch_db:fuel_management.view_fuel_tank_replenishment_form
+msgid "Cancel Replenishment"
+msgstr "Annuler le réapprovisionnement"
+
+#. module: fuel_management
+#: model_terms:ir.ui.view,arch_db:fuel_management.view_fuel_tank_replenishment_form
+msgid "Are you sure you want to cancel this replenishment?"
+msgstr "Êtes-vous sûr de vouloir annuler ce réapprovisionnement ?"
+
+#. module: fuel_management
+#: model_terms:ir.ui.view,arch_db:fuel_management.view_fuel_tank_replenishment_form
+msgid "Explain why this replenishment is being cancelled..."
+msgstr "Indiquez la raison de l'annulation de ce réapprovisionnement..."
+
+#. module: fuel_management
+#. odoo-python
+#: code:addons/fuel_management/models/fuel_tank_replenishment.py:0
+msgid ""
+"Only draft replenishments can be deleted. A confirmed replenishment must "
+"be cancelled instead."
+msgstr ""
+"Seuls les réapprovisionnements en brouillon peuvent être supprimés. Un "
+"réapprovisionnement confirmé doit être annulé à la place."
+
+#. module: fuel_management
+#. odoo-python
+#: code:addons/fuel_management/models/fuel_tank_replenishment.py:0
+msgid "Only a confirmed replenishment can be cancelled."
+msgstr "Seul un réapprovisionnement confirmé peut être annulé."
+
+#. module: fuel_management
+#. odoo-python
+#: code:addons/fuel_management/models/fuel_tank_replenishment.py:0
+msgid "Please enter a cancellation reason."
+msgstr "Veuillez saisir un motif d'annulation."
+
+#. module: fuel_management
+#. odoo-python
+#: code:addons/fuel_management/models/fuel_tank_replenishment.py:0
+#, python-format
+msgid ""
+"This replenishment cannot be cancelled because the tank no longer contains "
+"enough stock.\n"
+"\n"
+"Tank stock: %(stock).3f L\n"
+"Quantity to reverse: %(quantity).3f L"
+msgstr ""
+"Ce réapprovisionnement ne peut pas être annulé car la cuve ne contient plus "
+"une quantité suffisante de carburant.\n"
+"\n"
+"Stock de la cuve : %(stock).3f L\n"
+"Quantité à contre-passer : %(quantity).3f L"
+
+#. module: fuel_management
+#. odoo-python
+#: code:addons/fuel_management/models/fuel_shift.py:0
+msgid ""
+"Only draft shifts can be deleted. An opened or validated shift must be kept "
+"for history."
+msgstr ""
+"Seuls les shifts en brouillon peuvent être supprimés. Un shift ouvert ou "
+"validé doit être conservé dans l'historique."
+
+#. module: fuel_management
+#. odoo-python
+#: code:addons/fuel_management/models/fuel_shift.py:0
+msgid ""
+"This shift cannot be deleted because its stock movement has already been "
+"posted."
+msgstr ""
+"Ce shift ne peut pas être supprimé car son mouvement de stock a déjà été "
+"comptabilisé."
+
+#. module: fuel_management
+#. odoo-python
+#: code:addons/fuel_management/wizard/fuel_shift_validation_wizard.py:0
+msgid "The closing index has not been recorded for nozzle '%(nozzle)s'."
+msgstr "L'index de clôture n'a pas été enregistré pour le pistolet '%(nozzle)s'."
+
+#. module: fuel_management
+#. odoo-python
+#: code:addons/fuel_management/wizard/fuel_shift_validation_wizard.py:0
+#, python-format
+msgid ""
+"The shift cannot be validated because the following nozzles have no meter "
+"reading: %(nozzles)s"
+msgstr ""
+"Le shift ne peut pas être validé car les pistolets suivants n'ont aucun "
+"relevé de compteur : %(nozzles)s"
+
+#. module: fuel_management
+#. odoo-python
+#: code:addons/fuel_management/models/fuel_meter_reading.py:0
+msgid "You cannot delete a meter reading from a validated shift."
+msgstr "Vous ne pouvez pas supprimer un relevé de compteur appartenant à un shift validé."
+
+#. module: fuel_management
+#. odoo-python
+#: code:addons/fuel_management/models/fuel_meter_reading.py:0
+msgid "You cannot add a meter reading to a validated shift."
+msgstr "Vous ne pouvez pas ajouter un relevé de compteur à un shift validé."
+
+#. module: fuel_management
+#. odoo-python
+#: code:addons/fuel_management/models/fuel_dip_reading.py:0
+msgid "You cannot delete a dip reading from a validated shift."
+msgstr "Vous ne pouvez pas supprimer un jaugeage appartenant à un shift validé."
+
+#. module: fuel_management
+#. odoo-python
+#: code:addons/fuel_management/models/fuel_dip_reading.py:0
+msgid "You cannot modify a dip reading from a validated shift."
+msgstr "Vous ne pouvez pas modifier un jaugeage appartenant à un shift validé."
+
+#. module: fuel_management
+#. odoo-python
+#: code:addons/fuel_management/models/fuel_dip_reading.py:0
+msgid "You cannot add a dip reading to a validated shift."
+msgstr "Vous ne pouvez pas ajouter un jaugeage à un shift validé."
+
+#. module: fuel_management
+#: model:ir.model.fields,field_description:fuel_management.field_fuel_meter_reading__shift_state
+msgid "Shift Status"
+msgstr "Statut du shift"
+
+#. module: fuel_management
+#: model:ir.model.fields,field_description:fuel_management.field_fuel_meter_reading__correction_ids
+msgid "Corrections"
+msgstr "Corrections"
+
+#. module: fuel_management
+#. odoo-python
+#: code:addons/fuel_management/models/fuel_meter_reading.py:0
+#: model_terms:ir.ui.view,arch_db:fuel_management.view_fuel_meter_correction_wizard_form
+msgid "Correct Closing Index"
+msgstr "Corriger l'index de clôture"
+
+#. module: fuel_management50,000
+#. odoo-python
+#: code:addons/fuel_management/models/fuel_meter_reading.py:0
+msgid "Only a meter reading from a validated shift can be corrected."
+msgstr "Seul un relevé de compteur appartenant à un shift validé peut être corrigé."
+
+#. module: fuel_management
+#: model_terms:ir.ui.view,arch_db:fuel_management.view_fuel_meter_correction_wizard_form
+msgid "Correction"
+msgstr "Correction"
+
+#. module: fuel_management
+#: model_terms:ir.ui.view,arch_db:fuel_management.view_fuel_meter_correction_wizard_form
+msgid "Apply Correction"
+msgstr "Appliquer la correction"
+
+#. module: fuel_management
+#: model_terms:ir.ui.view,arch_db:fuel_management.view_fuel_meter_correction_wizard_form
+msgid "Explain the reason for this correction..."
+msgstr "Indiquez le motif de cette correction..."
+
+#. module: fuel_management
+#: model:ir.model.fields,field_description:fuel_management.field_fuel_meter_correction_wizard__reading_id
+msgid "Meter Reading"
+msgstr "Relevé de compteur"
+
+#. module: fuel_management
+#: model:ir.model.fields,field_description:fuel_management.field_fuel_meter_correction_wizard__opening_reading
+msgid "Opening Index"
+msgstr "Index d'ouverture"
+
+#. module: fuel_management
+#: model:ir.model.fields,field_description:fuel_management.field_fuel_meter_correction_wizard__old_closing_reading
+msgid "Current Closing Index"
+msgstr "Index de clôture actuel"
+
+#. module: fuel_management
+#: model:ir.model.fields,field_description:fuel_management.field_fuel_meter_correction_wizard__old_dispensed_qty
+msgid "Current Dispensed Quantity"
+msgstr "Quantité distribuée actuelle"
+
+#. module: fuel_management
+#: model:ir.model.fields,field_description:fuel_management.field_fuel_meter_correction_wizard__new_closing_reading
+msgid "Correct Closing Index"
+msgstr "Index de clôture corrigé"
+
+#. module: fuel_management
+#: model:ir.model.fields,field_description:fuel_management.field_fuel_meter_correction_wizard__new_dispensed_qty
+msgid "Corrected Dispensed Quantity"
+msgstr "Quantité distribuée corrigée"
+
+#. module: fuel_management
+#: model:ir.model.fields,field_description:fuel_management.field_fuel_meter_correction_wizard__stock_adjustment_qty
+msgid "Stock Adjustment"
+msgstr "Ajustement de stock"
+
+#. module: fuel_management
+#: model:ir.model.fields,field_description:fuel_management.field_fuel_meter_correction_wizard__reason
+msgid "Correction Reason"
+msgstr "Motif de la correction"
+
+#. module: fuel_management
+#. odoo-python
+#: code:addons/fuel_management/wizard/fuel_meter_correction_wizard.py:0
+msgid "This meter reading no longer belongs to a validated shift."
+msgstr "Ce relevé de compteur n'appartient plus à un shift validé."
+
+#. module: fuel_management
+#. odoo-python
+#: code:addons/fuel_management/wizard/fuel_meter_correction_wizard.py:0
+msgid "The corrected closing index cannot be lower than the opening index."
+msgstr "L'index de clôture corrigé ne peut pas être inférieur à l'index d'ouverture."
+
+#. module: fuel_management
+#. odoo-python
+#: code:addons/fuel_management/wizard/fuel_meter_correction_wizard.py:0
+msgid "The corrected closing index is identical to the current index."
+msgstr "L'index de clôture corrigé est identique à l'index actuel."
+
+#. module: fuel_management
+#. odoo-python
+#: code:addons/fuel_management/wizard/fuel_meter_correction_wizard.py:0
+msgid ""
+"This closing index cannot be corrected because a later validated shift "
+"already exists for this nozzle. A stock regularization must be used instead."
+msgstr ""
+"Cet index de clôture ne peut pas être corrigé car un shift validé plus récent "
+"existe déjà pour ce pistolet. Une régularisation de stock doit être utilisée "
+"à la place."
+
+#. module: fuel_management
+#. odoo-python
+#: code:addons/fuel_management/wizard/fuel_meter_correction_wizard.py:0
+#, python-format
+msgid ""
+"The correction requires more fuel to be removed from the tank, but the "
+"available stock is insufficient.\n"
+"\n"
+"Available stock: %(stock).3f L\n"
+"Additional quantity required: %(qty).3f L"
+msgstr ""
+"La correction nécessite de retirer davantage de carburant de la cuve, mais "
+"le stock disponible est insuffisant.\n"
+"\n"
+"Stock disponible : %(stock).3f L\n"
+"Quantité supplémentaire nécessaire : %(qty).3f L"
+
+#. module: fuel_management
+#. odoo-python
+#: code:addons/fuel_management/wizard/fuel_meter_correction_wizard.py:0
+#, python-format
+msgid ""
+"Closing index corrected for nozzle '%(nozzle)s': %(old).3f L → %(new).3f L. "
+"Stock adjustment: %(adjustment).3f L."
+msgstr ""
+"Index de clôture corrigé pour le pistolet '%(nozzle)s' : %(old).3f L → "
+"%(new).3f L. Ajustement de stock : %(adjustment).3f L."
+
+#. module: fuel_management
+#: model:ir.model.fields,field_description:fuel_management.field_fuel_meter_correction_wizard__new_closing_reading
+msgid "Corrected Closing Index"
+msgstr "Index de clôture corrigé"
+
+#. module: fuel_management
+#: model_terms:ir.ui.view,arch_db:fuel_management.view_fuel_shift_form
+msgid "Correct Meter Index"
+msgstr "Corriger l'index du compteur"

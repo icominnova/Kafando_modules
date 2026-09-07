@@ -8,31 +8,18 @@
         <field name="arch" type="xml">
 
             <list decoration-success="state == 'done'">
-
-                <field name="date"
-                    string="Date"/>
-
                 <field name="receipt_id"
                     string="Receipt"/>
-
                 <field name="station_id"
                     string="Station"/>
-
                 <field name="tank_id"
                     string="Tank"/>
-
                 <field name="product_id"
                     string="Product"/>
-
                 <field name="quantity"
                     string="Quantity (L)"/>
-
                 <field name="remaining_after_qty"
                     string="Remaining (L)"/>
-
-                <field name="state"
-                    string="Status"/>
-
             </list>
 
         </field>
@@ -55,10 +42,18 @@
                         class="btn-primary"
                         invisible="state != 'draft'"/>
 
+                    <button
+                        name="action_cancel"
+                        string="Cancel Replenishment"
+                        type="object"
+                        class="btn-secondary"
+                        invisible="state != 'done'"
+                        confirm="Are you sure you want to cancel this replenishment?"/>
+
                     <field
                         name="state"
                         widget="statusbar"
-                        statusbar_visible="draft,done"/>
+                        statusbar_visible="draft,done,cancelled"/>
 
                 </header>
 
@@ -122,6 +117,13 @@
                             <field
                                 name="company_id"
                                 readonly="1"/>
+                            <field name="confirmed_by"
+                                readonly="1"
+                                invisible="state == 'draft'"/>
+
+                            <field name="confirmed_date"
+                                readonly="1"
+                                invisible="state == 'draft'"/>
                         </group>
                     </group>
 
@@ -131,6 +133,23 @@
                             nolabel="1"
                             readonly="state == 'done'"/>
                     </group>
+                    <group string="Cancellation"
+                        invisible="state == 'draft'">
+
+                        <field name="cancel_reason"
+                            placeholder="Explain why this replenishment is being cancelled..."
+                            readonly="state == 'cancelled'"/>
+
+                        <field name="cancelled_by"
+                            readonly="1"
+                            invisible="state != 'cancelled'"/>
+
+                        <field name="cancelled_date"
+                            readonly="1"
+                            invisible="state != 'cancelled'"/>
+
+                    </group>
+
                 </sheet>
             </form>
         </field>
