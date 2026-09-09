@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="action_report_fuel_expense" model="ir.actions.report">
+        <field name="name">Expense Voucher</field>
+        <field name="model">fuel.expense</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">fuel_management.report_fuel_expense_document</field>
+        <field name="report_file">fuel_management.report_fuel_expense_document</field>
+        <field name="print_report_name">'Expense - %s' % (object.name)</field>
+    </record>
+
+</odoo>

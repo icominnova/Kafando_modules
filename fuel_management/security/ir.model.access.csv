@@ -24,3 +24,7 @@ access_fuel_shift_validation_wizard_user,fuel.shift.validation.wizard user,model
 access_fuel_collection_user,Fuel.collection User,model_fuel_collection,group_fuel_user,1,1,1,1
 access_fuel_meter_correction_wizard_manager,fuel.meter.correction.wizard.manager,model_fuel_meter_correction_wizard,fuel_management.group_fuel_manager,1,1,1,1
 access_fuel_meter_correction_manager,fuel.meter.correction.manager,model_fuel_meter_correction,fuel_management.group_fuel_manager,1,0,1,0
+access_fuel_expense_user,Fuel Expense User,model_fuel_expense,group_fuel_user,1,1,1,1
+access_fuel_expense_manager,Fuel Expense Manager,model_fuel_expense,group_fuel_manager,1,1,1,1
+access_fuel_expense_category_user,Fuel Expense Category User,model_fuel_expense_category,group_fuel_user,1,0,0,0
+access_fuel_expense_category_manager,Fuel Expense Category Manager,model_fuel_expense_category,group_fuel_manager,1,1,1,1

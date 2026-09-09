@@ -94,6 +94,12 @@
         parent="menu_fuel_operations"
         action="action_fuel_tank_replenishment"
         sequence="40"/>
+
+    <menuitem id="menu_fuel_expense"
+        name="Expenses"
+        parent="menu_fuel_operations"
+        action="action_fuel_expense"
+        sequence="50"/>
         
     <!-- Compliance -->
     <menuitem id="menu_fuel_compliance"
@@ -125,5 +131,12 @@
         parent="menu_fuel_config"
         action="action_fuel_price_wizard"
         sequence="20"/>
-
+    
+    <menuitem id="menu_fuel_expense_category"
+        name="Expense Categories"
+        parent="menu_fuel_config"
+        action="action_fuel_expense_category"
+        sequence="30"
+        groups="fuel_management.group_fuel_manager"/>
+        
 </odoo>

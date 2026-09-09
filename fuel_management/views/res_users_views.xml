@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="view_users_form_fuel_station" model="ir.ui.view">
+        <field name="name">res.users.form.fuel.station</field>
+        <field name="model">res.users</field>
+        <field name="inherit_id" ref="base.view_users_form"/>
+        <field name="arch" type="xml">
+
+            <xpath expr="//field[@name='company_ids']" position="after">
+                <field name="fuel_station_ids"
+                       widget="many2many_tags"/>
+                <field name="fuel_default_station_id"/>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>

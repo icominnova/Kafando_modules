@@ -36,9 +36,10 @@ class FuelTankReplenishment(models.Model):
             ('state', '=', 'done'),
             ('picking_type_code', '=', 'incoming'),
             ('fuel_replenished', '=', False),
+            ('fuel_purchase_type', '=', 'fuel'),
         ],
     )
-
+    
     purchase_order_id = fields.Many2one(
         'purchase.order',
         string='Purchase Order',
@@ -281,6 +282,29 @@ class FuelTankReplenishment(models.Model):
                 entered=self.quantity,
             ))
 
+        purchase = self.purchase_order_id
+        if not purchase:
+            raise UserError(_(
+                "The selected receipt is not linked to a purchase order."
+            ))
+
+        if purchase.purchase_type != 'fuel':
+            raise UserError(_(
+                "Only receipts from fuel purchases can be used for tank replenishment."
+            ))
+
+        if purchase.fuel_station_id != self.tank_id.station_id:
+            raise UserError(_(
+                "The selected tank does not belong to the fuel station "
+                "defined on the purchase order."
+            ))
+
+        if self.shift_id.station_id != purchase.fuel_station_id:
+            raise UserError(_(
+                "The selected shift does not belong to the fuel station "
+                "defined on the purchase order."
+            ))
+
         # Ajouter le carburant dans la cuve
         self.tank_id._adjust_stock(self.quantity)
 
@@ -307,6 +331,8 @@ class FuelTankReplenishment(models.Model):
         self.write({
             'remaining_after_qty': remaining_after,
             'state': 'done',
+            'confirmed_by': self.env.user.id,
+            'confirmed_date': fields.Datetime.now(),
         })
 
         return {
@@ -369,6 +395,26 @@ class FuelTankReplenishment(models.Model):
         })
 
         return True
+
+    def write(self, vals):
+        protected_fields = {
+            'receipt_id',
+            'tank_id',
+            'shift_id',
+            'quantity',
+            'date',
+        }
+
+        for rec in self:
+            if rec.state in ('done', 'cancelled'):
+                modified_fields = protected_fields.intersection(vals)
+
+                if modified_fields:
+                    raise UserError(_(
+                        "A confirmed or cancelled replenishment cannot be modified."
+                    ))
+
+        return super().write(vals)
 
     def unlink(self):
         for rec in self:

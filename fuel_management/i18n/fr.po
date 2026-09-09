@@ -1883,3 +1883,387 @@ msgstr "Index de clôture corrigé"
 #: model_terms:ir.ui.view,arch_db:fuel_management.view_fuel_shift_form
 msgid "Correct Meter Index"
 msgstr "Corriger l'index du compteur"
+
+#. module: fuel_management
+#: model:ir.model.fields,field_description:fuel_management.field_res_users__fuel_station_ids
+msgid "Allowed Fuel Stations"
+msgstr "Stations-service autorisées"
+
+#. module: fuel_management
+#: model:ir.model.fields,help:fuel_management.field_res_users__fuel_station_ids
+msgid "Fuel stations this user is allowed to access."
+msgstr "Stations-service auxquelles cet utilisateur est autorisé à accéder."
+
+#. module: fuel_management
+#: model:ir.model.fields,field_description:fuel_management.field_res_users__fuel_default_station_id
+msgid "Default Fuel Station"
+msgstr "Station-service par défaut"
+
+#. module: fuel_management
+#: model:ir.model.fields,help:fuel_management.field_res_users__fuel_default_station_id
+msgid "Fuel station selected by default for this user."
+
+#. module: fuel_management
+#: model:res.groups,name:fuel_management.group_fuel_admin
+msgid "Administrator"
+msgstr "Administrateur"
+
+#. module: fuel_management
+#: model:ir.model,name:fuel_management.model_fuel_expense
+msgid "Fuel Station Expense"
+msgstr "Dépense de station-service"
+
+#. module: fuel_management
+#: model:ir.model,name:fuel_management.model_fuel_expense_category
+msgid "Fuel Expense Category"
+msgstr "Catégorie de dépense"
+
+#. module: fuel_management
+#: model:ir.model.fields,field_description:fuel_management.field_fuel_expense_category__name
+msgid "Category Name"
+msgstr "Nom de la catégorie"
+
+#. module: fuel_management
+#: model:ir.model.fields,field_description:fuel_management.field_fuel_expense__name
+msgid "Reference"
+msgstr "Référence"
+
+#. module: fuel_management
+#: model:ir.model.fields,field_description:fuel_management.field_fuel_expense__date
+msgid "Expense Date"
+msgstr "Date de la dépense"
+
+#. module: fuel_management
+#: model:ir.model.fields,field_description:fuel_management.field_fuel_expense__category_id
+msgid "Expense Category"
+msgstr "Catégorie de dépense"
+
+#. module: fuel_management
+#: model:ir.model.fields,field_description:fuel_management.field_fuel_expense__description
+msgid "Description"
+msgstr "Description"
+
+#. module: fuel_management
+#: model:ir.model.fields,field_description:fuel_management.field_fuel_expense__amount
+msgid "Amount"
+msgstr "Montant"
+
+#. module: fuel_management
+#: model:ir.model.fields,field_description:fuel_management.field_fuel_expense__payment_source
+msgid "Payment Source"
+msgstr "Source de paiement"
+
+#. module: fuel_management
+#: model:ir.model.fields,field_description:fuel_management.field_fuel_expense__user_id
+msgid "Recorded By"
+msgstr "Enregistré par"
+
+#. module: fuel_management
+#: model:ir.model.fields,field_description:fuel_management.field_fuel_expense__notes
+msgid "Notes"
+msgstr "Notes"
+
+#. module: fuel_management
+#: model:ir.model.fields,field_description:fuel_management.field_fuel_expense__state
+msgid "Status"
+msgstr "Statut"
+
+#. module: fuel_management
+#: model:ir.model.fields,field_description:fuel_management.field_fuel_expense__approved_by
+msgid "Approved By"
+msgstr "Approuvé par"
+
+#. module: fuel_management
+#: model:ir.model.fields,field_description:fuel_management.field_fuel_expense__approved_date
+msgid "Approval Date"
+msgstr "Date d'approbation"
+
+#. module: fuel_management
+#: model:ir.model.fields,field_description:fuel_management.field_fuel_expense__rejected_by
+msgid "Rejected By"
+msgstr "Rejeté par"
+
+#. module: fuel_management
+#: model:ir.model.fields,field_description:fuel_management.field_fuel_expense__rejected_date
+msgid "Rejection Date"
+msgstr "Date de rejet"
+
+#. module: fuel_management
+#: model:ir.model.fields,field_description:fuel_management.field_fuel_expense__rejection_reason
+msgid "Rejection Reason"
+msgstr "Motif du rejet"
+
+#. module: fuel_management
+#: model:ir.model.fields.selection,name:fuel_management.selection__fuel_expense__payment_source__station_cash
+msgid "Station Cash"
+msgstr "Caisse de la station"
+
+#. module: fuel_management
+#: model:ir.model.fields.selection,name:fuel_management.selection__fuel_expense__payment_source__mobile_money
+msgid "Mobile Money"
+msgstr "Mobile Money"
+
+#. module: fuel_management
+#: model:ir.model.fields.selection,name:fuel_management.selection__fuel_expense__payment_source__bank
+msgid "Bank"
+msgstr "Banque"
+
+#. module: fuel_management
+#: model:ir.model.fields.selection,name:fuel_management.selection__fuel_expense__payment_source__other
+msgid "Other"
+msgstr "Autre"
+
+#. module: fuel_management
+#: model:ir.model.fields.selection,name:fuel_management.selection__fuel_expense__state__draft
+msgid "Draft"
+msgstr "Brouillon"
+
+#. module: fuel_management
+#: model:ir.model.fields.selection,name:fuel_management.selection__fuel_expense__state__submitted
+msgid "Submitted"
+msgstr "Soumis"
+
+#. module: fuel_management
+#: model:ir.model.fields.selection,name:fuel_management.selection__fuel_expense__state__approved
+msgid "Approved"
+msgstr "Approuvé"
+
+#. module: fuel_management
+#: model:ir.model.fields.selection,name:fuel_management.selection__fuel_expense__state__rejected
+msgid "Rejected"
+msgstr "Rejeté"
+
+#. module: fuel_management
+#: model:ir.model.fields.selection,name:fuel_management.selection__fuel_expense__state__cancelled
+msgid "Cancelled"
+msgstr "Annulé"
+
+#. module: fuel_management
+#: model_terms:ir.ui.view,arch_db:fuel_management.view_fuel_expense_form
+msgid "Submit"
+msgstr "Soumettre"
+
+#. module: fuel_management
+#: model_terms:ir.ui.view,arch_db:fuel_management.view_fuel_expense_form
+msgid "Approve"
+msgstr "Approuver"
+
+#. module: fuel_management
+#: model_terms:ir.ui.view,arch_db:fuel_management.view_fuel_expense_form
+msgid "Reject"
+msgstr "Rejeter"
+
+#. module: fuel_management
+#: model_terms:ir.ui.view,arch_db:fuel_management.view_fuel_expense_form
+msgid "Cancel"
+msgstr "Annuler"
+
+#. module: fuel_management
+#: model_terms:ir.ui.view,arch_db:fuel_management.view_fuel_expense_form
+msgid "Reset to Draft"
+msgstr "Remettre en brouillon"
+
+#. module: fuel_management
+#: model_terms:ir.ui.view,arch_db:fuel_management.view_fuel_expense_form
+msgid "Fuel Expense"
+msgstr "Dépense de station"
+
+#. module: fuel_management
+#: model_terms:ir.ui.view,arch_db:fuel_management.view_fuel_expense_form
+msgid "Expense Information"
+msgstr "Informations sur la dépense"
+
+#. module: fuel_management
+#: model_terms:ir.ui.view,arch_db:fuel_management.view_fuel_expense_form
+msgid "Payment"
+msgstr "Paiement"
+
+#. module: fuel_management
+#: model_terms:ir.ui.view,arch_db:fuel_management.view_fuel_expense_form
+msgid "Approval Information"
+msgstr "Informations d'approbation"
+
+#. module: fuel_management
+#: model_terms:ir.ui.view,arch_db:fuel_management.view_fuel_expense_form
+msgid "Rejection"
+msgstr "Rejet"
+
+#. module: fuel_management
+#: model:ir.actions.act_window,name:fuel_management.action_fuel_expense
+#: model:ir.ui.menu,name:fuel_management.menu_fuel_expense
+msgid "Expenses"
+msgstr "Dépenses"
+
+#. module: fuel_management
+#: model:ir.actions.act_window,name:fuel_management.action_fuel_expense_category
+#: model:ir.ui.menu,name:fuel_management.menu_fuel_expense_category
+#: model_terms:ir.ui.view,arch_db:fuel_management.view_fuel_expense_category_list
+msgid "Expense Categories"
+msgstr "Catégories de dépenses"
+
+#. module: fuel_management
+#: model_terms:ir.ui.view,arch_db:fuel_management.view_fuel_expense_category_form
+msgid "Expense Category"
+msgstr "Catégorie de dépense"
+
+#. module: fuel_management
+#: model_terms:ir.ui.view,arch_db:fuel_management.view_fuel_expense_search
+msgid "Search Expenses"
+msgstr "Rechercher des dépenses"
+
+#. module: fuel_management
+#: model_terms:ir.ui.view,arch_db:fuel_management.view_fuel_expense_search
+msgid "Group By"
+msgstr "Regrouper par"
+
+#. module: fuel_management
+#: model_terms:ir.ui.view,arch_db:fuel_management.view_fuel_expense_search
+msgid "Station Cash"
+msgstr "Caisse de la station"
+
+#. module: fuel_management
+#: model_terms:ir.ui.view,arch_db:fuel_management.action_fuel_expense
+msgid "Create your first station expense."
+msgstr "Créez votre première dépense de station."
+
+#. module: fuel_management
+#: model_terms:ir.ui.view,arch_db:fuel_management.action_fuel_expense
+msgid "Record and monitor operational expenses related to your fuel stations."
+msgstr "Enregistrez et suivez les dépenses d'exploitation liées à vos stations-service."
+
+#. module: fuel_management
+#: model_terms:ir.ui.view,arch_db:fuel_management.view_fuel_expense_form
+msgid "Additional information about this expense..."
+msgstr "Informations complémentaires sur cette dépense..."
+
+#. module: fuel_management
+#: model_terms:ir.ui.view,arch_db:fuel_management.view_fuel_expense_form
+msgid "Explain why this expense is being rejected..."
+msgstr "Indiquez le motif du rejet de cette dépense..."
+
+#. module: fuel_management
+#: model:ir.model.fields,help:fuel_management.field_fuel_expense__shift_id
+msgid "Optional shift related to this expense."
+msgstr "Shift facultatif associé à cette dépense."
+
+#. module: fuel_management
+#. odoo-python
+#: code:addons/fuel_management/models/fuel_expense.py:0
+#, python-format
+msgid "An expense category with this name already exists for this company."
+msgstr "Une catégorie de dépense portant ce nom existe déjà pour cette société."
+
+#. module: fuel_management
+#. odoo-python
+#: code:addons/fuel_management/models/fuel_expense.py:0
+#, python-format
+msgid "The expense amount must be greater than zero."
+msgstr "Le montant de la dépense doit être supérieur à zéro."
+
+#. module: fuel_management
+#. odoo-python
+#: code:addons/fuel_management/models/fuel_expense.py:0
+#, python-format
+msgid "The selected shift must belong to the selected fuel station."
+msgstr "Le shift sélectionné doit appartenir à la station-service sélectionnée."
+
+#. module: fuel_management
+#. odoo-python
+#: code:addons/fuel_management/models/fuel_expense.py:0
+#, python-format
+msgid "The expense category must belong to the same company as the fuel station."
+msgstr "La catégorie de dépense doit appartenir à la même société que la station-service."
+
+#. module: fuel_management
+#. odoo-python
+#: code:addons/fuel_management/models/fuel_expense.py:0
+#, python-format
+msgid "An approved expense cannot be modified."
+msgstr "Une dépense approuvée ne peut pas être modifiée."
+
+#. module: fuel_management
+#. odoo-python
+#: code:addons/fuel_management/models/fuel_expense.py:0
+#, python-format
+msgid "Expense status must be changed using the workflow buttons."
+msgstr "Le statut de la dépense doit être modifié à l'aide des boutons du workflow."
+
+#. module: fuel_management
+#. odoo-python
+#: code:addons/fuel_management/models/fuel_expense.py:0
+#, python-format
+msgid "Only a draft expense can be submitted."
+msgstr "Seule une dépense en brouillon peut être soumise."
+
+#. module: fuel_management
+#. odoo-python
+#: code:addons/fuel_management/models/fuel_expense.py:0
+#, python-format
+msgid "Only a Fuel Manager or Administrator can approve expenses."
+msgstr "Seul un responsable ou un administrateur Fuel peut approuver les dépenses."
+
+#. module: fuel_management
+#. odoo-python
+#: code:addons/fuel_management/models/fuel_expense.py:0
+#, python-format
+msgid "Only a submitted expense can be approved."
+msgstr "Seule une dépense soumise peut être approuvée."
+
+#. module: fuel_management
+#. odoo-python
+#: code:addons/fuel_management/models/fuel_expense.py:0
+#, python-format
+msgid "Only a Fuel Manager or Administrator can reject expenses."
+msgstr "Seul un responsable ou un administrateur Fuel peut rejeter les dépenses."
+
+#. module: fuel_management
+#. odoo-python
+#: code:addons/fuel_management/models/fuel_expense.py:0
+#, python-format
+msgid "Only a submitted expense can be rejected."
+msgstr "Seule une dépense soumise peut être rejetée."
+
+#. module: fuel_management
+#. odoo-python
+#: code:addons/fuel_management/models/fuel_expense.py:0
+#, python-format
+msgid "A rejection reason is required before rejecting an expense."
+msgstr "Un motif de rejet est obligatoire avant de rejeter une dépense."
+
+#. module: fuel_management
+#. odoo-python
+#: code:addons/fuel_management/models/fuel_expense.py:0
+#, python-format
+msgid "An approved expense cannot be cancelled."
+msgstr "Une dépense approuvée ne peut pas être annulée."
+
+#. module: fuel_management
+#. odoo-python
+#: code:addons/fuel_management/models/fuel_expense.py:0
+#, python-format
+msgid "Only a rejected or cancelled expense can be reset to draft."
+msgstr "Seule une dépense rejetée ou annulée peut être remise en brouillon."
+
+#. module: fuel_management
+#. odoo-python
+#: code:addons/fuel_management/models/fuel_expense.py:0
+#, python-format
+msgid "Only draft, rejected or cancelled expenses can be deleted."
+msgstr "Seules les dépenses en brouillon, rejetées ou annulées peuvent être supprimées."
+
+#. module: fuel_management
+#: model:ir.sequence,name:fuel_management.seq_fuel_expense
+msgid "Fuel Expense"
+msgstr "Dépense de station"
+
+#. module: fuel_management
+#: model_terms:ir.ui.view,arch_db:fuel_management.view_fuel_expense_form
+msgid "Print"
+msgstr "Imprimer"
+
+#. module: fuel_management
+#. odoo-python
+#: code:addons/fuel_management/models/fuel_expense.py:0
+#, python-format
+msgid "Only an approved expense can be printed."
+msgstr "Seule une dépense approuvée peut être imprimée."

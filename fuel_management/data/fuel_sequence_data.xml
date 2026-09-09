@@ -9,4 +9,11 @@
             <field name="company_id" eval="False"/>
         </record>
     </data>
+    <record id="seq_fuel_expense" model="ir.sequence">
+        <field name="name">Fuel Expense</field>
+        <field name="code">fuel.expense</field>
+        <field name="prefix">FEXP/%(year)s/</field>
+        <field name="padding">5</field>
+        <field name="company_id" eval="False"/>
+    </record>
 </odoo>

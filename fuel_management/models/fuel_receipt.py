@@ -4,6 +4,21 @@ from odoo import models, fields, api
 class StockPicking(models.Model):
     _inherit = 'stock.picking'
 
+    fuel_purchase_type = fields.Selection(
+        related='purchase_id.purchase_type',
+        string='Purchase Type',
+        store=True,
+        readonly=True,
+    )
+
+    fuel_station_id = fields.Many2one(
+        'fuel.station',
+        related='purchase_id.fuel_station_id',
+        string='Fuel Station',
+        store=True,
+        readonly=True,
+    )
+
     fuel_replenished = fields.Boolean(
         string='Fully Replenished',
         default=False,
@@ -49,14 +64,13 @@ class StockPicking(models.Model):
 
             moves = picking.move_ids.filtered(
                 lambda m:
-                m.state == 'done'
-                and m.product_id
-                and m.quantity > 0
+                    m.state == 'done'
+                    and m.product_id
+                    and m.quantity > 0
             )
 
             products = moves.mapped('product_id')
 
-            # Pour le moment : une réception carburant = un seul produit
             if len(products) == 1:
                 product = products[0]
 

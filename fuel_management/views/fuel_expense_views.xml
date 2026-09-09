@@ -1,0 +1,297 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_fuel_expense_list" model="ir.ui.view">
+        <field name="name">fuel.expense.list</field>
+        <field name="model">fuel.expense</field>
+        <field name="arch" type="xml">
+            <list
+                string="Expenses"
+                decoration-success="state == 'approved'"
+                decoration-warning="state == 'submitted'"
+                decoration-danger="state == 'rejected'"
+                decoration-muted="state == 'cancelled'">
+
+                <field name="name"/>
+                <field name="date"/>
+                <field name="station_id"/>
+                <field name="shift_id"/>
+                <field name="category_id"/>
+                <field name="description"/>
+                <field name="payment_source"/>
+                <field name="amount"/>
+                <field name="currency_id" column_invisible="True"/>
+                <field name="user_id"/>
+
+                <field name="state"
+                       widget="badge"
+                       decoration-info="state == 'draft'"
+                       decoration-warning="state == 'submitted'"
+                       decoration-success="state == 'approved'"
+                       decoration-danger="state == 'rejected'"
+                       decoration-muted="state == 'cancelled'"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="view_fuel_expense_form" model="ir.ui.view">
+        <field name="name">fuel.expense.form</field>
+        <field name="model">fuel.expense</field>
+        <field name="arch" type="xml">
+            <form string="Fuel Expense">
+
+                <header>
+
+                    <button name="action_submit"
+                            string="Submit"
+                            type="object"
+                            class="btn-primary"
+                            invisible="state != 'draft'"/>
+
+                    <button name="action_approve"
+                            string="Approve"
+                            type="object"
+                            class="btn-primary"
+                            groups="fuel_management.group_fuel_manager"
+                            invisible="state != 'submitted'"/>
+
+                    <button name="action_reject"
+                            string="Reject"
+                            type="object"
+                            class="btn-secondary"
+                            groups="fuel_management.group_fuel_manager"
+                            invisible="state != 'submitted'"/>
+
+                    <button name="action_cancel"
+                            string="Cancel"
+                            type="object"
+                            invisible="state not in ('draft', 'submitted', 'rejected')"/>
+
+                    <button name="action_reset_draft"
+                            string="Reset to Draft"
+                            type="object"
+                            invisible="state not in ('rejected', 'cancelled')"/>
+
+                    <field name="state"
+                           widget="statusbar"
+                           statusbar_visible="draft,submitted,approved"/>
+
+                    <button name="action_print_expense"
+                        string="Print"
+                        type="object"
+                        class="btn-secondary"
+                        invisible="state != 'approved'"/>
+                </header>
+
+                <sheet>
+
+                    <div class="oe_title">
+                        <label for="name"/>
+                        <h1>
+                            <field name="name"/>
+                        </h1>
+                    </div>
+
+                    <group>
+
+                        <group string="Expense Information">
+
+                            <field name="date"
+                                   readonly="state == 'approved'"/>
+
+                            <field name="station_id"
+                                   readonly="state != 'draft'"
+                                   options="{'no_create': True}"/>
+
+                            <field name="shift_id"
+                                   readonly="state != 'draft'"
+                                   options="{'no_create': True}"/>
+
+                            <field name="category_id"
+                                   readonly="state != 'draft'"
+                                   options="{'no_create': True}"/>
+
+                            <field name="description"
+                                   readonly="state == 'approved'"/>
+
+                        </group>
+
+                        <group string="Payment">
+
+                            <field name="amount"
+                                   readonly="state == 'approved'"/>
+
+                            <field name="currency_id"
+                                   invisible="1"/>
+
+                            <field name="payment_source"
+                                   readonly="state == 'approved'"/>
+
+                            <field name="user_id"
+                                   readonly="1"/>
+
+                            <field name="company_id"
+                                   readonly="1"
+                                   groups="base.group_multi_company"/>
+
+                        </group>
+
+                    </group>
+
+                    <group string="Approval Information"
+                           invisible="state not in ('approved', 'rejected')">
+
+                        <group>
+                            <field name="approved_by"
+                                   invisible="state != 'approved'"/>
+
+                            <field name="approved_date"
+                                   invisible="state != 'approved'"/>
+                        </group>
+
+                        <group>
+                            <field name="rejected_by"
+                                   invisible="state != 'rejected'"/>
+
+                            <field name="rejected_date"
+                                   invisible="state != 'rejected'"/>
+                        </group>
+
+                    </group>
+
+                    <group string="Rejection"
+                           groups="fuel_management.group_fuel_manager"
+                           invisible="state not in ('submitted', 'rejected')">
+
+                        <field name="rejection_reason"
+                            placeholder="Explain why this expense is being rejected..."
+                            readonly="state == 'rejected'"/>
+
+                    </group>
+
+                    <group string="Notes">
+                        <field name="notes"
+                               placeholder="Additional information about this expense..."/>
+                    </group>
+
+                </sheet>
+
+                <chatter/>
+
+            </form>
+        </field>
+    </record>
+
+    <record id="view_fuel_expense_search" model="ir.ui.view">
+        <field name="name">fuel.expense.search</field>
+        <field name="model">fuel.expense</field>
+        <field name="arch" type="xml">
+            <search string="Search Expenses">
+
+                <field name="name"/>
+                <field name="description"/>
+                <field name="station_id"/>
+                <field name="shift_id"/>
+                <field name="category_id"/>
+                <field name="user_id"/>
+
+                <separator/>
+
+                <filter name="filter_draft"
+                        string="Draft"
+                        domain="[('state', '=', 'draft')]"/>
+
+                <filter name="filter_submitted"
+                        string="Submitted"
+                        domain="[('state', '=', 'submitted')]"/>
+
+                <filter name="filter_approved"
+                        string="Approved"
+                        domain="[('state', '=', 'approved')]"/>
+
+                <filter name="filter_rejected"
+                        string="Rejected"
+                        domain="[('state', '=', 'rejected')]"/>
+
+                <filter name="filter_station_cash"
+                        string="Station Cash"
+                        domain="[('payment_source', '=', 'station_cash')]"/>
+
+                <separator/>
+
+                <filter name="group_station"
+                        string="Station"
+                        context="{'group_by': 'station_id'}"/>
+
+                <filter name="group_category"
+                        string="Expense Category"
+                        context="{'group_by': 'category_id'}"/>
+
+                <filter name="group_payment_source"
+                        string="Payment Source"
+                        context="{'group_by': 'payment_source'}"/>
+
+                <filter name="group_state"
+                        string="Status"
+                        context="{'group_by': 'state'}"/>
+
+                <filter name="group_date"
+                        string="Date"
+                        context="{'group_by': 'date'}"/>
+
+            </search>
+        </field>
+    </record>
+    
+    <record id="action_fuel_expense" model="ir.actions.act_window">
+        <field name="name">Expenses</field>
+        <field name="res_model">fuel.expense</field>
+        <field name="view_mode">list,form</field>
+        <field name="search_view_id" ref="view_fuel_expense_search"/>
+        <field name="context">{}</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create your first station expense.
+            </p>
+            <p>
+                Record and monitor operational expenses related to your fuel stations.
+            </p>
+        </field>
+    </record>
+
+    <record id="view_fuel_expense_category_list" model="ir.ui.view">
+        <field name="name">fuel.expense.category.list</field>
+        <field name="model">fuel.expense.category</field>
+        <field name="arch" type="xml">
+            <list string="Expense Categories">
+                <field name="name"/>
+                <field name="company_id"
+                       groups="base.group_multi_company"/>
+                <field name="active"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="view_fuel_expense_category_form" model="ir.ui.view">
+        <field name="name">fuel.expense.category.form</field>
+        <field name="model">fuel.expense.category</field>
+        <field name="arch" type="xml">
+            <form string="Expense Category">
+                <sheet>
+                    <group>
+                        <field name="name"/>
+                        <field name="company_id"
+                               groups="base.group_multi_company"/>
+                        <field name="active"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_fuel_expense_category" model="ir.actions.act_window">
+        <field name="name">Expense Categories</field>
+        <field name="res_model">fuel.expense.category</field>
+        <field name="view_mode">list,form</field>
+    </record>
+
+</odoo>

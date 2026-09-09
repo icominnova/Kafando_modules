@@ -1,0 +1,360 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+     <!-- Station rules -->
+    <record id="fuel_station_allowed_station_rule" model="ir.rule">
+        <field name="name">Fuel Station - Allowed Stations</field>
+        <field name="model_id"
+               ref="model_fuel_station"/>
+        <field name="groups"
+               eval="[(4, ref('group_fuel_user'))]"/>
+        <field name="domain_force">
+            [('id', 'in', user.fuel_station_ids.ids)]
+        </field>
+    </record>
+    <record id="fuel_station_admin_all_rule" model="ir.rule">
+        <field name="name">Fuel Station - Administrator All Stations</field>
+        <field name="model_id"
+               ref="model_fuel_station"/>
+        <field name="groups"
+               eval="[(4, ref('group_fuel_admin'))]"/>
+        <field name="domain_force">
+            [(1, '=', 1)]
+        </field>
+    </record>
+
+    <!-- Tanks rules -->
+    <record id="fuel_tank_allowed_station_rule" model="ir.rule">
+        <field name="name">Fuel Tank - Allowed Stations</field>
+        <field name="model_id"
+            ref="model_fuel_tank"/>
+        <field name="groups"
+            eval="[(4, ref('group_fuel_user'))]"/>
+        <field name="domain_force">
+            [('station_id', 'in', user.fuel_station_ids.ids)]
+        </field>
+    </record>
+    <record id="fuel_tank_admin_all_rule" model="ir.rule">
+        <field name="name">Fuel Tank - Administrator All Stations</field>
+        <field name="model_id"
+            ref="model_fuel_tank"/>
+        <field name="groups"
+            eval="[(4, ref('group_fuel_admin'))]"/>
+        <field name="domain_force">
+            [(1, '=', 1)]
+        </field>
+    </record>
+
+    <!-- Tanks rules -->
+    <record id="fuel_pump_allowed_station_rule" model="ir.rule">
+        <field name="name">Fuel Pump - Allowed Stations</field>
+        <field name="model_id"
+            ref="model_fuel_pump"/>
+        <field name="groups"
+            eval="[(4, ref('group_fuel_user'))]"/>
+        <field name="domain_force">
+            [('station_id', 'in', user.fuel_station_ids.ids)]
+        </field>
+    </record>
+    <record id="fuel_pump_admin_all_rule" model="ir.rule">
+        <field name="name">Fuel Pump - Administrator All Stations</field>
+        <field name="model_id"
+            ref="model_fuel_pump"/>
+        <field name="groups"
+            eval="[(4, ref('group_fuel_admin'))]"/>
+        <field name="domain_force">
+            [(1, '=', 1)]
+        </field>
+    </record>
+
+
+    <!-- Nozzles rules -->
+    <record id="fuel_nozzle_allowed_station_rule" model="ir.rule">
+        <field name="name">Fuel Nozzle - Allowed Stations</field>
+
+        <field name="model_id"
+            ref="model_fuel_nozzle"/>
+
+        <field name="groups"
+            eval="[(4, ref('group_fuel_user'))]"/>
+
+        <field name="domain_force">
+            [('station_id', 'in', user.fuel_station_ids.ids)]
+        </field>
+    </record>
+    <record id="fuel_nozzle_admin_all_rule" model="ir.rule">
+        <field name="name">Fuel Nozzle - Administrator All Stations</field>
+
+        <field name="model_id"
+            ref="model_fuel_nozzle"/>
+
+        <field name="groups"
+            eval="[(4, ref('group_fuel_admin'))]"/>
+
+        <field name="domain_force">
+            [(1, '=', 1)]
+        </field>
+    </record>
+
+    <!-- Shifts rules -->
+    <record id="fuel_shift_allowed_station_rule" model="ir.rule">
+        <field name="name">Fuel Shift - Allowed Stations</field>
+        <field name="model_id"
+            ref="model_fuel_shift"/>
+        <field name="groups"
+            eval="[(4, ref('group_fuel_user'))]"/>
+        <field name="domain_force">
+            [('station_id', 'in', user.fuel_station_ids.ids)]
+        </field>
+    </record>
+    <record id="fuel_shift_admin_all_rule" model="ir.rule">
+        <field name="name">Fuel Shift - Administrator All Stations</field>
+        <field name="model_id"
+            ref="model_fuel_shift"/>
+        <field name="groups"
+            eval="[(4, ref('group_fuel_admin'))]"/>
+        <field name="domain_force">
+            [(1, '=', 1)]
+        </field>
+    </record>
+
+    <!-- Meter reading rules -->
+    <record id="fuel_meter_reading_allowed_station_rule" model="ir.rule">
+        <field name="name">Fuel Meter Reading - Allowed Stations</field>
+        <field name="model_id"
+            ref="model_fuel_meter_reading"/>
+        <field name="groups"
+            eval="[(4, ref('group_fuel_user'))]"/>
+        <field name="domain_force">
+            [('station_id', 'in', user.fuel_station_ids.ids)]
+        </field>
+    </record>
+
+    <record id="fuel_meter_reading_admin_all_rule" model="ir.rule">
+        <field name="name">Fuel Meter Reading - Administrator All Stations</field>
+        <field name="model_id"
+            ref="model_fuel_meter_reading"/>
+        <field name="groups"
+            eval="[(4, ref('group_fuel_admin'))]"/>
+        <field name="domain_force">
+            [(1, '=', 1)]
+        </field>
+    </record>
+
+    <!-- Dip reading rules -->
+    <record id="fuel_dip_reading_allowed_station_rule" model="ir.rule">
+        <field name="name">Fuel Dip Reading - Allowed Stations</field>
+        <field name="model_id"
+            ref="model_fuel_dip_reading"/>
+        <field name="groups"
+            eval="[(4, ref('group_fuel_user'))]"/>
+        <field name="domain_force">
+            [('station_id', 'in', user.fuel_station_ids.ids)]
+        </field>
+    </record>
+
+    <record id="fuel_dip_reading_admin_all_rule" model="ir.rule">
+        <field name="name">Fuel Dip Reading - Administrator All Stations</field>
+        <field name="model_id"
+            ref="model_fuel_dip_reading"/>
+        <field name="groups"
+            eval="[(4, ref('group_fuel_admin'))]"/>
+        <field name="domain_force">
+            [(1, '=', 1)]
+        </field>
+    </record>
+
+    <!-- Replenishment rules -->
+    <record id="fuel_tank_replenishment_allowed_station_rule" model="ir.rule">
+        <field name="name">Fuel Tank Replenishment - Allowed Stations</field>
+        <field name="model_id"
+            ref="model_fuel_tank_replenishment"/>
+        <field name="groups"
+            eval="[(4, ref('group_fuel_user'))]"/>
+        <field name="domain_force">
+            [('station_id', 'in', user.fuel_station_ids.ids)]
+        </field>
+    </record>
+    <record id="fuel_tank_replenishment_admin_all_rule" model="ir.rule">
+        <field name="name">Fuel Tank Replenishment - Administrator All Stations</field>
+        <field name="model_id"
+            ref="model_fuel_tank_replenishment"/>
+        <field name="groups"
+            eval="[(4, ref('group_fuel_admin'))]"/>
+        <field name="domain_force">
+            [(1, '=', 1)]
+        </field>
+    </record>
+
+    <!-- Collections rules -->
+    <record id="fuel_collection_allowed_station_rule" model="ir.rule">
+        <field name="name">Fuel Collection - Allowed Stations</field>
+        <field name="model_id"
+            ref="model_fuel_collection"/>
+        <field name="groups"
+            eval="[(4, ref('group_fuel_user'))]"/>
+        <field name="domain_force">
+            [('station_id', 'in', user.fuel_station_ids.ids)]
+        </field>
+    </record>
+
+    <record id="fuel_collection_admin_all_rule" model="ir.rule">
+        <field name="name">Fuel Collection - Administrator All Stations</field>
+        <field name="model_id"
+            ref="model_fuel_collection"/>
+        <field name="groups"
+            eval="[(4, ref('group_fuel_admin'))]"/>
+        <field name="domain_force">
+            [(1, '=', 1)]
+        </field>
+    </record>
+
+    <!-- Meter correction rules -->
+    <record id="fuel_meter_correction_allowed_station_rule" model="ir.rule">
+        <field name="name">Fuel Meter Correction - Allowed Stations</field>
+        <field name="model_id"
+            ref="model_fuel_meter_correction"/>
+        <field name="groups"
+            eval="[(4, ref('group_fuel_user'))]"/>
+        <field name="domain_force">
+            [('station_id', 'in', user.fuel_station_ids.ids)]
+        </field>
+    </record>
+
+    <record id="fuel_meter_correction_admin_all_rule" model="ir.rule">
+        <field name="name">Fuel Meter Correction - Administrator All Stations</field>
+        <field name="model_id"
+            ref="model_fuel_meter_correction"/>
+        <field name="groups"
+            eval="[(4, ref('group_fuel_admin'))]"/>
+        <field name="domain_force">
+            [(1, '=', 1)]
+        </field>
+    </record>
+
+    <!-- Lisenses rules -->
+    <record id="fuel_license_allowed_station_rule" model="ir.rule">
+        <field name="name">Fuel License - Allowed Stations</field>
+        <field name="model_id"
+            ref="model_fuel_license"/>
+        <field name="groups"
+            eval="[(4, ref('group_fuel_user'))]"/>
+        <field name="domain_force">
+            [('station_id', 'in', user.fuel_station_ids.ids)]
+        </field>
+    </record>
+
+    <record id="fuel_license_admin_all_rule" model="ir.rule">
+        <field name="name">Fuel License - Administrator All Stations</field>
+        <field name="model_id"
+            ref="model_fuel_license"/>
+        <field name="groups"
+            eval="[(4, ref('group_fuel_admin'))]"/>
+        <field name="domain_force">
+            [(1, '=', 1)]
+        </field>
+    </record>
+
+    <!-- Stock piking rules -->
+    <record id="fuel_stock_picking_allowed_station_rule" model="ir.rule">
+        <field name="name">Fuel Receipt - Allowed Stations</field>
+        <field name="model_id"
+            ref="stock.model_stock_picking"/>
+        <field name="groups"
+            eval="[(4, ref('group_fuel_user'))]"/>
+        <field name="domain_force">
+            [
+                '|',
+                ('fuel_purchase_type', '!=', 'fuel'),
+                ('fuel_station_id', 'in', user.fuel_station_ids.ids)
+            ]
+        </field>
+    </record>
+    <record id="fuel_stock_picking_admin_all_rule" model="ir.rule">
+        <field name="name">Fuel Receipt - Administrator All Stations</field>
+        <field name="model_id"
+            ref="stock.model_stock_picking"/>
+        <field name="groups"
+            eval="[(4, ref('group_fuel_admin'))]"/>
+        <field name="domain_force">
+            [(1, '=', 1)]
+        </field>
+    </record>
+
+    <!-- Purchase order rules -->
+    <record id="fuel_purchase_order_allowed_station_rule" model="ir.rule">
+        <field name="name">Fuel Purchase Order - Allowed Stations</field>
+        <field name="model_id"
+            ref="purchase.model_purchase_order"/>
+        <field name="groups"
+            eval="[(4, ref('group_fuel_user'))]"/>
+        <field name="domain_force">
+            [
+                '|',
+                ('purchase_type', '!=', 'fuel'),
+                ('fuel_station_id', 'in', user.fuel_station_ids.ids)
+            ]
+        </field>
+    </record>
+
+    <record id="fuel_purchase_order_admin_all_rule" model="ir.rule">
+        <field name="name">Fuel Purchase Order - Administrator All Stations</field>
+        <field name="model_id"
+            ref="purchase.model_purchase_order"/>
+        <field name="groups"
+            eval="[(4, ref('group_fuel_admin'))]"/>
+        <field name="domain_force">
+            [(1, '=', 1)]
+        </field>
+    </record>
+
+     <!-- Purchase order lines rules -->
+    <record id="fuel_purchase_order_line_allowed_station_rule" model="ir.rule">
+        <field name="name">Fuel Purchase Order Line - Allowed Stations</field>
+        <field name="model_id"
+            ref="purchase.model_purchase_order_line"/>
+        <field name="groups"
+            eval="[(4, ref('group_fuel_user'))]"/>
+        <field name="domain_force">
+            [
+                '|',
+                ('order_id.purchase_type', '!=', 'fuel'),
+                ('order_id.fuel_station_id', 'in', user.fuel_station_ids.ids)
+            ]
+        </field>
+    </record>
+
+    <record id="fuel_purchase_order_line_admin_all_rule" model="ir.rule">
+        <field name="name">Fuel Purchase Order Line - Administrator All Stations</field>
+        <field name="model_id"
+            ref="purchase.model_purchase_order_line"/>
+        <field name="groups"
+            eval="[(4, ref('group_fuel_admin'))]"/>
+        <field name="domain_force">
+            [(1, '=', 1)]
+        </field>
+    </record>
+
+    <!-- Expense rules -->
+    <record id="fuel_expense_allowed_station_rule" model="ir.rule">
+        <field name="name">Fuel Expense - Allowed Stations</field>
+        <field name="model_id"
+            ref="model_fuel_expense"/>
+        <field name="groups"
+            eval="[(4, ref('group_fuel_user'))]"/>
+        <field name="domain_force">
+            [('station_id', 'in', user.fuel_station_ids.ids)]
+        </field>
+    </record>
+
+    <record id="fuel_expense_admin_all_rule" model="ir.rule">
+        <field name="name">Fuel Expense - Administrator All Stations</field>
+        <field name="model_id"
+            ref="model_fuel_expense"/>
+        <field name="groups"
+            eval="[(4, ref('group_fuel_admin'))]"/>
+        <field name="domain_force">
+            [(1, '=', 1)]
+        </field>
+    </record>
+
+</odoo>

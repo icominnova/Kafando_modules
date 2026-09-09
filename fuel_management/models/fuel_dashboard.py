@@ -17,7 +17,7 @@ class FuelDashboard(models.Model):
 
     @api.depends('name', 'station_id')
     def _compute_kpis(self):
-        today = fields.Date.today()
+        today = fields.Date.context_today(self)
         for rec in self:
             shift_domain = [('date', '=', today)]
             tank_domain = []
@@ -38,7 +38,7 @@ class FuelDashboard(models.Model):
 
     @api.model
     def get_dashboard_data(self, station_id=False):
-        today = fields.Date.today()
+        today = fields.Date.context_today(self)
 
         shift_domain = [('date', '=', today)]
         tank_domain = []
